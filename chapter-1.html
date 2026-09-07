@@ -4,30 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Chapter 1</title>
+  <title>Chapter 1 - My Manhwa</title>
 
   <style>
     * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      background: #111;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .top {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #181818;
+    body {
+      margin: 0;
+      background: #080808;
       color: white;
-      text-align: center;
-      padding: 14px;
       font-family: Arial, sans-serif;
-      font-size: 20px;
-      font-weight: bold;
     }
+
+    /* PROGRESS BAR */
+
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: white;
+      z-index: 999;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      position: sticky;
+      top: 3px;
+      z-index: 100;
+      height: 58px;
+      background: rgba(15, 15, 15, 0.96);
+      border-bottom: 1px solid #222;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 12px;
+    }
+
+    .left,
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .btn,
+    .select {
+      border: 1px solid #333;
+      background: #1b1b1b;
+      color: white;
+      padding: 9px 11px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .select {
+      outline: none;
+    }
+
+    .chapter-title {
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* READER */
 
     .reader {
       width: 100%;
@@ -35,6 +87,243 @@
       margin: auto;
     }
 
+    .reader img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      background: #111;
+    }
+
+    /* BOTTOM NAV */
+
+    .bottom {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px 12px 50px;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .bottom a {
+      flex: 1;
+      text-align: center;
+      background: #1b1b1b;
+      color: white;
+      text-decoration: none;
+      padding: 13px;
+      border-radius: 7px;
+      border: 1px solid #333;
+    }
+
+    /* TOP BUTTON */
+
+    #topBtn {
+      position: fixed;
+      right: 15px;
+      bottom: 20px;
+
+      display: none;
+
+      width: 45px;
+      height: 45px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: white;
+      color: black;
+
+      font-size: 20px;
+      cursor: pointer;
+
+      z-index: 200;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      .chapter-title {
+        max-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .btn,
+      .select {
+        padding: 8px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="progress"></div>
+
+
+  <!-- TOP BAR -->
+
+  <div class="topbar">
+
+    <div class="left">
+
+      <a class="btn" href="index.html">
+        🏠
+      </a>
+
+      <a class="btn" href="chapter-1.html">
+        ←
+      </a>
+
+    </div>
+
+
+    <div class="chapter-title">
+      Chapter 1
+    </div>
+
+
+    <div class="right">
+
+      <select
+        class="select"
+        onchange="goChapter(this.value)"
+      >
+
+        <option value="">Chapter</option>
+
+        <option value="chapter-1.html">
+          Chapter 1
+        </option>
+
+        <option value="chapter-2.html">
+          Chapter 2
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <!-- READER -->
+
+  <div class="reader">
+
+    <img loading="lazy" src="chapter-1/001.jpg">
+    <img loading="lazy" src="chapter-1/002.jpg">
+    <img loading="lazy" src="chapter-1/003.jpg">
+    <img loading="lazy" src="chapter-1/004.jpg">
+    <img loading="lazy" src="chapter-1/005.jpg">
+    <img loading="lazy" src="chapter-1/006.jpg">
+    <img loading="lazy" src="chapter-1/007.jpg">
+    <img loading="lazy" src="chapter-1/008.jpg">
+    <img loading="lazy" src="chapter-1/009.jpg">
+    <img loading="lazy" src="chapter-1/010.jpg">
+    <img loading="lazy" src="chapter-1/011.jpg">
+    <img loading="lazy" src="chapter-1/012.jpg">
+    <img loading="lazy" src="chapter-1/013.jpg">
+    <img loading="lazy" src="chapter-1/014.jpg">
+    <img loading="lazy" src="chapter-1/015.jpg">
+    <img loading="lazy" src="chapter-1/016.jpg">
+    <img loading="lazy" src="chapter-1/017.jpg">
+    <img loading="lazy" src="chapter-1/018.jpg">
+    <img loading="lazy" src="chapter-1/019.jpg">
+    <img loading="lazy" src="chapter-1/020.jpg">
+
+  </div>
+
+
+  <!-- BOTTOM NAV -->
+
+  <div class="bottom">
+
+    <a href="index.html">
+      🏠 Home
+    </a>
+
+    <a href="chapter-2.html">
+      Next Chapter →
+    </a>
+
+  </div>
+
+
+  <!-- TOP BUTTON -->
+
+  <button id="topBtn" onclick="goTop()">
+    ↑
+  </button>
+
+
+  <script>
+
+    /* CHAPTER SELECTOR */
+
+    function goChapter(url) {
+
+      if (url !== "") {
+        window.location.href = url;
+      }
+
+    }
+
+
+    /* READING PROGRESS */
+
+    window.addEventListener("scroll", function() {
+
+      const scrollTop =
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+      const progress =
+        (scrollTop / height) * 100;
+
+      document.getElementById("progress").style.width =
+        progress + "%";
+
+
+      /* TOP BUTTON */
+
+      const topBtn =
+        document.getElementById("topBtn");
+
+      if (scrollTop > 500) {
+        topBtn.style.display = "block";
+      } else {
+        topBtn.style.display = "none";
+      }
+
+    });
+
+
+    /* GO TOP */
+
+    function goTop() {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>
     .reader img {
       display: block;
       width: 100%;
