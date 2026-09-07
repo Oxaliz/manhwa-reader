@@ -1,67 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ToonNest</title>
+<meta charset="UTF-8">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    body {
-      margin: 0;
-      background: #0b0b0b;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
+<title>My Manhwa</title>
 
-    /* NAVBAR */
+<style>
 
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 18px;
-      background: rgba(15, 15, 15, 0.96);
-      border-bottom: 1px solid #222;
-    }
+* {
+box-sizing: border-box;
+}
 
-    .logo {
-      font-size: 21px;
-      font-weight: bold;
-    }
+body {
+margin: 0;
+background: #0b0b0b;
+color: white;
+font-family: Arial, sans-serif;
+}
 
-    .search {
-      width: 150px;
-      padding: 9px 12px;
-      border: 1px solid #333;
-      border-radius: 20px;
-      background: #1a1a1a;
-      color: white;
-      outline: none;
-    }
+/* HEADER */
 
-    /* HERO */
+header {
 
-    .hero {
-      max-width: 1000px;
-      margin: auto;
-      padding: 35px 18px;
-      display: flex;
-      gap: 25px;
-      align-items: center;
-    }
+position: sticky;
+top: 0;
+z-index: 100;
 
-    .cover {
-      width: 180px;
-      height: 260px;
+height: 62px;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+padding: 0 18px;
+
+background: rgba(12,12,12,.97);
+
+border-bottom: 1px solid #222;
+
+}
+
+.logo {
+
+font-size: 20px;
+font-weight: bold;
+
+}
+
+.search {
+
+width: 160px;
+
+padding: 9px 13px;
+
+border-radius: 20px;
+
+border: 1px solid #333;
+
+background: #191919;
+
+color: white;
+
+outline: none;
+
+}
+
+/* HERO */
+
+.hero {
+
+max-width: 1000px;
+
+margin: auto;
+
+padding: 35px 18px;
+
+display: flex;
+
+gap: 25px;
+
+}
+
+.cover {
+
+width: 180px;
+
+height: 260px;
+
+object-fit: cover;
+
+border-radius: 8px;
+
+background: #222;
+
+}
+
+.info {
+
+flex: 1;
+
+}
+
+.title {
+
+font-size: 32px;
+
+font-weight: bold;
+
+margin-bottom: 10px;
+
+}
+
+.description {
+
+color: #aaa;
+
+line-height: 1.6;
+
+margin-bottom: 15px;
+
+}
+
+.tags {
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 7px;
+
+margin-bottom: 20px;
+
+}
+
+.tag {
+
+padding: 6px 10px;
+
+border-radius: 15px;
+
+background: #202020;
+
+border: 1px solid #333;
+
+font-size: 13px;
+
+color: #ccc;
+
+}
+
+.read {
+
+display: inline-block;
+
+background: white;
+
+color: black;
+
+padding: 12px 20px;
+
+border-radius: 6px;
+
+text-decoration: none;
+
+font-weight: bold;
+
+}
+
+/* CHAPTER SECTION */
+
+.container {
+
+max-width: 1000px;
+
+margin: auto;
+
+padding: 0 18px 50px;
+
+}
+
+.section-title {
+
+font-size: 22px;
+
+font-weight: bold;
+
+margin-bottom: 15px;
+
+}
+
+.chapter {
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+background: #151515;
+
+border: 1px solid #222;
+
+padding: 16px;
+
+margin-bottom: 9px;
+
+border-radius: 7px;
+
+text-decoration: none;
+
+color: white;
+
+}
+
+.chapter:hover {
+
+background: #202020;
+
+}
+
+.chapter-left {
+
+display: flex;
+
+align-items: center;
+
+gap: 12px;
+
+}
+
+.number {
+
+width: 35px;
+
+height: 35px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+background: #222;
+
+border-radius: 6px;
+
+font-size: 13px;
+
+}
+
+.name {
+
+font-weight: bold;
+
+}
+
+.date {
+
+font-size: 12px;
+
+color: #777;
+
+}
+
+/* FOOTER */
+
+footer {
+
+text-align: center;
+
+padding: 30px;
+
+border-top: 1px solid #222;
+
+color: #666;
+
+font-size: 13px;
+
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+.hero {
+
+align-items: flex-start;
+
+}
+
+.cover {
+
+width: 120px;
+
+height: 175px;
+
+}
+
+.title {
+
+font-size: 22px;
+
+}
+
+.description {
+
+font-size: 14px;
+
+}
+
+.search {
+
+width: 120px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+MY MANHWA
+</div>
+
+<input
+class="search"
+id="search"
+type="text"
+placeholder="Search chapter..."
+onkeyup="searchChapter()">
+
+</header>
+
+
+<!-- MANHWA INFO -->
+
+<div class="hero">
+
+
+<img
+class="cover"
+src="cover.jpg"
+alt="Cover">
+
+
+<div class="info">
+
+
+<div class="title">
+My Manhwa
+</div>
+
+
+<div class="description">
+
+A short description of your manhwa
+goes here. Replace this text with
+your own story description.
+
+</div>
+
+
+<div class="tags">
+
+<span class="tag">
+Action
+</span>
+
+<span class="tag">
+Romance
+</span>
+
+<span class="tag">
+Fantasy
+</span>
+
+<span class="tag">
+Drama
+</span>
+
+</div>
+
+
+<a
+class="read"
+href="chapter-1.html">
+
+Read Now →
+
+</a>
+
+
+</div>
+
+</div>
+
+
+<!-- CHAPTERS -->
+
+<div class="container">
+
+
+<div class="section-title">
+Chapters
+</div>
+
+
+<div id="chapters">
+
+
+<a
+class="chapter"
+href="chapter-2.html">
+
+<div class="chapter-left">
+
+<div class="number">
+02
+</div>
+
+<div>
+
+<div class="name">
+Chapter 2
+</div>
+
+<div class="date">
+Latest
+</div>
+
+</div>
+
+</div>
+
+<div>
+→
+</div>
+
+</a>
+
+
+<a
+class="chapter"
+href="chapter-1.html">
+
+<div class="chapter-left">
+
+<div class="number">
+01
+</div>
+
+<div>
+
+<div class="name">
+Chapter 1
+</div>
+
+<div class="date">
+Available
+</div>
+
+</div>
+
+</div>
+
+<div>
+→
+</div>
+
+</a>
+
+
+</div>
+
+</div>
+
+
+<footer>
+
+© 2026 My Manhwa
+
+</footer>
+
+
+<script>
+
+function searchChapter() {
+
+let input =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+let chapters =
+document.querySelectorAll(".chapter");
+
+chapters.forEach(function(chapter) {
+
+let text =
+chapter.innerText
+.toLowerCase();
+
+if (text.includes(input)) {
+
+chapter.style.display = "flex";
+
+} else {
+
+chapter.style.display = "none";
+
+}
+
+});
+
+}
+
+</script>
+
+
+</body>
+
+</html>      height: 260px;
       object-fit: cover;
       border-radius: 8px;
       background: #222;
