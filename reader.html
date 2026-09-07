@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MY MANHWA Reader</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#111;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:55px;
+  background:#181818;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  box-shadow:0 2px 10px rgba(0,0,0,.5);
+}
+
+.logo{
+  font-weight:bold;
+  font-size:18px;
+}
+
+button,select{
+  background:#292929;
+  color:white;
+  border:0;
+  border-radius:6px;
+  padding:9px 12px;
+  font-size:14px;
+}
+
+.progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  background:#ff4d6d;
+  width:0%;
+  z-index:2000;
+}
+
+.chapter-title{
+  text-align:center;
+  padding:15px 10px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.reader{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+}
+
+.reader img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0 auto;
+  background:#222;
+}
+
+.loading{
+  text-align:center;
+  padding:30px;
+  color:#aaa;
+}
+
+.bottom-nav{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:20px 12px 35px;
+  max-width:900px;
+  margin:auto;
+}
+
+.bottom-nav button{
+  flex:1;
+}
+
+.top-btn{
+  position:fixed;
+  right:15px;
+  bottom:75px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#ff4d6d;
+  font-size:20px;
+  display:none;
+}
+
+@media(max-width:600px){
+  .logo{
+    font-size:15px;
+  }
+
+  select{
+    max-width:130px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="topbar">
+
+  <button onclick="goHome()">⌂</button>
+
+  <div class="logo">MY MANHWA</div>
+
+  <select id="chapterSelect" onchange="changeChapter()">
+  </select>
+
+</div>
+
+<div class="chapter-title" id="chapterTitle">
+  Loading...
+</div>
+
+<div class="reader" id="reader">
+  <div class="loading">Loading chapter...</div>
+</div>
+
+<div class="bottom-nav">
+
+  <button onclick="previousChapter()">
+    ← Previous
+  </button>
+
+  <button onclick="nextChapter()">
+    Next →
+  </button>
+
+</div>
+
+<button class="top-btn" id="topBtn" onclick="scrollToTop()">
+  ↑
+</button>
+
+<script>
+
+let chapters = [];
+let currentChapter = 0;
+
+async function loadChapters(){
+
+  const response = await fetch("chapters.json");
+
+  chapters = await response.json();
+
+  const params = new URLSearchParams(window.location.search);
+
+  const requested = parseInt(params.get("chapter")) || 1;
+
+  const index = chapters.findIndex(
+    chapter => chapter.number === requested
+  );
+
+  currentChapter = index >= 0 ? index : 0;
+
+  createChapterSelector();
+
+  loadChapter();
+
+}
+
+function createChapterSelector(){
+
+  const select = document.getElementById("chapterSelect");
+
+  select.innerHTML = "";
+
+  chapters.forEach((chapter,index)=>{
+
+    const option = document.createElement("option");
+
+    option.value = index;
+
+    option.textContent = chapter.title;
+
+    select.appendChild(option);
+
+  });
+
+  select.value = currentChapter;
+
+}
+
+function loadChapter(){
+
+  const chapter = chapters[currentChapter];
+
+  document.getElementById("chapterTitle").textContent =
+    chapter.title;
+
+  const reader = document.getElementById("reader");
+
+  reader.innerHTML = "";
+
+  for(let i=1; i<=chapter.pages; i++){
+
+    const img = document.createElement("img");
+
+    const number = String(i).padStart(3,"0");
+
+    img.src =
+      `${chapter.folder}/${number}.jpg`;
+
+    img.loading = "lazy";
+
+    img.alt =
+      `${chapter.title} Page ${i}`;
+
+    reader.appendChild(img);
+
+  }
+
+  window.scrollTo(0,0);
+
+  updateButtons();
+
+}
+
+function changeChapter(){
+
+  currentChapter =
+    parseInt(
+      document.getElementById("chapterSelect").value
+    );
+
+  const chapter = chapters[currentChapter];
+
+  window.location.href =
+    `reader.html?chapter=${chapter.number}`;
+
+}
+
+function previousChapter(){
+
+  if(currentChapter > 0){
+
+    const chapter =
+      chapters[currentChapter - 1];
+
+    window.location.href =
+      `reader.html?chapter=${chapter.number}`;
+
+  }
+
+}
+
+function nextChapter(){
+
+  if(currentChapter < chapters.length - 1){
+
+    const chapter =
+      chapters[currentChapter + 1];
+
+    window.location.href =
+      `reader.html?chapter=${chapter.number}`;
+
+  }
+
+}
+
+function updateButtons(){
+
+  const buttons =
+    document.querySelectorAll(".bottom-nav button");
+
+  buttons[0].style.visibility =
+    currentChapter === 0 ? "hidden" : "visible";
+
+  buttons[1].style.visibility =
+    currentChapter === chapters.length - 1
+      ? "hidden"
+      : "visible";
+
+}
+
+function goHome(){
+
+  window.location.href = "index.html";
+
+}
+
+function scrollToTop(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+window.addEventListener("scroll",()=>{
+
+  const scrollTop =
+    window.scrollY;
+
+  const docHeight =
+    document.documentElement.scrollHeight
+    - window.innerHeight;
+
+  const percent =
+    docHeight > 0
+      ? (scrollTop / docHeight) * 100
+      : 0;
+
+  document.getElementById("progress").style.width =
+    percent + "%";
+
+  document.getElementById("topBtn").style.display =
+    scrollTop > 500 ? "block" : "none";
+
+});
+
+loadChapters();
+
+</script>
+
+</body>
+  </html>
