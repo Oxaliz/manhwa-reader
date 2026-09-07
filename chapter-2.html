@@ -11,18 +11,12 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       background: #080808;
       color: white;
       font-family: Arial, sans-serif;
     }
-
-    /* PROGRESS BAR */
 
     #progress {
       position: fixed;
@@ -34,14 +28,12 @@
       z-index: 999;
     }
 
-    /* TOP BAR */
-
     .topbar {
       position: sticky;
       top: 3px;
       z-index: 100;
       height: 58px;
-      background: rgba(15, 15, 15, 0.96);
+      background: rgba(15,15,15,.96);
       border-bottom: 1px solid #222;
 
       display: flex;
@@ -62,6 +54,227 @@
     .select {
       border: 1px solid #333;
       background: #1b1b1b;
+      color: white;
+      padding: 9px 11px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .select {
+      outline: none;
+    }
+
+    .chapter-title {
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .reader {
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .reader img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+
+    .bottom {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px 12px 50px;
+
+      display: flex;
+      gap: 10px;
+    }
+
+    .bottom a {
+      flex: 1;
+      text-align: center;
+      background: #1b1b1b;
+      color: white;
+      text-decoration: none;
+      padding: 13px;
+      border-radius: 7px;
+      border: 1px solid #333;
+    }
+
+    #topBtn {
+      position: fixed;
+      right: 15px;
+      bottom: 20px;
+
+      display: none;
+
+      width: 45px;
+      height: 45px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: white;
+      color: black;
+
+      font-size: 20px;
+      z-index: 200;
+    }
+
+    @media (max-width: 600px) {
+
+      .chapter-title {
+        max-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .btn,
+      .select {
+        padding: 8px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="progress"></div>
+
+  <div class="topbar">
+
+    <div class="left">
+
+      <a class="btn" href="index.html">🏠</a>
+
+      <a class="btn" href="chapter-1.html">←</a>
+
+    </div>
+
+    <div class="chapter-title">
+      Chapter 2
+    </div>
+
+    <div class="right">
+
+      <select
+        class="select"
+        onchange="goChapter(this.value)"
+      >
+
+        <option value="">Chapter</option>
+
+        <option value="chapter-1.html">
+          Chapter 1
+        </option>
+
+        <option value="chapter-2.html" selected>
+          Chapter 2
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="reader">
+
+    <img loading="lazy" src="chapter-2/001.jpg">
+    <img loading="lazy" src="chapter-2/002.jpg">
+    <img loading="lazy" src="chapter-2/003.jpg">
+    <img loading="lazy" src="chapter-2/004.jpg">
+    <img loading="lazy" src="chapter-2/005.jpg">
+    <img loading="lazy" src="chapter-2/006.jpg">
+    <img loading="lazy" src="chapter-2/007.jpg">
+    <img loading="lazy" src="chapter-2/008.jpg">
+    <img loading="lazy" src="chapter-2/009.jpg">
+    <img loading="lazy" src="chapter-2/010.jpg">
+    <img loading="lazy" src="chapter-2/011.jpg">
+    <img loading="lazy" src="chapter-2/012.jpg">
+    <img loading="lazy" src="chapter-2/013.jpg">
+    <img loading="lazy" src="chapter-2/014.jpg">
+    <img loading="lazy" src="chapter-2/015.jpg">
+    <img loading="lazy" src="chapter-2/016.jpg">
+    <img loading="lazy" src="chapter-2/017.jpg">
+    <img loading="lazy" src="chapter-2/018.jpg">
+    <img loading="lazy" src="chapter-2/019.jpg">
+    <img loading="lazy" src="chapter-2/020.jpg">
+
+  </div>
+
+
+  <div class="bottom">
+
+    <a href="chapter-1.html">
+      ← Previous
+    </a>
+
+    <a href="index.html">
+      🏠 Home
+    </a>
+
+  </div>
+
+
+  <button id="topBtn" onclick="goTop()">
+    ↑
+  </button>
+
+
+  <script>
+
+    function goChapter(url) {
+
+      if (url !== "") {
+        window.location.href = url;
+      }
+
+    }
+
+    window.addEventListener("scroll", function() {
+
+      const scrollTop =
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+      const progress =
+        height > 0 ? (scrollTop / height) * 100 : 0;
+
+      document.getElementById("progress").style.width =
+        progress + "%";
+
+      const topBtn =
+        document.getElementById("topBtn");
+
+      topBtn.style.display =
+        scrollTop > 500 ? "block" : "none";
+
+    });
+
+    function goTop() {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>      background: #1b1b1b;
       color: white;
       padding: 9px 11px;
       border-radius: 6px;
