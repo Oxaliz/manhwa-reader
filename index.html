@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Manhwa Reader</title>
+  <title>My Manhwa</title>
 
   <style>
     * {
@@ -13,55 +13,290 @@
 
     body {
       margin: 0;
-      background: #111;
-      color: white;
+      background: #0b0b0b;
+      color: #fff;
       font-family: Arial, sans-serif;
     }
 
-    .header {
-      text-align: center;
-      padding: 25px 15px;
-      background: #181818;
+    /* NAVBAR */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: rgba(15, 15, 15, 0.96);
+      border-bottom: 1px solid #222;
     }
 
-    .header h1 {
-      margin: 0 0 8px;
-      font-size: 26px;
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
     }
 
-    .header p {
-      margin: 0;
+    .search {
+      width: 150px;
+      padding: 9px 12px;
+      border: 1px solid #333;
+      border-radius: 20px;
+      background: #1a1a1a;
+      color: white;
+      outline: none;
+    }
+
+    /* HERO */
+
+    .hero {
+      max-width: 1000px;
+      margin: auto;
+      padding: 35px 18px;
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .cover {
+      width: 180px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #222;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .info h1 {
+      margin: 0 0 12px;
+      font-size: 30px;
+    }
+
+    .description {
       color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 15px;
     }
 
-    .chapters {
-      max-width: 700px;
-      margin: 25px auto;
-      padding: 0 15px;
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      background: #222;
+      border: 1px solid #333;
+      padding: 6px 10px;
+      border-radius: 15px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .read-btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: white;
+      color: black;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    /* CHAPTERS */
+
+    .section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 18px 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
     }
 
     .chapter {
-      display: block;
-      background: #222;
-      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #151515;
+      border: 1px solid #222;
+      border-radius: 7px;
+      padding: 15px;
+      margin-bottom: 9px;
       text-decoration: none;
-      padding: 18px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      font-size: 18px;
+      color: white;
     }
 
     .chapter:hover {
-      background: #333;
+      background: #1d1d1d;
+    }
+
+    .chapter-name {
+      font-weight: bold;
+    }
+
+    .chapter-date {
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #666;
+      border-top: 1px solid #222;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      .hero {
+        align-items: flex-start;
+      }
+
+      .cover {
+        width: 120px;
+        height: 175px;
+      }
+
+      .info h1 {
+        font-size: 22px;
+      }
+
+      .description {
+        font-size: 14px;
+      }
+
+      .search {
+        width: 120px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="header">
-    <h1>My Manhwa</h1>
-    <p>Choose a chapter to read</p>
+  <!-- NAVBAR -->
+
+  <div class="navbar">
+    <div class="logo">MY MANHWA</div>
+
+    <input
+      class="search"
+      type="text"
+      placeholder="Search..."
+      onkeyup="searchChapter()"
+    >
+  </div>
+
+
+  <!-- MANHWA INFO -->
+
+  <div class="hero">
+
+    <!-- COVER IMAGE -->
+    <img
+      class="cover"
+      src="cover.jpg"
+      alt="Manhwa Cover"
+    >
+
+    <div class="info">
+
+      <h1>My Manhwa</h1>
+
+      <div class="description">
+        Your manhwa description goes here.
+        Write a short introduction about your story.
+      </div>
+
+      <div class="tags">
+        <span class="tag">Action</span>
+        <span class="tag">Romance</span>
+        <span class="tag">Fantasy</span>
+        <span class="tag">Drama</span>
+      </div>
+
+      <a class="read-btn" href="chapter-1.html">
+        Read First Chapter
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- CHAPTER LIST -->
+
+  <div class="section">
+
+    <div class="section-title">
+      Chapters
+    </div>
+
+    <div id="chapterList">
+
+      <a class="chapter" href="chapter-2.html">
+        <span class="chapter-name">Chapter 2</span>
+        <span class="chapter-date">New</span>
+      </a>
+
+      <a class="chapter" href="chapter-1.html">
+        <span class="chapter-name">Chapter 1</span>
+        <span class="chapter-date">Available</span>
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <footer>
+    © 2026 My Manhwa
+  </footer>
+
+
+  <script>
+
+    function searchChapter() {
+
+      let input =
+        document.querySelector(".search").value.toLowerCase();
+
+      let chapters =
+        document.querySelectorAll(".chapter");
+
+      chapters.forEach(function(chapter) {
+
+        let text =
+          chapter.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+          chapter.style.display = "flex";
+        } else {
+          chapter.style.display = "none";
+        }
+
+      });
+
+    }
+
+  </script>
+
+</body>
+                     </html>    <p>Choose a chapter to read</p>
   </div>
 
   <div class="chapters">
