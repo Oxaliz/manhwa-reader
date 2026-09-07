@@ -3,65 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 1</title>
+
+  <title>Manhwa Reader</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       background: #111;
-    }
-
-    .title {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #181818;
       color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
       text-align: center;
-      padding: 15px;
-      font: bold 20px Arial;
+      padding: 25px 15px;
+      background: #181818;
     }
 
-    .reader {
-      width: 100%;
-      max-width: 900px;
-      margin: auto;
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
     }
 
-    .reader img {
+    .header p {
+      margin: 0;
+      color: #aaa;
+    }
+
+    .chapters {
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .chapter {
       display: block;
-      width: 100%;
-      height: auto;
+      background: #222;
+      color: white;
+      text-decoration: none;
+      padding: 18px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+
+    .chapter:hover {
+      background: #333;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="title">Chapter 1</div>
-
-  <div class="reader">
-    <img src="chapter-1/001.jpg">
-    <img src="chapter-1/002.jpg">
-    <img src="chapter-1/003.jpg">
-    <img src="chapter-1/004.jpg">
-    <img src="chapter-1/005.jpg">
-    <img src="chapter-1/006.jpg">
-    <img src="chapter-1/007.jpg">
-    <img src="chapter-1/008.jpg">
-    <img src="chapter-1/009.jpg">
-    <img src="chapter-1/010.jpg">
-    <img src="chapter-1/011.jpg">
-    <img src="chapter-1/012.jpg">
-    <img src="chapter-1/013.jpg">
-    <img src="chapter-1/014.jpg">
-    <img src="chapter-1/015.jpg">
-    <img src="chapter-1/016.jpg">
-    <img src="chapter-1/017.jpg">
-    <img src="chapter-1/018.jpg">
-    <img src="chapter-1/019.jpg">
-    <img src="chapter-1/020.jpg">
+  <div class="header">
+    <h1>My Manhwa</h1>
+    <p>Choose a chapter to read</p>
   </div>
+
+  <div class="chapters">
+
+    <a class="chapter" href="index.html">
+      Chapter 1
+    </a>
+
+    <a class="chapter" href="chapter-2.html">
+      Chapter 2
+    </a>
+
+  </div>
+
+</body>
+</html>  </div>
 
 </body>
 </html>
