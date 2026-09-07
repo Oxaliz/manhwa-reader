@@ -1,67 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>My Manhwa</title>
+<title>MY MANHWA</title>
 
 <style>
-
-* {
-box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-margin: 0;
-background: #0b0b0b;
-color: white;
-font-family: Arial, sans-serif;
+body{
+  background:#101010;
+  color:white;
+  font-family:Arial,sans-serif;
 }
 
-/* HEADER */
+.header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#181818;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 12px rgba(0,0,0,.5);
+}
 
-header {
+.logo{
+  font-size:20px;
+  font-weight:bold;
+}
 
-position: sticky;
-top: 0;
-z-index: 100;
+.search{
+  width:180px;
+  padding:9px 12px;
+  border:0;
+  border-radius:20px;
+  background:#292929;
+  color:white;
+  outline:none;
+}
 
-height: 62px;
+.hero{
+  max-width:900px;
+  margin:auto;
+  padding:25px 15px;
+  display:flex;
+  gap:20px;
+}
 
-display: flex;
-align-items: center;
-justify-content: space-between;
+.cover{
+  width:150px;
+  height:210px;
+  object-fit:cover;
+  border-radius:8px;
+  background:#222;
+}
 
-padding: 0 18px;
+.info{
+  flex:1;
+}
 
-background: rgba(12,12,12,.97);
+.title{
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
 
-border-bottom: 1px solid #222;
+.description{
+  color:#bbb;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:18px;
+}
+
+.tag{
+  background:#292929;
+  padding:6px 10px;
+  border-radius:15px;
+  font-size:12px;
+}
+
+.read-btn{
+  display:inline-block;
+  background:#ff4d6d;
+  color:white;
+  text-decoration:none;
+  padding:11px 18px;
+  border-radius:7px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:10px 15px 40px;
+}
+
+.section-title{
+  font-size:20px;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.chapter{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#1b1b1b;
+  padding:14px;
+  margin-bottom:8px;
+  border-radius:8px;
+  text-decoration:none;
+  color:white;
+}
+
+.chapter:hover{
+  background:#252525;
+}
+
+.chapter-name{
+  font-weight:bold;
+}
+
+.read{
+  color:#ff4d6d;
+  font-size:13px;
+}
+
+.empty{
+  text-align:center;
+  color:#888;
+  padding:30px;
+}
+
+.footer{
+  text-align:center;
+  color:#666;
+  padding:30px 10px;
+  font-size:12px;
+}
+
+@media(max-width:600px){
+
+  .header{
+    gap:10px;
+  }
+
+  .logo{
+    font-size:16px;
+  }
+
+  .search{
+    width:145px;
+  }
+
+  .hero{
+    align-items:flex-start;
+  }
+
+  .cover{
+    width:115px;
+    height:165px;
+  }
+
+  .title{
+    font-size:21px;
+  }
+
+  .description{
+    font-size:13px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo">
+    MY MANHWA
+  </div>
+
+  <input
+    class="search"
+    id="search"
+    type="text"
+    placeholder="Search chapter..."
+    oninput="searchChapter()"
+  >
+
+</header>
+
+<section class="hero">
+
+  <img
+    class="cover"
+    src="cover.jpg"
+    alt="Manhwa Cover"
+  >
+
+  <div class="info">
+
+    <div class="title">
+      My Manhwa
+    </div>
+
+    <div class="description">
+      Your manhwa description goes here.
+      Update this text with your own story description.
+    </div>
+
+    <div class="tags">
+      <span class="tag">Action</span>
+      <span class="tag">Romance</span>
+      <span class="tag">Fantasy</span>
+      <span class="tag">Drama</span>
+    </div>
+
+    <a
+      class="read-btn"
+      href="reader.html?chapter=1"
+    >
+      Read Now →
+    </a>
+
+  </div>
+
+</section>
+
+<main class="container">
+
+  <div class="section-title">
+    Chapters
+  </div>
+
+  <div id="chapters">
+    <div class="empty">
+      Loading chapters...
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  © 2026 MY MANHWA
+</footer>
+
+<script>
+
+let chapters = [];
+
+async function loadChapters(){
+
+  const response =
+    await fetch("chapters.json");
+
+  chapters =
+    await response.json();
+
+  displayChapters(chapters);
 
 }
 
-.logo {
+function displayChapters(list){
 
-font-size: 20px;
-font-weight: bold;
+  const box =
+    document.getElementById("chapters");
+
+  box.innerHTML = "";
+
+  list
+    .slice()
+    .reverse()
+    .forEach(chapter => {
+
+      const link =
+        document.createElement("a");
+
+      link.className = "chapter";
+
+      link.href =
+        `reader.html?chapter=${chapter.number}`;
+
+      link.innerHTML = `
+        <span class="chapter-name">
+          ${chapter.title}
+        </span>
+
+        <span class="read">
+          Read →
+        </span>
+      `;
+
+      box.appendChild(link);
+
+    });
 
 }
 
-.search {
+function searchChapter(){
 
-width: 160px;
+  const keyword =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
 
-padding: 9px 13px;
+  const filtered =
+    chapters.filter(chapter =>
+      chapter.title
+        .toLowerCase()
+        .includes(keyword)
+    );
 
-border-radius: 20px;
+  displayChapters(filtered);
 
-border: 1px solid #333;
+}
 
+loadChapters();
+
+</script>
+
+</body>
+</html>
 background: #191919;
 
 color: white;
