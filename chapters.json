@@ -1,0 +1,14 @@
+[
+  {
+    "number": 1,
+    "title": "Chapter 1",
+    "folder": "chapter-1",
+    "pages": 20
+  },
+  {
+    "number": 2,
+    "title": "Chapter 2",
+    "folder": "chapter-2",
+    "pages": 20
+  }
+]
