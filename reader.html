@@ -6,42 +6,59 @@
   <title>ToonNest — Reader</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0b0b0f; color: #eee; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; transition: 0.3s; }
+    :root {
+      --bg: #0b0b0f;
+      --bg2: #12121a;
+      --bg3: #1a1a28;
+      --border: #2a2a3a;
+      --text: #eee;
+      --primary: #ff6b8a;
+      --primary2: #d98ac8;
+    }
+    .light {
+      --bg: #f5f0f7;
+      --bg2: #ffffff;
+      --bg3: #f0ebf2;
+      --border: #ddd;
+      --text: #222;
+    }
+    body { background: var(--bg); color: var(--text); }
 
     .progress {
       position: fixed; top: 0; left: 0;
       width: 0%; height: 3px;
-      background: #ff6b8a;
+      background: var(--primary);
       z-index: 9999;
     }
 
     .topbar {
       position: sticky; top: 0;
-      background: #12121a;
+      background: var(--bg2);
       padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #2a2a3a;
+      border-bottom: 1px solid var(--border);
       z-index: 100;
     }
     .topbar .logo {
       font-weight: 700;
       font-size: 16px;
-      background: linear-gradient(90deg, #ff6b8a, #d98ac8);
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .topbar button, .topbar select {
-      background: #1e1e30;
+      background: var(--bg3);
       border: none;
-      color: #fff;
+      color: var(--text);
       padding: 8px 14px;
       border-radius: 30px;
       cursor: pointer;
       font-size: 13px;
     }
-    .topbar select { background: #1a1a28; border: 1px solid #2a2a3a; }
+    .topbar select { border: 1px solid var(--border); }
 
     .chapter-title {
       text-align: center;
@@ -58,7 +75,7 @@
       display: block;
       width: 100%;
       height: auto;
-      background: #111;
+      background: var(--bg3);
     }
 
     .bottom-nav {
@@ -71,15 +88,15 @@
     .bottom-nav button {
       flex: 1;
       padding: 14px;
-      background: #1e1e30;
+      background: var(--bg3);
       border: none;
       border-radius: 30px;
-      color: #fff;
+      color: var(--text);
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
     }
-    .bottom-nav button:hover { background: #2a2a42; }
+    .bottom-nav button:hover { background: var(--border); }
     .bottom-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
 
     .top-btn {
@@ -89,7 +106,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: #ff6b8a;
+      background: var(--primary);
       border: none;
       color: #fff;
       font-size: 20px;
@@ -98,7 +115,6 @@
       z-index: 50;
       box-shadow: 0 4px 20px rgba(255,107,138,0.3);
     }
-
     @media (max-width: 600px) {
       .topbar .logo { font-size: 14px; }
       .topbar button, .topbar select { font-size: 12px; padding: 6px 10px; }
@@ -128,17 +144,38 @@
   <button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <script>
-    let manhwa, chapters, currentIndex = 0;
+    let manhwa, chapters, currentIndex = 0, manhwaId = 1;
+
+    // ===== THEME =====
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light');
+    }
 
     // ===== PREMIUM =====
     function isPremium() {
       return localStorage.getItem('isPremium') === 'true';
     }
 
+    // ===== PROGRESS (Reading History) =====
+    function setProgress(manhwaId, chapter) {
+      localStorage.setItem('progress_' + manhwaId, chapter.toString());
+    }
+    function getProgress(manhwaId) {
+      return parseInt(localStorage.getItem('progress_' + manhwaId) || '0');
+    }
+
+    // ===== LAST READ POSITION (page) =====
+    function savePagePosition(manhwaId, chapter, page) {
+      localStorage.setItem('lastPage_' + manhwaId + '_' + chapter, page.toString());
+    }
+    function getPagePosition(manhwaId, chapter) {
+      return parseInt(localStorage.getItem('lastPage_' + manhwaId + '_' + chapter) || '0');
+    }
+
     // ===== LOAD =====
     async function load() {
       const params = new URLSearchParams(window.location.search);
-      const manhwaId = parseInt(params.get('manhwa')) || 1;
+      manhwaId = parseInt(params.get('manhwa')) || 1;
       const chapterNum = parseInt(params.get('chapter')) || 1;
 
       const res = await fetch('manhwa.json');
@@ -187,11 +224,52 @@
         const num = String(i).padStart(3, '0');
         img.src = `${ch.folder}/${num}.jpg`;
         img.loading = 'lazy';
+        img.dataset.page = i;
         reader.appendChild(img);
       }
+
+      // Save reading progress (chapter)
+      setProgress(manhwaId, ch.number);
+
+      // Scroll to last read page
+      const lastPage = getPagePosition(manhwaId, ch.number);
+      if (lastPage > 0 && lastPage <= ch.pages) {
+        const imgs = reader.querySelectorAll('img');
+        if (imgs[lastPage - 1]) {
+          setTimeout(() => {
+            imgs[lastPage - 1].scrollIntoView({ behavior: 'smooth' });
+          }, 300);
+        }
+      }
+
       updateButtons();
-      window.scrollTo(0, 0);
     }
+
+    // ===== SAVE PAGE POSITION ON SCROLL =====
+    function saveCurrentPage() {
+      const reader = document.getElementById('reader');
+      const imgs = reader.querySelectorAll('img');
+      const scrollTop = window.scrollY + window.innerHeight / 2;
+      let currentPage = 1;
+      imgs.forEach((img, i) => {
+        const rect = img.getBoundingClientRect();
+        if (rect.top < window.innerHeight / 2) {
+          currentPage = i + 1;
+        }
+      });
+      const ch = chapters[currentIndex];
+      if (ch) {
+        savePagePosition(manhwaId, ch.number, currentPage);
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      saveCurrentPage();
+      const st = window.scrollY;
+      const dh = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('progress').style.width = dh > 0 ? (st / dh) * 100 + '%' : '0%';
+      document.getElementById('topBtn').style.display = st > 500 ? 'block' : 'none';
+    });
 
     // ===== CHANGE =====
     function changeChapter() {
@@ -202,14 +280,14 @@
         document.getElementById('chapterSelect').value = currentIndex;
         return;
       }
-      location.href = `reader.html?manhwa=${manhwa.id}&chapter=${ch.number}`;
+      location.href = `reader.html?manhwa=${manhwaId}&chapter=${ch.number}`;
     }
 
     // ===== PREV/NEXT =====
     function prevChapter() {
       if (currentIndex > 0) {
         const ch = chapters[currentIndex - 1];
-        location.href = `reader.html?manhwa=${manhwa.id}&chapter=${ch.number}`;
+        location.href = `reader.html?manhwa=${manhwaId}&chapter=${ch.number}`;
       }
     }
     function nextChapter() {
@@ -219,7 +297,7 @@
           alert('🔒 နောက် Chapter က Premium ပါ။');
           return;
         }
-        location.href = `reader.html?manhwa=${manhwa.id}&chapter=${ch.number}`;
+        location.href = `reader.html?manhwa=${manhwaId}&chapter=${ch.number}`;
       }
     }
 
@@ -227,14 +305,6 @@
       document.getElementById('prevBtn').disabled = currentIndex === 0;
       document.getElementById('nextBtn').disabled = currentIndex === chapters.length - 1;
     }
-
-    // ===== PROGRESS =====
-    window.addEventListener('scroll', () => {
-      const st = window.scrollY;
-      const dh = document.documentElement.scrollHeight - window.innerHeight;
-      document.getElementById('progress').style.width = dh > 0 ? (st / dh) * 100 + '%' : '0%';
-      document.getElementById('topBtn').style.display = st > 500 ? 'block' : 'none';
-    });
 
     load();
   </script>
