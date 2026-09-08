@@ -201,7 +201,8 @@
         const img = document.createElement('img');
         const num = String(i).padStart(3, '0');
         // ✅ WebP အတွက် ပြင်ဆင်ပြီး
-        img.src = `${ch.folder}/${num}.webp`;
+        img.src = `/${ch.folder}/${num}.webp`;
+// ရလဒ်: /manhwa-1/chapter-1/001.webp
         img.loading = 'lazy';
         reader.appendChild(img);
       }
