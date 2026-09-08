@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "My Manhwa",
+    "cover": "covers/manhwa-1.jpg",
+    "latestChapter": 2
+  },
+  {
+    "id": 2,
+    "title": "Another Manhwa",
+    "cover": "covers/manhwa-2.jpg",
+    "latestChapter": 1
+  },
+  {
+    "id": 3,
+    "title": "New Manhwa",
+    "cover": "covers/manhwa-3.jpg",
+    "latestChapter": 1
+  }
+]
