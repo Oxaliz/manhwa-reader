@@ -5,33 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToonNest — Manhwa Reader</title>
   <style>
-    /* ===== RESET ===== */
+    /* ===== RESET & BASE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0b0b0f; color: #eee; font-family: 'Segoe UI', Arial, sans-serif; }
-
-    /* ===== SCROLLBAR ===== */
+    body { font-family: 'Segoe UI', Arial, sans-serif; transition: 0.3s; }
+    :root {
+      --bg: #0b0b0f;
+      --bg2: #12121a;
+      --bg3: #1a1a28;
+      --border: #2a2a3a;
+      --text: #eee;
+      --text2: #aaa;
+      --primary: #ff6b8a;
+      --primary2: #d98ac8;
+      --shadow: rgba(255,107,138,0.15);
+    }
+    .light {
+      --bg: #f5f0f7;
+      --bg2: #ffffff;
+      --bg3: #f0ebf2;
+      --border: #ddd;
+      --text: #222;
+      --text2: #555;
+      --shadow: rgba(0,0,0,0.08);
+    }
+    body { background: var(--bg); color: var(--text); }
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #1a1a24; }
-    ::-webkit-scrollbar-thumb { background: #ff6b8a; border-radius: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
     /* ===== HEADER ===== */
     .header {
       background: linear-gradient(135deg, #1a0b1f, #2d1b33);
       padding: 30px 20px 20px;
       text-align: center;
-      border-bottom: 2px solid #ff6b8a;
+      border-bottom: 2px solid var(--primary);
     }
     .logo {
       font-size: 36px;
       font-weight: 900;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #ff6b8a, #d98ac8);
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .tagline {
       font-size: 13px;
-      color: #aaa;
+      color: var(--text2);
       margin-top: 4px;
       letter-spacing: 2px;
     }
@@ -42,24 +60,23 @@
       align-items: center;
       justify-content: space-between;
       padding: 12px 20px;
-      background: #12121a;
-      border-bottom: 1px solid #2a2a3a;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     .nav-left { display: flex; align-items: center; gap: 12px; }
     .menu-btn {
-      background: none; border: none; color: #fff; font-size: 26px;
+      background: none; border: none; color: var(--text); font-size: 26px;
       cursor: pointer;
     }
-    .nav-title {
-      font-weight: 600;
-      font-size: 15px;
-      color: #ddd;
-    }
+    .nav-title { font-weight: 600; font-size: 15px; color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .premium-btn {
-      background: linear-gradient(135deg, #ff6b8a, #d98ac8);
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
       border: none;
       color: #fff;
       padding: 8px 18px;
@@ -70,33 +87,69 @@
       transition: 0.2s;
     }
     .premium-btn:hover { transform: scale(1.05); opacity: 0.9; }
-    .premium-badge {
-      background: #ff6b8a;
-      color: #fff;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-left: 8px;
+    .theme-btn {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .notif-btn {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      position: relative;
+    }
+    .notif-dot {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      width: 10px;
+      height: 10px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 2px solid var(--bg2);
     }
 
-    /* ===== SEARCH ===== */
+    /* ===== SEARCH + FILTER ===== */
     .search-area {
       max-width: 1100px;
       margin: 20px auto 0;
       padding: 0 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .search {
-      width: 100%;
+      flex: 1;
+      min-width: 200px;
       padding: 14px 18px;
       border-radius: 30px;
-      border: 1px solid #2a2a3a;
-      background: #181822;
-      color: #fff;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
       font-size: 15px;
       outline: none;
       transition: 0.3s;
     }
-    .search:focus { border-color: #ff6b8a; box-shadow: 0 0 20px rgba(255,107,138,0.15); }
+    .search:focus { border-color: var(--primary); box-shadow: 0 0 20px var(--shadow); }
+    .filter-select {
+      padding: 14px 18px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      cursor: pointer;
+    }
+    .filter-select:focus { border-color: var(--primary); }
 
     /* ===== CONTAINER ===== */
     .container {
@@ -116,9 +169,9 @@
     .section-title {
       font-size: 22px;
       font-weight: 700;
-      color: #fff;
+      color: var(--text);
     }
-    .section-title span { color: #ff6b8a; }
+    .section-title span { color: var(--primary); }
 
     /* ===== GRID ===== */
     .grid {
@@ -129,30 +182,28 @@
 
     /* ===== CARD ===== */
     .card {
-      background: #161620;
+      background: var(--bg2);
       border-radius: 16px;
       overflow: hidden;
       text-decoration: none;
-      color: #fff;
+      color: var(--text);
       transition: 0.3s;
-      border: 1px solid #22223a;
+      border: 1px solid var(--border);
       position: relative;
     }
     .card:hover {
       transform: translateY(-6px);
-      border-color: #ff6b8a;
-      box-shadow: 0 10px 30px rgba(255,107,138,0.15);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px var(--shadow);
     }
     .card-cover {
       width: 100%;
       aspect-ratio: 2/3;
       object-fit: cover;
       display: block;
-      background: #1a1a28;
+      background: var(--bg3);
     }
-    .card-body {
-      padding: 12px 12px 14px;
-    }
+    .card-body { padding: 12px 12px 14px; }
     .card-title {
       font-size: 14px;
       font-weight: 600;
@@ -162,14 +213,30 @@
     }
     .card-genre {
       font-size: 11px;
-      color: #888;
+      color: var(--text2);
       margin-top: 4px;
+    }
+    /* Reading progress bar on card */
+    .card-progress {
+      width: 100%;
+      height: 3px;
+      background: var(--bg3);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .card-progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      width: 0%;
+      transition: 0.3s;
     }
     .badge-latest {
       position: absolute;
       top: 10px;
       left: 10px;
-      background: #ff6b8a;
+      background: var(--primary);
       color: #fff;
       font-size: 9px;
       font-weight: 700;
@@ -177,6 +244,23 @@
       border-radius: 20px;
       letter-spacing: 0.5px;
     }
+    .favorite-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      transition: 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .favorite-btn:hover { transform: scale(1.1); }
+    .favorite-btn.active { color: #ff6b8a; }
 
     /* ===== MENU PANEL ===== */
     .overlay {
@@ -187,24 +271,23 @@
       display: none;
     }
     .overlay.show { display: block; }
-
     .menu-panel {
       position: fixed;
       top: 0;
       left: -300px;
       width: 280px;
       height: 100vh;
-      background: #12121a;
+      background: var(--bg2);
       z-index: 300;
       padding: 30px 20px;
       transition: 0.3s;
-      border-right: 1px solid #2a2a3a;
+      border-right: 1px solid var(--border);
     }
     .menu-panel.open { left: 0; }
     .menu-close {
       background: none;
       border: none;
-      color: #fff;
+      color: var(--text);
       font-size: 28px;
       float: right;
       cursor: pointer;
@@ -212,7 +295,7 @@
     .menu-logo {
       font-size: 28px;
       font-weight: 900;
-      background: linear-gradient(90deg, #ff6b8a, #d98ac8);
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin: 30px 0 30px;
@@ -220,19 +303,19 @@
     .menu-link {
       display: block;
       padding: 14px 6px;
-      border-bottom: 1px solid #22223a;
-      color: #ddd;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
       text-decoration: none;
       font-size: 15px;
       transition: 0.2s;
     }
-    .menu-link:hover { color: #ff6b8a; padding-left: 10px; }
+    .menu-link:hover { color: var(--primary); padding-left: 10px; }
 
     /* ===== EMPTY ===== */
     .empty {
       grid-column: 1/-1;
       text-align: center;
-      color: #666;
+      color: var(--text2);
       padding: 50px 10px;
     }
 
@@ -249,38 +332,31 @@
     }
     .modal.show { display: flex; }
     .modal-box {
-      background: #1a1a28;
+      background: var(--bg2);
       max-width: 420px;
       width: 100%;
       padding: 35px 30px;
       border-radius: 20px;
-      border: 1px solid #33334a;
+      border: 1px solid var(--border);
     }
-    .modal-box h2 {
-      color: #ff6b8a;
-      margin-bottom: 8px;
-    }
-    .modal-box p {
-      color: #aaa;
-      margin-bottom: 18px;
-      font-size: 14px;
-    }
+    .modal-box h2 { color: var(--primary); margin-bottom: 8px; }
+    .modal-box p { color: var(--text2); margin-bottom: 18px; font-size: 14px; }
     .modal-box input {
       width: 100%;
       padding: 14px;
       border-radius: 30px;
-      border: 1px solid #2a2a3a;
-      background: #0f0f18;
-      color: #fff;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
       font-size: 15px;
       outline: none;
       margin-bottom: 14px;
     }
-    .modal-box input:focus { border-color: #ff6b8a; }
+    .modal-box input:focus { border-color: var(--primary); }
     .modal-box .btn-submit {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, #ff6b8a, #d98ac8);
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
       border: none;
       border-radius: 30px;
       color: #fff;
@@ -294,13 +370,32 @@
       float: right;
       background: none;
       border: none;
-      color: #fff;
+      color: var(--text);
       font-size: 28px;
       cursor: pointer;
     }
-    .modal-msg {
-      margin-top: 14px;
+    .modal-msg { margin-top: 14px; font-size: 14px; }
+
+    /* ===== NOTIFICATION ===== */
+    .notif-bar {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px 15px;
       font-size: 14px;
+      font-weight: 600;
+      display: none;
+      cursor: pointer;
+    }
+    .notif-bar.show { display: block; }
+    .notif-bar .close-notif {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      float: right;
+      cursor: pointer;
+      margin-left: 10px;
     }
 
     /* ===== MOBILE ===== */
@@ -310,6 +405,7 @@
       .card-body { padding: 8px 8px 10px; }
       .card-title { font-size: 12px; }
       .section-title { font-size: 18px; }
+      .nav-right .theme-btn, .nav-right .notif-btn { padding: 6px 10px; font-size: 14px; }
     }
     @media (max-width: 400px) {
       .grid { grid-template-columns: repeat(2, 1fr); gap: 14px 8px; }
@@ -317,6 +413,12 @@
   </style>
 </head>
 <body>
+
+  <!-- ===== NOTIFICATION BAR ===== -->
+  <div class="notif-bar" id="notifBar">
+    <button class="close-notif" onclick="closeNotif()">×</button>
+    <span id="notifText">📢 Chapter အသစ်ထွက်ရှိပါပြီ!</span>
+  </div>
 
   <!-- ===== HEADER ===== -->
   <header class="header">
@@ -330,17 +432,32 @@
       <button class="menu-btn" onclick="openMenu()">☰</button>
       <span class="nav-title" id="navTitle">Home</span>
     </div>
-    <button class="premium-btn" onclick="openModal()">👑 Premium</button>
+    <div class="nav-right">
+      <button class="theme-btn" onclick="toggleTheme()" title="Dark/Light Mode">🌓</button>
+      <button class="notif-btn" onclick="toggleNotif()" title="Notifications">
+        🔔
+        <span class="notif-dot" id="notifDot"></span>
+      </button>
+      <button class="premium-btn" onclick="openModal()">👑 Premium</button>
+    </div>
   </nav>
 
-  <!-- ===== SEARCH ===== -->
+  <!-- ===== SEARCH + FILTER ===== -->
   <div class="search-area">
-    <input class="search" id="searchInput" type="text" placeholder="🔍 Search Manhwa..." oninput="searchManhwa()">
+    <input class="search" id="searchInput" type="text" placeholder="🔍 Search Manhwa..." oninput="filterAll()">
+    <select class="filter-select" id="genreFilter" onchange="filterAll()">
+      <option value="all">All Genres</option>
+      <option value="Action">Action</option>
+      <option value="Romance">Romance</option>
+      <option value="Fantasy">Fantasy</option>
+      <option value="Horror">Horror</option>
+      <option value="Comedy">Comedy</option>
+      <option value="Drama">Drama</option>
+    </select>
   </div>
 
   <!-- ===== MAIN ===== -->
   <main class="container">
-
     <section class="section">
       <div class="section-head">
         <div class="section-title">🆕 <span>Latest</span> Updates</div>
@@ -354,7 +471,6 @@
       </div>
       <div class="grid" id="allGrid"></div>
     </section>
-
   </main>
 
   <!-- ===== MENU PANEL ===== -->
@@ -365,6 +481,7 @@
     <a class="menu-link" href="index.html">🏠 Home</a>
     <a class="menu-link" href="#" onclick="closeMenu(); document.getElementById('latestGrid').scrollIntoView({behavior:'smooth'});">🆕 Latest</a>
     <a class="menu-link" href="#" onclick="closeMenu(); document.getElementById('allGrid').scrollIntoView({behavior:'smooth'});">📚 All Manhwa</a>
+    <a class="menu-link" href="#" onclick="closeMenu(); showFavorites();">❤️ My Favorites</a>
     <a class="menu-link" href="#" onclick="closeMenu(); openModal();">👑 Premium</a>
   </div>
 
@@ -385,6 +502,42 @@
     // DATA
     // ============================================================
     let manhwaList = [];
+    let allManhwa = [];
+
+    // ============================================================
+    // THEME (Dark/Light)
+    // ============================================================
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light');
+    }
+
+    // ============================================================
+    // NOTIFICATION
+    // ============================================================
+    function showNotif(text) {
+      document.getElementById('notifText').textContent = text;
+      document.getElementById('notifBar').classList.add('show');
+      localStorage.setItem('notifShown', 'true');
+      document.getElementById('notifDot').style.display = 'none';
+    }
+    function closeNotif() {
+      document.getElementById('notifBar').classList.remove('show');
+    }
+    function toggleNotif() {
+      if (document.getElementById('notifBar').classList.contains('show')) {
+        closeNotif();
+      } else {
+        showNotif('📢 နောက်ဆုံး Chapter အသစ်များကို ကြည့်ရှုပါ!');
+      }
+    }
+    // Show notification on first visit
+    if (!localStorage.getItem('notifShown')) {
+      setTimeout(() => showNotif('📢 ToonNest မှ ကြိုဆိုပါတယ်! Chapter အသစ်များ စောင့်မျှော်နေပါ။'), 1000);
+    }
 
     // ============================================================
     // PREMIUM SYSTEM
@@ -397,11 +550,7 @@
 
     function updateNav() {
       const title = document.getElementById('navTitle');
-      if (isPremium()) {
-        title.innerHTML = 'Home 👑';
-      } else {
-        title.innerHTML = 'Home';
-      }
+      title.innerHTML = isPremium() ? 'Home 👑' : 'Home';
     }
 
     function openModal() {
@@ -427,12 +576,51 @@
     }
 
     // ============================================================
+    // FAVORITES (localStorage)
+    // ============================================================
+    function getFavorites() {
+      return JSON.parse(localStorage.getItem('favorites') || '[]');
+    }
+    function toggleFavorite(id) {
+      let favs = getFavorites();
+      const idx = favs.indexOf(id);
+      if (idx > -1) { favs.splice(idx, 1); } else { favs.push(id); }
+      localStorage.setItem('favorites', JSON.stringify(favs));
+      filterAll(); // refresh
+    }
+    function isFavorite(id) {
+      return getFavorites().includes(id);
+    }
+    function showFavorites() {
+      const grid = document.getElementById('allGrid');
+      const favs = getFavorites();
+      const filtered = manhwaList.filter(m => favs.includes(m.id));
+      grid.innerHTML = '';
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty">❤️ ကြိုက်နှစ်သက်ရာ Manhwa မရှိသေးပါ။</div>`;
+        return;
+      }
+      filtered.forEach(m => grid.appendChild(createCard(m, false)));
+    }
+
+    // ============================================================
+    // READING PROGRESS (localStorage)
+    // ============================================================
+    function getProgress(manhwaId) {
+      return parseInt(localStorage.getItem('progress_' + manhwaId) || '0');
+    }
+    function setProgress(manhwaId, chapter) {
+      localStorage.setItem('progress_' + manhwaId, chapter.toString());
+    }
+
+    // ============================================================
     // LOAD MANHWA
     // ============================================================
     async function loadManhwa() {
       try {
         const res = await fetch('manhwa.json');
         manhwaList = await res.json();
+        allManhwa = [...manhwaList];
         renderLatest();
         renderAll();
       } catch {
@@ -449,17 +637,27 @@
       a.className = 'card';
       a.href = `manhwa.html?id=${manhwa.id}`;
 
+      const progress = getProgress(manhwa.id);
+      const totalChapters = manhwa.chapters?.length || 1;
+      const progressPercent = Math.round((progress / totalChapters) * 100);
+
       let badge = '';
       if (showBadge) {
         badge = `<span class="badge-latest">LATEST</span>`;
       }
 
+      const fav = isFavorite(manhwa.id);
+
       a.innerHTML = `
         ${badge}
+        <button class="favorite-btn ${fav ? 'active' : ''}" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite(${manhwa.id});">${fav ? '❤️' : '🤍'}</button>
         <img class="card-cover" src="${manhwa.cover}" alt="${manhwa.title}" loading="lazy">
         <div class="card-body">
           <div class="card-title">${manhwa.title}</div>
           <div class="card-genre">${manhwa.genres ? manhwa.genres.slice(0,2).join(' • ') : ''}</div>
+          <div class="card-progress">
+            <div class="card-progress-bar" style="width:${progressPercent}%;"></div>
+          </div>
         </div>
       `;
       return a;
@@ -483,13 +681,20 @@
     }
 
     // ============================================================
-    // SEARCH
+    // SEARCH + FILTER (combined)
     // ============================================================
-    function searchManhwa() {
+    function filterAll() {
       const keyword = document.getElementById('searchInput').value.toLowerCase();
+      const genre = document.getElementById('genreFilter').value;
+
+      let filtered = allManhwa.filter(m => {
+        const matchTitle = m.title.toLowerCase().includes(keyword);
+        const matchGenre = genre === 'all' || (m.genres && m.genres.includes(genre));
+        return matchTitle && matchGenre;
+      });
+
       const grid = document.getElementById('allGrid');
       grid.innerHTML = '';
-      const filtered = manhwaList.filter(m => m.title.toLowerCase().includes(keyword));
       if (filtered.length === 0) {
         grid.innerHTML = `<div class="empty">🔍 ရှာမတွေ့ပါ</div>`;
         return;
@@ -518,4 +723,4 @@
   </script>
 
 </body>
-    </html>
+  </html>
