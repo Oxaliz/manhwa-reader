@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Manhwa</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#000;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+
+/* HEADER */
+
+.header{
+  background:#762765;
+  text-align:center;
+  padding:20px 10px;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:bold;
+}
+
+/* MENU */
+
+.menu{
+  height:50px;
+  background:#050505;
+  border-bottom:1px solid #762765;
+
+  display:flex;
+  align-items:center;
+
+  padding:0 18px;
+}
+
+/* MAIN */
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:25px 15px 50px;
+}
+
+/* INFO */
+
+.info{
+  display:flex;
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.cover{
+  width:160px;
+  height:220px;
+  object-fit:cover;
+  background:#222;
+}
+
+.details{
+  flex:1;
+}
+
+.title{
+  font-size:26px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.status{
+  display:inline-block;
+  background:#762765;
+  padding:5px 10px;
+  border-radius:5px;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.description{
+  color:#bbb;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+.genres{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.genre{
+  background:#222;
+  border:1px solid #333;
+  padding:6px 10px;
+  border-radius:15px;
+  font-size:12px;
+}
+
+/* CHAPTERS */
+
+.section-title{
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+.chapter{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background:#151515;
+  border:1px solid #222;
+
+  padding:14px;
+  margin-bottom:8px;
+
+  border-radius:6px;
+
+  color:#fff;
+  text-decoration:none;
+}
+
+.chapter:hover{
+  background:#762765;
+}
+
+.chapter-title{
+  font-weight:bold;
+}
+
+.read{
+  color:#d98ac8;
+  font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .info{
+    gap:14px;
+  }
+
+  .cover{
+    width:120px;
+    height:170px;
+  }
+
+  .title{
+    font-size:21px;
+  }
+
+  .description{
+    font-size:13px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo">
+    Manhwa Myanmar
+  </div>
+
+</header>
+
+<div class="menu">
+  ☰ &nbsp; Menu
+</div>
+
+<main class="container">
+
+  <div class="info">
+
+    <img
+      class="cover"
+      id="cover"
+      src=""
+      alt="Cover"
+    >
+
+    <div class="details">
+
+      <div
+        class="title"
+        id="title"
+      >
+        Loading...
+      </div>
+
+      <div
+        class="status"
+        id="status"
+      >
+      </div>
+
+      <div
+        class="description"
+        id="description"
+      >
+      </div>
+
+      <div
+        class="genres"
+        id="genres"
+      >
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section-title">
+    Chapters
+  </div>
+
+  <div id="chapters">
+  </div>
+
+</main>
+
+<script>
+
+let manhwaList = [];
+
+let currentManhwa;
+
+
+/* LOAD DATA */
+
+async function loadManhwa(){
+
+  const response =
+    await fetch("manhwa.json");
+
+  manhwaList =
+    await response.json();
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const id =
+    parseInt(
+      params.get("id")
+    ) || 1;
+
+
+  currentManhwa =
+    manhwaList.find(
+      item => item.id === id
+    );
+
+
+  if(!currentManhwa){
+
+    document.body.innerHTML =
+      "<h2 style='padding:30px'>Manhwa not found.</h2>";
+
+    return;
+
+  }
+
+
+  showManhwa();
+
+}
+
+
+/* SHOW MANHWA */
+
+function showManhwa(){
+
+  document.getElementById("title")
+    .textContent =
+      currentManhwa.title;
+
+
+  document.getElementById("cover")
+    .src =
+      currentManhwa.cover;
+
+
+  document.getElementById("status")
+    .textContent =
+      currentManhwa.status;
+
+
+  document.getElementById("description")
+    .textContent =
+      currentManhwa.description;
+
+
+  const genres =
+    document.getElementById("genres");
+
+
+  currentManhwa.genres.forEach(
+    genre => {
+
+      const item =
+        document.createElement("span");
+
+      item.className =
+        "genre";
+
+      item.textContent =
+        genre;
+
+      genres.appendChild(item);
+
+    }
+  );
+
+
+  const chapters =
+    document.getElementById("chapters");
+
+
+  currentManhwa.chapters
+    .slice()
+    .reverse()
+    .forEach(chapter => {
+
+      const link =
+        document.createElement("a");
+
+      link.className =
+        "chapter";
+
+
+      link.href =
+        `reader.html?manhwa=${currentManhwa.id}&chapter=${chapter.number}`;
+
+
+      link.innerHTML = `
+
+        <span class="chapter-title">
+          ${chapter.title}
+        </span>
+
+        <span class="read">
+          Read →
+        </span>
+
+      `;
+
+
+      chapters.appendChild(link);
+
+    });
+
+}
+
+
+loadManhwa();
+
+</script>
+
+</body>
+</html>
