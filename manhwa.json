@@ -10,45 +10,7 @@
       {
         "number": 1,
         "title": "Chapter 1",
-        "folder": "chapter-1",
-        "pages": 20
-      },
-      {
-        "number": 2,
-        "title": "Chapter 2",
-        "folder": "chapter-2",
-        "pages": 20
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "title": "Another Manhwa",
-    "cover": "covers/manhwa-2.jpg",
-    "description": "Another Manhwa story description.",
-    "status": "Ongoing",
-    "genres": ["Romance", "Drama"],
-    "chapters": [
-      {
-        "number": 1,
-        "title": "Chapter 1",
-        "folder": "another-1",
-        "pages": 20
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "title": "New Manhwa",
-    "cover": "covers/manhwa-3.jpg",
-    "description": "New Manhwa story description.",
-    "status": "Ongoing",
-    "genres": ["Fantasy", "Drama"],
-    "chapters": [
-      {
-        "number": 1,
-        "title": "Chapter 1",
-        "folder": "new-1",
+        "folder": "manhwa-1/chapter-1",
         "pages": 20
       }
     ]
