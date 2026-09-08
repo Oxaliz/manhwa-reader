@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Manhwa Myanmar</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -20,80 +26,125 @@ body{
 }
 
 /* HEADER */
+
 .header{
   background:#762765;
+  padding:20px 15px;
   text-align:center;
-  padding:22px 10px 20px;
 }
 
 .logo{
-  font-size:32px;
+  font-size:30px;
   font-weight:bold;
-  margin-bottom:8px;
 }
 
 .subtitle{
-  font-size:14px;
+  font-size:12px;
+  margin-top:6px;
+  opacity:.9;
 }
 
-/* MENU */
-.menu-bar{
+/* NAV */
+
+.nav{
   height:52px;
-  background:#050505;
-  border-bottom:1px solid #762765;
+  background:#111;
+  border-bottom:1px solid #292929;
 
   display:flex;
   align-items:center;
+  justify-content:space-between;
 
-  padding:0 18px;
-  font-size:16px;
+  padding:0 15px;
 }
 
-.menu-icon{
+.menu-btn{
+  background:none;
+  border:0;
+  color:#fff;
   font-size:24px;
-  margin-right:8px;
+  cursor:pointer;
+}
+
+.nav-title{
+  font-size:14px;
+  font-weight:bold;
 }
 
 /* SEARCH */
-.search-box{
-  padding:20px 15px 5px;
+
+.search-area{
+  padding:15px;
   max-width:1100px;
   margin:auto;
 }
 
 .search{
   width:100%;
-  padding:12px 15px;
-  border:none;
-  outline:none;
-  border-radius:5px;
 
-  background:#1b1b1b;
+  padding:12px 15px;
+
+  background:#181818;
   color:#fff;
 
-  font-size:14px;
+  border:1px solid #292929;
+  border-radius:6px;
+
+  outline:none;
 }
 
-/* GRID */
+/* SECTIONS */
+
 .container{
   max-width:1100px;
   margin:auto;
-  padding:20px 15px 50px;
+  padding:10px 15px 50px;
 }
+
+.section{
+  margin-top:15px;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:14px;
+}
+
+.section-title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.view-all{
+  color:#d98ac8;
+  font-size:12px;
+}
+
+/* GRID */
 
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:28px 20px;
+  gap:24px 15px;
 }
 
 /* CARD */
+
 .card{
+  position:relative;
+
   background:#762765;
-  padding:9px;
+
+  padding:7px;
+
   text-decoration:none;
   color:#fff;
+
   display:block;
+
   transition:.2s;
 }
 
@@ -104,66 +155,192 @@ body{
 .cover{
   width:100%;
   aspect-ratio:3/4;
+
   object-fit:cover;
   display:block;
+
   background:#222;
 }
 
-.title{
+.card-title{
   text-align:center;
-  font-size:14px;
+
+  font-size:13px;
   font-weight:bold;
-  padding:9px 4px 5px;
+
+  padding:9px 3px 4px;
 
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
+/* LATEST BADGE */
+
+.badge{
+  position:absolute;
+
+  top:12px;
+  left:12px;
+
+  background:#ff4d6d;
+  color:#fff;
+
+  padding:4px 6px;
+
+  font-size:9px;
+  font-weight:bold;
+
+  border-radius:3px;
+}
+
+/* MENU PANEL */
+
+.menu-panel{
+  position:fixed;
+
+  top:0;
+  left:-280px;
+
+  width:280px;
+  height:100vh;
+
+  background:#111;
+
+  z-index:5000;
+
+  padding:25px 20px;
+
+  transition:.25s;
+
+  box-shadow:5px 0 20px rgba(0,0,0,.6);
+}
+
+.menu-panel.open{
+  left:0;
+}
+
+.menu-close{
+  background:none;
+  border:0;
+  color:#fff;
+
+  font-size:28px;
+
+  float:right;
+
+  cursor:pointer;
+}
+
+.menu-logo{
+  clear:both;
+
+  padding-top:35px;
+
+  font-size:24px;
+  font-weight:bold;
+
+  margin-bottom:30px;
+}
+
+.menu-link{
+  display:block;
+
+  padding:14px 5px;
+
+  border-bottom:1px solid #252525;
+
+  color:#fff;
+
+  text-decoration:none;
+}
+
+.menu-link:hover{
+  color:#d98ac8;
+}
+
+/* OVERLAY */
+
+.overlay{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,.65);
+
+  z-index:4000;
+
+  display:none;
+}
+
+.overlay.show{
+  display:block;
+}
+
+/* EMPTY */
+
+.empty{
+  grid-column:1/-1;
+
+  text-align:center;
+
+  color:#777;
+
+  padding:40px 10px;
+}
+
 /* MOBILE */
+
 @media(max-width:700px){
 
   .logo{
     font-size:27px;
   }
 
-  .subtitle{
-    font-size:12px;
-  }
-
   .grid{
     grid-template-columns:repeat(3,1fr);
-    gap:25px 15px;
-  }
 
-  .card{
-    padding:8px;
-  }
-
-  .title{
-    font-size:12px;
-  }
-}
-
-/* SMALL PHONE */
-@media(max-width:380px){
-
-  .grid{
-    gap:18px 8px;
+    gap:22px 10px;
   }
 
   .card{
     padding:6px;
   }
 
-  .title{
+  .card-title{
     font-size:11px;
   }
+
+  .badge{
+    top:9px;
+    left:9px;
+    font-size:8px;
+  }
+
 }
+
+/* SMALL PHONE */
+
+@media(max-width:380px){
+
+  .container{
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .grid{
+    gap:18px 7px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
+
+
+<!-- HEADER -->
 
 <header class="header">
 
@@ -177,82 +354,298 @@ body{
 
 </header>
 
-<div class="menu-bar">
 
-  <span class="menu-icon">☰</span>
-  <span>Menu</span>
+<!-- NAV -->
 
-</div>
+<nav class="nav">
 
-<div class="search-box">
+  <button
+    class="menu-btn"
+    onclick="openMenu()"
+  >
+    ☰
+  </button>
+
+  <div class="nav-title">
+    HOME
+  </div>
+
+  <div style="width:30px"></div>
+
+</nav>
+
+
+<!-- SEARCH -->
+
+<div class="search-area">
 
   <input
     class="search"
     id="search"
     type="text"
-    placeholder="Search Manhwa..."
+    placeholder="🔍 Search Manhwa..."
     oninput="searchManhwa()"
   >
 
 </div>
 
+
+<!-- MAIN -->
+
 <main class="container">
 
-  <div class="grid" id="manhwaGrid"></div>
+
+  <!-- LATEST -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        🆕 Latest Updates
+      </div>
+
+      <div class="view-all">
+        Latest
+      </div>
+
+    </div>
+
+    <div
+      class="grid"
+      id="latestGrid"
+    >
+
+    </div>
+
+  </section>
+
+
+  <!-- ALL -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        📚 All Manhwa
+      </div>
+
+    </div>
+
+    <div
+      class="grid"
+      id="allGrid"
+    >
+
+    </div>
+
+  </section>
+
 
 </main>
+
+
+<!-- MENU PANEL -->
+
+<div
+  class="overlay"
+  id="overlay"
+  onclick="closeMenu()"
+></div>
+
+
+<div
+  class="menu-panel"
+  id="menuPanel"
+>
+
+  <button
+    class="menu-close"
+    onclick="closeMenu()"
+  >
+    ×
+  </button>
+
+  <div class="menu-logo">
+    Manhwa Myanmar
+  </div>
+
+  <a
+    class="menu-link"
+    href="index.html"
+  >
+    🏠 Home
+  </a>
+
+  <a
+    class="menu-link"
+    href="#latest"
+    onclick="closeMenu()"
+  >
+    🆕 Latest Updates
+  </a>
+
+  <a
+    class="menu-link"
+    href="#all"
+    onclick="closeMenu()"
+  >
+    📚 All Manhwa
+  </a>
+
+</div>
+
 
 <script>
 
 let manhwaList = [];
 
+
+/* LOAD */
+
 async function loadManhwa(){
 
-  const response = await fetch("manhwa.json");
+  try{
 
-  manhwaList = await response.json();
+    const response =
+      await fetch("manhwa.json");
 
-  displayManhwa(manhwaList);
+    manhwaList =
+      await response.json();
+
+    displayLatest();
+
+    displayAll();
+
+  }
+
+  catch(error){
+
+    document.getElementById(
+      "latestGrid"
+    ).innerHTML =
+      `<div class="empty">
+        Unable to load Manhwa.
+      </div>`;
+
+  }
 
 }
 
-function displayManhwa(list){
+
+/* CARD */
+
+function createCard(manhwa,index){
+
+  const card =
+    document.createElement("a");
+
+  card.className = "card";
+
+  card.href =
+    `manhwa.html?id=${manhwa.id}`;
+
+
+  let badge = "";
+
+  if(index === 0){
+
+    badge =
+      `<span class="badge">
+        LATEST
+      </span>`;
+
+  }
+
+
+  card.innerHTML = `
+
+    ${badge}
+
+    <img
+      class="cover"
+      src="${manhwa.cover}"
+      alt="${manhwa.title}"
+      loading="lazy"
+    >
+
+    <div class="card-title">
+      ${manhwa.title}
+    </div>
+
+  `;
+
+
+  return card;
+
+}
+
+
+/* LATEST */
+
+function displayLatest(){
 
   const grid =
-    document.getElementById("manhwaGrid");
+    document.getElementById(
+      "latestGrid"
+    );
 
   grid.innerHTML = "";
 
-  list.forEach(manhwa => {
 
-    const card =
-      document.createElement("a");
+  const latest =
+    manhwaList
+      .slice()
+      .reverse()
+      .slice(0,6);
 
-    card.className = "card";
 
-    card.href =
-  `manhwa.html?id=${manhwa.id}`;
+  latest.forEach(
+    (manhwa,index) => {
 
-    card.innerHTML = `
+      grid.appendChild(
+        createCard(
+          manhwa,
+          index
+        )
+      );
 
-      <img
-        class="cover"
-        src="${manhwa.cover}"
-        alt="${manhwa.title}"
-        loading="lazy"
-      >
-
-      <div class="title">
-        ${manhwa.title}
-      </div>
-
-    `;
-
-    grid.appendChild(card);
-
-  });
+    }
+  );
 
 }
+
+
+/* ALL */
+
+function displayAll(){
+
+  const grid =
+    document.getElementById(
+      "allGrid"
+    );
+
+  grid.innerHTML = "";
+
+
+  manhwaList.forEach(
+    (manhwa,index) => {
+
+      grid.appendChild(
+        createCard(
+          manhwa,
+          -1
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* SEARCH */
 
 function searchManhwa(){
 
@@ -262,20 +655,75 @@ function searchManhwa(){
       .value
       .toLowerCase();
 
+
   const result =
-    manhwaList.filter(manhwa =>
-      manhwa.title
-        .toLowerCase()
-        .includes(keyword)
+    manhwaList.filter(
+      manhwa =>
+        manhwa.title
+          .toLowerCase()
+          .includes(keyword)
     );
 
-  displayManhwa(result);
+
+  const grid =
+    document.getElementById(
+      "allGrid"
+    );
+
+  grid.innerHTML = "";
+
+
+  result.forEach(
+    manhwa => {
+
+      grid.appendChild(
+        createCard(
+          manhwa,
+          -1
+        )
+      );
+
+    }
+  );
 
 }
+
+
+/* MENU */
+
+function openMenu(){
+
+  document
+    .getElementById("menuPanel")
+    .classList
+    .add("open");
+
+  document
+    .getElementById("overlay")
+    .classList
+    .add("show");
+
+}
+
+
+function closeMenu(){
+
+  document
+    .getElementById("menuPanel")
+    .classList
+    .remove("open");
+
+  document
+    .getElementById("overlay")
+    .classList
+    .remove("show");
+
+}
+
 
 loadManhwa();
 
 </script>
 
 </body>
-</html>
+  </html>
