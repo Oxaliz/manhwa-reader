@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MY MANHWA</title>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Manhwa Myanmar</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -14,54 +20,399 @@
 }
 
 body{
-  background:#101010;
-  color:white;
+  background:#000;
+  color:#fff;
   font-family:Arial,sans-serif;
 }
 
+/* ================= HEADER ================= */
+
 .header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:#181818;
-  padding:14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 2px 12px rgba(0,0,0,.5);
+  background:#762765;
+  text-align:center;
+  padding:22px 10px 20px;
 }
 
 .logo{
-  font-size:20px;
+  font-size:32px;
   font-weight:bold;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  font-size:14px;
+}
+
+/* ================= MENU ================= */
+
+.menu-bar{
+  height:52px;
+  background:#050505;
+  border-bottom:1px solid #762765;
+
+  display:flex;
+  align-items:center;
+
+  padding:0 18px;
+
+  font-size:16px;
+}
+
+.menu-icon{
+  font-size:24px;
+  margin-right:8px;
+}
+
+/* ================= SEARCH ================= */
+
+.search-box{
+  padding:15px 15px 5px;
+  max-width:1100px;
+  margin:auto;
 }
 
 .search{
-  width:180px;
-  padding:9px 12px;
-  border:0;
-  border-radius:20px;
-  background:#292929;
-  color:white;
+  width:100%;
+
+  padding:12px 15px;
+
+  border:none;
   outline:none;
+
+  border-radius:5px;
+
+  background:#1b1b1b;
+  color:#fff;
+
+  font-size:14px;
 }
 
-.hero{
-  max-width:900px;
+/* ================= MAIN ================= */
+
+.container{
+  max-width:1100px;
   margin:auto;
-  padding:25px 15px;
-  display:flex;
-  gap:20px;
+
+  padding:20px 15px 50px;
+}
+
+/* ================= GRID ================= */
+
+.grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:28px 20px;
+}
+
+/* ================= CARD ================= */
+
+.card{
+  background:#762765;
+
+  padding:9px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  display:block;
+
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
 }
 
 .cover{
-  width:150px;
-  height:210px;
+  width:100%;
+
+  aspect-ratio:3 / 4;
+
   object-fit:cover;
-  border-radius:8px;
+
+  display:block;
+
   background:#222;
 }
 
+.title{
+  text-align:center;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  padding:9px 4px 5px;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+  text-align:center;
+
+  color:#888;
+
+  padding:40px 10px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+  .logo{
+    font-size:27px;
+  }
+
+  .subtitle{
+    font-size:12px;
+  }
+
+  .grid{
+    grid-template-columns:
+      repeat(3,1fr);
+
+    gap:25px 15px;
+  }
+
+  .card{
+    padding:8px;
+  }
+
+  .title{
+    font-size:12px;
+  }
+
+}
+
+/* ================= SMALL PHONE ================= */
+
+@media(max-width:380px){
+
+  .container{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .grid{
+    gap:18px 8px;
+  }
+
+  .card{
+    padding:6px;
+  }
+
+  .title{
+    font-size:11px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="logo">
+    Manhwa Myanmar
+  </div>
+
+  <div class="subtitle">
+    ( Manhwa Collection )
+  </div>
+
+</header>
+
+
+<!-- MENU -->
+
+<div class="menu-bar">
+
+  <span class="menu-icon"></span>
+
+  <span>Menu</span>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+  <input
+    class="search"
+    id="search"
+    type="text"
+    placeholder="Search Manhwa..."
+    oninput="searchManhwa()"
+  >
+
+</div>
+
+
+<!-- MANHWA -->
+
+<main class="container">
+
+  <div
+    class="grid"
+    id="manhwaGrid"
+  >
+
+    <div class="empty">
+      Loading...
+    </div>
+
+  </div>
+
+</main>
+
+
+<script>
+
+let manhwaList = [];
+
+
+/* ================= LOAD ================= */
+
+async function loadManhwa(){
+
+  try{
+
+    const response =
+      await fetch("manhwa.json");
+
+    manhwaList =
+      await response.json();
+
+    displayManhwa(manhwaList);
+
+  }
+
+  catch(error){
+
+    document.getElementById(
+      "manhwaGrid"
+    ).innerHTML =
+
+      `<div class="empty">
+        Failed to load Manhwa.
+      </div>`;
+
+  }
+
+}
+
+
+/* ================= DISPLAY ================= */
+
+function displayManhwa(list){
+
+  const grid =
+    document.getElementById(
+      "manhwaGrid"
+    );
+
+  grid.innerHTML = "";
+
+
+  if(list.length === 0){
+
+    grid.innerHTML =
+      `<div class="empty">
+        No Manhwa Found
+      </div>`;
+
+    return;
+
+  }
+
+
+  list.forEach(manhwa => {
+
+    const card =
+      document.createElement("a");
+
+
+    card.className =
+      "card";
+
+
+    card.href =
+      `reader.html?chapter=${manhwa.latestChapter}`;
+
+
+    card.innerHTML = `
+
+      <img
+        class="cover"
+        src="${manhwa.cover}"
+        alt="${manhwa.title}"
+        loading="lazy"
+      >
+
+      <div class="title">
+        ${manhwa.title}
+      </div>
+
+    `;
+
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchManhwa(){
+
+  const keyword =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
+
+
+  const result =
+    manhwaList.filter(manhwa =>
+
+      manhwa.title
+        .toLowerCase()
+        .includes(keyword)
+
+    );
+
+
+  displayManhwa(result);
+
+}
+
+
+loadManhwa();
+
+</script>
+
+
+</body>
+</html>
 .info{
   flex:1;
 }
