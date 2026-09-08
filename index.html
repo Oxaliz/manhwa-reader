@@ -1,729 +1,521 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="my">
 <head>
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Manhwa Myanmar</title>
-
-<style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  background:#000;
-  color:#fff;
-  font-family:Arial,sans-serif;
-}
-
-/* HEADER */
-
-.header{
-  background:#762765;
-  padding:20px 15px;
-  text-align:center;
-}
-
-.logo{
-  font-size:30px;
-  font-weight:bold;
-}
-
-.subtitle{
-  font-size:12px;
-  margin-top:6px;
-  opacity:.9;
-}
-
-/* NAV */
-
-.nav{
-  height:52px;
-  background:#111;
-  border-bottom:1px solid #292929;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:0 15px;
-}
-
-.menu-btn{
-  background:none;
-  border:0;
-  color:#fff;
-  font-size:24px;
-  cursor:pointer;
-}
-
-.nav-title{
-  font-size:14px;
-  font-weight:bold;
-}
-
-/* SEARCH */
-
-.search-area{
-  padding:15px;
-  max-width:1100px;
-  margin:auto;
-}
-
-.search{
-  width:100%;
-
-  padding:12px 15px;
-
-  background:#181818;
-  color:#fff;
-
-  border:1px solid #292929;
-  border-radius:6px;
-
-  outline:none;
-}
-
-/* SECTIONS */
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:10px 15px 50px;
-}
-
-.section{
-  margin-top:15px;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  margin-bottom:14px;
-}
-
-.section-title{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.view-all{
-  color:#d98ac8;
-  font-size:12px;
-}
-
-/* GRID */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px 15px;
-}
-
-/* CARD */
-
-.card{
-  position:relative;
-
-  background:#762765;
-
-  padding:7px;
-
-  text-decoration:none;
-  color:#fff;
-
-  display:block;
-
-  transition:.2s;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-}
-
-.cover{
-  width:100%;
-  aspect-ratio:3/4;
-
-  object-fit:cover;
-  display:block;
-
-  background:#222;
-}
-
-.card-title{
-  text-align:center;
-
-  font-size:13px;
-  font-weight:bold;
-
-  padding:9px 3px 4px;
-
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-/* LATEST BADGE */
-
-.badge{
-  position:absolute;
-
-  top:12px;
-  left:12px;
-
-  background:#ff4d6d;
-  color:#fff;
-
-  padding:4px 6px;
-
-  font-size:9px;
-  font-weight:bold;
-
-  border-radius:3px;
-}
-
-/* MENU PANEL */
-
-.menu-panel{
-  position:fixed;
-
-  top:0;
-  left:-280px;
-
-  width:280px;
-  height:100vh;
-
-  background:#111;
-
-  z-index:5000;
-
-  padding:25px 20px;
-
-  transition:.25s;
-
-  box-shadow:5px 0 20px rgba(0,0,0,.6);
-}
-
-.menu-panel.open{
-  left:0;
-}
-
-.menu-close{
-  background:none;
-  border:0;
-  color:#fff;
-
-  font-size:28px;
-
-  float:right;
-
-  cursor:pointer;
-}
-
-.menu-logo{
-  clear:both;
-
-  padding-top:35px;
-
-  font-size:24px;
-  font-weight:bold;
-
-  margin-bottom:30px;
-}
-
-.menu-link{
-  display:block;
-
-  padding:14px 5px;
-
-  border-bottom:1px solid #252525;
-
-  color:#fff;
-
-  text-decoration:none;
-}
-
-.menu-link:hover{
-  color:#d98ac8;
-}
-
-/* OVERLAY */
-
-.overlay{
-  position:fixed;
-
-  inset:0;
-
-  background:rgba(0,0,0,.65);
-
-  z-index:4000;
-
-  display:none;
-}
-
-.overlay.show{
-  display:block;
-}
-
-/* EMPTY */
-
-.empty{
-  grid-column:1/-1;
-
-  text-align:center;
-
-  color:#777;
-
-  padding:40px 10px;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-  .logo{
-    font-size:27px;
-  }
-
-  .grid{
-    grid-template-columns:repeat(3,1fr);
-
-    gap:22px 10px;
-  }
-
-  .card{
-    padding:6px;
-  }
-
-  .card-title{
-    font-size:11px;
-  }
-
-  .badge{
-    top:9px;
-    left:9px;
-    font-size:8px;
-  }
-
-}
-
-/* SMALL PHONE */
-
-@media(max-width:380px){
-
-  .container{
-    padding-left:8px;
-    padding-right:8px;
-  }
-
-  .grid{
-    gap:18px 7px;
-  }
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToonNest — Manhwa Reader</title>
+  <style>
+    /* ===== RESET ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0b0b0f; color: #eee; font-family: 'Segoe UI', Arial, sans-serif; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1a1a24; }
+    ::-webkit-scrollbar-thumb { background: #ff6b8a; border-radius: 10px; }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(135deg, #1a0b1f, #2d1b33);
+      padding: 30px 20px 20px;
+      text-align: center;
+      border-bottom: 2px solid #ff6b8a;
+    }
+    .logo {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ff6b8a, #d98ac8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .tagline {
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 4px;
+      letter-spacing: 2px;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: #12121a;
+      border-bottom: 1px solid #2a2a3a;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .menu-btn {
+      background: none; border: none; color: #fff; font-size: 26px;
+      cursor: pointer;
+    }
+    .nav-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: #ddd;
+    }
+    .premium-btn {
+      background: linear-gradient(135deg, #ff6b8a, #d98ac8);
+      border: none;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .premium-btn:hover { transform: scale(1.05); opacity: 0.9; }
+    .premium-badge {
+      background: #ff6b8a;
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: 8px;
+    }
+
+    /* ===== SEARCH ===== */
+    .search-area {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      padding: 0 15px;
+    }
+    .search {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 30px;
+      border: 1px solid #2a2a3a;
+      background: #181822;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+    .search:focus { border-color: #ff6b8a; box-shadow: 0 0 20px rgba(255,107,138,0.15); }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 15px 60px;
+    }
+
+    /* ===== SECTION ===== */
+    .section { margin-top: 30px; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .section-title span { color: #ff6b8a; }
+
+    /* ===== GRID ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 24px 16px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: #161620;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      transition: 0.3s;
+      border: 1px solid #22223a;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #ff6b8a;
+      box-shadow: 0 10px 30px rgba(255,107,138,0.15);
+    }
+    .card-cover {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+      background: #1a1a28;
+    }
+    .card-body {
+      padding: 12px 12px 14px;
+    }
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-genre {
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+    }
+    .badge-latest {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff6b8a;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== MENU PANEL ===== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      display: none;
+    }
+    .overlay.show { display: block; }
+
+    .menu-panel {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 280px;
+      height: 100vh;
+      background: #12121a;
+      z-index: 300;
+      padding: 30px 20px;
+      transition: 0.3s;
+      border-right: 1px solid #2a2a3a;
+    }
+    .menu-panel.open { left: 0; }
+    .menu-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      float: right;
+      cursor: pointer;
+    }
+    .menu-logo {
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff6b8a, #d98ac8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 30px 0 30px;
+    }
+    .menu-link {
+      display: block;
+      padding: 14px 6px;
+      border-bottom: 1px solid #22223a;
+      color: #ddd;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+    .menu-link:hover { color: #ff6b8a; padding-left: 10px; }
+
+    /* ===== EMPTY ===== */
+    .empty {
+      grid-column: 1/-1;
+      text-align: center;
+      color: #666;
+      padding: 50px 10px;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.show { display: flex; }
+    .modal-box {
+      background: #1a1a28;
+      max-width: 420px;
+      width: 100%;
+      padding: 35px 30px;
+      border-radius: 20px;
+      border: 1px solid #33334a;
+    }
+    .modal-box h2 {
+      color: #ff6b8a;
+      margin-bottom: 8px;
+    }
+    .modal-box p {
+      color: #aaa;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+    .modal-box input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 30px;
+      border: 1px solid #2a2a3a;
+      background: #0f0f18;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 14px;
+    }
+    .modal-box input:focus { border-color: #ff6b8a; }
+    .modal-box .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #ff6b8a, #d98ac8);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal-box .btn-submit:hover { opacity: 0.9; transform: scale(1.02); }
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .modal-msg {
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 600px) {
+      .logo { font-size: 28px; }
+      .grid { grid-template-columns: repeat(3, 1fr); gap: 16px 10px; }
+      .card-body { padding: 8px 8px 10px; }
+      .card-title { font-size: 12px; }
+      .section-title { font-size: 18px; }
+    }
+    @media (max-width: 400px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 14px 8px; }
+    }
+  </style>
 </head>
-
 <body>
 
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="logo">ToonNest</div>
+    <div class="tagline">✦ Read Manhwa in Style ✦</div>
+  </header>
 
-<!-- HEADER -->
+  <!-- ===== NAV ===== -->
+  <nav class="nav">
+    <div class="nav-left">
+      <button class="menu-btn" onclick="openMenu()">☰</button>
+      <span class="nav-title" id="navTitle">Home</span>
+    </div>
+    <button class="premium-btn" onclick="openModal()">👑 Premium</button>
+  </nav>
 
-<header class="header">
-
-  <div class="logo">
-    Manhwa Myanmar
+  <!-- ===== SEARCH ===== -->
+  <div class="search-area">
+    <input class="search" id="searchInput" type="text" placeholder="🔍 Search Manhwa..." oninput="searchManhwa()">
   </div>
 
-  <div class="subtitle">
-    ( Manhwa Collection )
-  </div>
+  <!-- ===== MAIN ===== -->
+  <main class="container">
 
-</header>
-
-
-<!-- NAV -->
-
-<nav class="nav">
-
-  <button
-    class="menu-btn"
-    onclick="openMenu()"
-  >
-    ☰
-  </button>
-
-  <div class="nav-title">
-    HOME
-  </div>
-
-  <div style="width:30px"></div>
-
-</nav>
-
-
-<!-- SEARCH -->
-
-<div class="search-area">
-
-  <input
-    class="search"
-    id="search"
-    type="text"
-    placeholder="🔍 Search Manhwa..."
-    oninput="searchManhwa()"
-  >
-
-</div>
-
-
-<!-- MAIN -->
-
-<main class="container">
-
-
-  <!-- LATEST -->
-
-  <section class="section">
-
-    <div class="section-head">
-
-      <div class="section-title">
-        🆕 Latest Updates
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">🆕 <span>Latest</span> Updates</div>
       </div>
+      <div class="grid" id="latestGrid"></div>
+    </section>
 
-      <div class="view-all">
-        Latest
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">📚 <span>All</span> Manhwa</div>
       </div>
+      <div class="grid" id="allGrid"></div>
+    </section>
 
-    </div>
+  </main>
 
-    <div
-      class="grid"
-      id="latestGrid"
-    >
-
-    </div>
-
-  </section>
-
-
-  <!-- ALL -->
-
-  <section class="section">
-
-    <div class="section-head">
-
-      <div class="section-title">
-        📚 All Manhwa
-      </div>
-
-    </div>
-
-    <div
-      class="grid"
-      id="allGrid"
-    >
-
-    </div>
-
-  </section>
-
-
-</main>
-
-
-<!-- MENU PANEL -->
-
-<div
-  class="overlay"
-  id="overlay"
-  onclick="closeMenu()"
-></div>
-
-
-<div
-  class="menu-panel"
-  id="menuPanel"
->
-
-  <button
-    class="menu-close"
-    onclick="closeMenu()"
-  >
-    ×
-  </button>
-
-  <div class="menu-logo">
-    Manhwa Myanmar
+  <!-- ===== MENU PANEL ===== -->
+  <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+  <div class="menu-panel" id="menuPanel">
+    <button class="menu-close" onclick="closeMenu()">×</button>
+    <div class="menu-logo">ToonNest</div>
+    <a class="menu-link" href="index.html">🏠 Home</a>
+    <a class="menu-link" href="#" onclick="closeMenu(); document.getElementById('latestGrid').scrollIntoView({behavior:'smooth'});">🆕 Latest</a>
+    <a class="menu-link" href="#" onclick="closeMenu(); document.getElementById('allGrid').scrollIntoView({behavior:'smooth'});">📚 All Manhwa</a>
+    <a class="menu-link" href="#" onclick="closeMenu(); openModal();">👑 Premium</a>
   </div>
 
-  <a
-    class="menu-link"
-    href="index.html"
-  >
-    🏠 Home
-  </a>
-
-  <a
-    class="menu-link"
-    href="#latest"
-    onclick="closeMenu()"
-  >
-    🆕 Latest Updates
-  </a>
-
-  <a
-    class="menu-link"
-    href="#all"
-    onclick="closeMenu()"
-  >
-    📚 All Manhwa
-  </a>
-
-</div>
-
-
-<script>
-
-let manhwaList = [];
-
-
-/* LOAD */
-
-async function loadManhwa(){
-
-  try{
-
-    const response =
-      await fetch("manhwa.json");
-
-    manhwaList =
-      await response.json();
-
-    displayLatest();
-
-    displayAll();
-
-  }
-
-  catch(error){
-
-    document.getElementById(
-      "latestGrid"
-    ).innerHTML =
-      `<div class="empty">
-        Unable to load Manhwa.
-      </div>`;
-
-  }
-
-}
-
-
-/* CARD */
-
-function createCard(manhwa,index){
-
-  const card =
-    document.createElement("a");
-
-  card.className = "card";
-
-  card.href =
-    `manhwa.html?id=${manhwa.id}`;
-
-
-  let badge = "";
-
-  if(index === 0){
-
-    badge =
-      `<span class="badge">
-        LATEST
-      </span>`;
-
-  }
-
-
-  card.innerHTML = `
-
-    ${badge}
-
-    <img
-      class="cover"
-      src="${manhwa.cover}"
-      alt="${manhwa.title}"
-      loading="lazy"
-    >
-
-    <div class="card-title">
-      ${manhwa.title}
+  <!-- ===== PREMIUM MODAL ===== -->
+  <div class="modal" id="premiumModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <h2>👑 Premium</h2>
+      <p>Telegram Group မှ ရရှိသော Code ကို ထည့်ပါ။</p>
+      <input type="text" id="premiumCode" placeholder="Code ထည့်ပါ...">
+      <button class="btn-submit" onclick="verifyCode()">အတည်ပြုမယ်</button>
+      <div class="modal-msg" id="premiumMsg"></div>
     </div>
+  </div>
 
-  `;
+  <script>
+    // ============================================================
+    // DATA
+    // ============================================================
+    let manhwaList = [];
 
+    // ============================================================
+    // PREMIUM SYSTEM
+    // ============================================================
+    const VALID_CODES = ["PREMIUM-ABC123", "PREMIUM-XYZ789"];
 
-  return card;
-
-}
-
-
-/* LATEST */
-
-function displayLatest(){
-
-  const grid =
-    document.getElementById(
-      "latestGrid"
-    );
-
-  grid.innerHTML = "";
-
-
-  const latest =
-    manhwaList
-      .slice()
-      .reverse()
-      .slice(0,6);
-
-
-  latest.forEach(
-    (manhwa,index) => {
-
-      grid.appendChild(
-        createCard(
-          manhwa,
-          index
-        )
-      );
-
+    function isPremium() {
+      return localStorage.getItem('isPremium') === 'true';
     }
-  );
 
-}
-
-
-/* ALL */
-
-function displayAll(){
-
-  const grid =
-    document.getElementById(
-      "allGrid"
-    );
-
-  grid.innerHTML = "";
-
-
-  manhwaList.forEach(
-    (manhwa,index) => {
-
-      grid.appendChild(
-        createCard(
-          manhwa,
-          -1
-        )
-      );
-
+    function updateNav() {
+      const title = document.getElementById('navTitle');
+      if (isPremium()) {
+        title.innerHTML = 'Home 👑';
+      } else {
+        title.innerHTML = 'Home';
+      }
     }
-  );
 
-}
-
-
-/* SEARCH */
-
-function searchManhwa(){
-
-  const keyword =
-    document
-      .getElementById("search")
-      .value
-      .toLowerCase();
-
-
-  const result =
-    manhwaList.filter(
-      manhwa =>
-        manhwa.title
-          .toLowerCase()
-          .includes(keyword)
-    );
-
-
-  const grid =
-    document.getElementById(
-      "allGrid"
-    );
-
-  grid.innerHTML = "";
-
-
-  result.forEach(
-    manhwa => {
-
-      grid.appendChild(
-        createCard(
-          manhwa,
-          -1
-        )
-      );
-
+    function openModal() {
+      document.getElementById('premiumModal').classList.add('show');
+      document.getElementById('premiumMsg').textContent = '';
     }
-  );
+    function closeModal() {
+      document.getElementById('premiumModal').classList.remove('show');
+    }
 
-}
+    function verifyCode() {
+      const input = document.getElementById('premiumCode').value.trim();
+      const msg = document.getElementById('premiumMsg');
+      if (VALID_CODES.includes(input)) {
+        localStorage.setItem('isPremium', 'true');
+        msg.style.color = '#4caf50';
+        msg.textContent = '✅ အောင်မြင်ပါပြီ!';
+        setTimeout(() => { closeModal(); location.reload(); }, 1200);
+      } else {
+        msg.style.color = '#ff6b8a';
+        msg.textContent = '❌ Code မှားနေပါသည်။';
+      }
+    }
 
+    // ============================================================
+    // LOAD MANHWA
+    // ============================================================
+    async function loadManhwa() {
+      try {
+        const res = await fetch('manhwa.json');
+        manhwaList = await res.json();
+        renderLatest();
+        renderAll();
+      } catch {
+        document.getElementById('latestGrid').innerHTML = `<div class="empty">⚠️ ဒေတာမရှိပါ</div>`;
+      }
+      updateNav();
+    }
 
-/* MENU */
+    // ============================================================
+    // RENDER CARDS
+    // ============================================================
+    function createCard(manhwa, showBadge = false) {
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = `manhwa.html?id=${manhwa.id}`;
 
-function openMenu(){
+      let badge = '';
+      if (showBadge) {
+        badge = `<span class="badge-latest">LATEST</span>`;
+      }
 
-  document
-    .getElementById("menuPanel")
-    .classList
-    .add("open");
+      a.innerHTML = `
+        ${badge}
+        <img class="card-cover" src="${manhwa.cover}" alt="${manhwa.title}" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">${manhwa.title}</div>
+          <div class="card-genre">${manhwa.genres ? manhwa.genres.slice(0,2).join(' • ') : ''}</div>
+        </div>
+      `;
+      return a;
+    }
 
-  document
-    .getElementById("overlay")
-    .classList
-    .add("show");
+    function renderLatest() {
+      const grid = document.getElementById('latestGrid');
+      grid.innerHTML = '';
+      const latest = manhwaList.slice().reverse().slice(0, 6);
+      latest.forEach((m, i) => {
+        grid.appendChild(createCard(m, i === 0));
+      });
+    }
 
-}
+    function renderAll() {
+      const grid = document.getElementById('allGrid');
+      grid.innerHTML = '';
+      manhwaList.forEach(m => {
+        grid.appendChild(createCard(m, false));
+      });
+    }
 
+    // ============================================================
+    // SEARCH
+    // ============================================================
+    function searchManhwa() {
+      const keyword = document.getElementById('searchInput').value.toLowerCase();
+      const grid = document.getElementById('allGrid');
+      grid.innerHTML = '';
+      const filtered = manhwaList.filter(m => m.title.toLowerCase().includes(keyword));
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty">🔍 ရှာမတွေ့ပါ</div>`;
+        return;
+      }
+      filtered.forEach(m => {
+        grid.appendChild(createCard(m, false));
+      });
+    }
 
-function closeMenu(){
+    // ============================================================
+    // MENU
+    // ============================================================
+    function openMenu() {
+      document.getElementById('menuPanel').classList.add('open');
+      document.getElementById('overlay').classList.add('show');
+    }
+    function closeMenu() {
+      document.getElementById('menuPanel').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
 
-  document
-    .getElementById("menuPanel")
-    .classList
-    .remove("open");
-
-  document
-    .getElementById("overlay")
-    .classList
-    .remove("show");
-
-}
-
-
-loadManhwa();
-
-</script>
+    // ============================================================
+    // START
+    // ============================================================
+    loadManhwa();
+  </script>
 
 </body>
-  </html>
+    </html>
