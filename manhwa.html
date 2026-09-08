@@ -6,32 +6,53 @@
   <title>ToonNest — Manhwa</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0b0b0f; color: #eee; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; transition: 0.3s; }
+    :root {
+      --bg: #0b0b0f;
+      --bg2: #12121a;
+      --bg3: #1a1a28;
+      --border: #2a2a3a;
+      --text: #eee;
+      --text2: #aaa;
+      --primary: #ff6b8a;
+      --primary2: #d98ac8;
+      --shadow: rgba(255,107,138,0.15);
+    }
+    .light {
+      --bg: #f5f0f7;
+      --bg2: #ffffff;
+      --bg3: #f0ebf2;
+      --border: #ddd;
+      --text: #222;
+      --text2: #555;
+      --shadow: rgba(0,0,0,0.08);
+    }
+    body { background: var(--bg); color: var(--text); }
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #1a1a24; }
-    ::-webkit-scrollbar-thumb { background: #ff6b8a; border-radius: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
     .header {
       background: linear-gradient(135deg, #1a0b1f, #2d1b33);
       padding: 20px;
       text-align: center;
-      border-bottom: 2px solid #ff6b8a;
+      border-bottom: 2px solid var(--primary);
     }
     .logo {
       font-size: 30px;
       font-weight: 900;
-      background: linear-gradient(90deg, #ff6b8a, #d98ac8);
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .back {
       display: inline-block;
       margin-top: 6px;
-      color: #aaa;
+      color: var(--text2);
       text-decoration: none;
       font-size: 14px;
     }
-    .back:hover { color: #ff6b8a; }
+    .back:hover { color: var(--primary); }
 
     .container {
       max-width: 900px;
@@ -43,17 +64,17 @@
       display: flex;
       gap: 24px;
       margin-bottom: 30px;
-      background: #12121a;
+      background: var(--bg2);
       padding: 20px;
       border-radius: 16px;
-      border: 1px solid #22223a;
+      border: 1px solid var(--border);
     }
     .cover {
       width: 160px;
       height: 220px;
       object-fit: cover;
       border-radius: 10px;
-      background: #1a1a28;
+      background: var(--bg3);
     }
     .details { flex: 1; }
     .title {
@@ -63,7 +84,7 @@
     }
     .status {
       display: inline-block;
-      background: #ff6b8a;
+      background: var(--primary);
       padding: 4px 14px;
       border-radius: 20px;
       font-size: 12px;
@@ -71,63 +92,111 @@
       margin-bottom: 12px;
     }
     .desc {
-      color: #bbb;
+      color: var(--text2);
       line-height: 1.7;
       margin-bottom: 14px;
       font-size: 15px;
     }
-    .genres {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .genres { display: flex; flex-wrap: wrap; gap: 8px; }
     .genre {
-      background: #22223a;
+      background: var(--bg3);
       padding: 5px 14px;
       border-radius: 20px;
       font-size: 12px;
-      border: 1px solid #33334a;
+      border: 1px solid var(--border);
     }
+
+    /* Rating */
+    .rating-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .stars {
+      display: flex;
+      gap: 4px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .stars span { transition: 0.2s; }
+    .stars span:hover { transform: scale(1.2); }
+    .stars span.active { color: #ffd700; }
+    .rating-avg { font-size: 14px; color: var(--text2); }
 
     .section-title {
       font-size: 22px;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin: 30px 0 16px;
     }
-    .section-title span { color: #ff6b8a; }
+    .section-title span { color: var(--primary); }
 
     .chapter {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #12121a;
-      border: 1px solid #22223a;
+      background: var(--bg2);
+      border: 1px solid var(--border);
       padding: 16px 20px;
       border-radius: 12px;
       margin-bottom: 10px;
       text-decoration: none;
-      color: #fff;
+      color: var(--text);
       transition: 0.2s;
     }
     .chapter:hover {
-      background: #1e1e30;
-      border-color: #ff6b8a;
+      background: var(--bg3);
+      border-color: var(--primary);
     }
     .chapter-title { font-weight: 600; }
-    .chapter-read {
-      color: #ff6b8a;
+    .chapter-read { color: var(--primary); font-size: 14px; }
+    .lock { color: var(--text2); margin-left: 8px; font-size: 13px; }
+
+    /* Comments */
+    .comment-box {
+      background: var(--bg2);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .comment-box textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
       font-size: 14px;
+      resize: vertical;
+      outline: none;
+      min-height: 80px;
     }
-    .lock {
-      color: #888;
-      margin-left: 8px;
-      font-size: 13px;
+    .comment-box textarea:focus { border-color: var(--primary); }
+    .comment-box button {
+      margin-top: 10px;
+      padding: 10px 24px;
+      background: var(--primary);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
     }
+    .comment-box button:hover { opacity: 0.9; }
+    .comment-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .comment-item .name { font-weight: 600; font-size: 14px; }
+    .comment-item .time { font-size: 12px; color: var(--text2); margin-left: 10px; }
+    .comment-item .text { margin-top: 4px; color: var(--text2); }
 
     @media (max-width: 600px) {
       .info { flex-direction: column; align-items: center; text-align: center; }
       .cover { width: 140px; height: 190px; }
       .title { font-size: 22px; }
+      .stars { font-size: 24px; }
     }
   </style>
 </head>
@@ -141,9 +210,42 @@
   <main class="container" id="main"></main>
 
   <script>
-    // ===== PREMIUM CHECK =====
+    // ===== THEME =====
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light');
+    }
+
+    // ===== PREMIUM =====
     function isPremium() {
       return localStorage.getItem('isPremium') === 'true';
+    }
+
+    // ===== RATING =====
+    function getRating(manhwaId) {
+      return parseFloat(localStorage.getItem('rating_' + manhwaId) || '0');
+    }
+    function setRating(manhwaId, val) {
+      localStorage.setItem('rating_' + manhwaId, val.toString());
+    }
+    function getAvgRating(manhwaId) {
+      const all = JSON.parse(localStorage.getItem('ratings_' + manhwaId) || '[]');
+      if (all.length === 0) return 0;
+      return all.reduce((a,b) => a + b, 0) / all.length;
+    }
+    function addRating(manhwaId, val) {
+      const all = JSON.parse(localStorage.getItem('ratings_' + manhwaId) || '[]');
+      all.push(val);
+      localStorage.setItem('ratings_' + manhwaId, JSON.stringify(all));
+    }
+
+    // ===== COMMENTS =====
+    function getComments(manhwaId) {
+      return JSON.parse(localStorage.getItem('comments_' + manhwaId) || '[]');
+    }
+    function addComment(manhwaId, name, text) {
+      const comments = getComments(manhwaId);
+      comments.push({ name, text, time: new Date().toLocaleString() });
+      localStorage.setItem('comments_' + manhwaId, JSON.stringify(comments));
     }
 
     // ===== LOAD =====
@@ -161,7 +263,10 @@
 
       const container = document.getElementById('main');
 
-      // Info
+      // Rating
+      const userRating = getRating(id);
+      const avgRating = getAvgRating(id);
+
       let html = `
         <div class="info">
           <img class="cover" src="${manhwa.cover}" alt="${manhwa.title}">
@@ -169,8 +274,12 @@
             <div class="title">${manhwa.title}</div>
             <div class="status">${manhwa.status || 'Ongoing'}</div>
             <div class="desc">${manhwa.description || ''}</div>
-            <div class="genres">
-              ${manhwa.genres.map(g => `<span class="genre">${g}</span>`).join('')}
+            <div class="genres">${manhwa.genres.map(g => `<span class="genre">${g}</span>`).join('')}</div>
+            <div class="rating-section">
+              <div class="stars" id="stars">
+                ${[1,2,3,4,5].map(n => `<span onclick="rate(${id}, ${n})" style="color:${n <= userRating ? '#ffd700' : '#555'}">★</span>`).join('')}
+              </div>
+              <span class="rating-avg">⭐ ${avgRating.toFixed(1)} (${JSON.parse(localStorage.getItem('ratings_' + id) || '[]').length} ratings)</span>
             </div>
           </div>
         </div>
@@ -190,7 +299,44 @@
         `;
       });
 
+      // Comments
+      const comments = getComments(id);
+      html += `
+        <div class="section-title">💬 <span>Comments</span></div>
+        <div class="comment-box">
+          <input type="text" id="commentName" placeholder="သင့်နာမည်..." style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); margin-bottom:10px; outline:none;">
+          <textarea id="commentText" placeholder="မှတ်ချက်ရေးပါ..."></textarea>
+          <button onclick="postComment(${id})">Post Comment</button>
+          <div id="commentList" style="margin-top:16px;">
+            ${comments.map(c => `
+              <div class="comment-item">
+                <span class="name">${c.name}</span>
+                <span class="time">${c.time}</span>
+                <div class="text">${c.text}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
       container.innerHTML = html;
+    }
+
+    // ===== RATE =====
+    function rate(id, val) {
+      setRating(id, val);
+      addRating(id, val);
+      load(); // refresh
+    }
+
+    // ===== POST COMMENT =====
+    function postComment(id) {
+      const name = document.getElementById('commentName').value.trim() || 'Guest';
+      const text = document.getElementById('commentText').value.trim();
+      if (!text) { alert('မှတ်ချက်ရေးပါ။'); return; }
+      addComment(id, name, text);
+      document.getElementById('commentText').value = '';
+      load(); // refresh
     }
 
     load();
