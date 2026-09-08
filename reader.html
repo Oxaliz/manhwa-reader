@@ -146,33 +146,14 @@
   <script>
     let manhwa, chapters, currentIndex = 0, manhwaId = 1;
 
-    // ===== THEME =====
     if (localStorage.getItem('theme') === 'light') {
       document.body.classList.add('light');
     }
 
-    // ===== PREMIUM =====
     function isPremium() {
       return localStorage.getItem('isPremium') === 'true';
     }
 
-    // ===== PROGRESS (Reading History) =====
-    function setProgress(manhwaId, chapter) {
-      localStorage.setItem('progress_' + manhwaId, chapter.toString());
-    }
-    function getProgress(manhwaId) {
-      return parseInt(localStorage.getItem('progress_' + manhwaId) || '0');
-    }
-
-    // ===== LAST READ POSITION (page) =====
-    function savePagePosition(manhwaId, chapter, page) {
-      localStorage.setItem('lastPage_' + manhwaId + '_' + chapter, page.toString());
-    }
-    function getPagePosition(manhwaId, chapter) {
-      return parseInt(localStorage.getItem('lastPage_' + manhwaId + '_' + chapter) || '0');
-    }
-
-    // ===== LOAD =====
     async function load() {
       const params = new URLSearchParams(window.location.search);
       manhwaId = parseInt(params.get('manhwa')) || 1;
@@ -187,7 +168,6 @@
       currentIndex = chapters.findIndex(c => c.number === chapterNum);
       if (currentIndex < 0) currentIndex = 0;
 
-      // Premium check (chapter 1 is free)
       if (chapters[currentIndex]?.number > 1 && !isPremium()) {
         alert('🔒 ဒီ Chapter က Premium ပါ။ Telegram Group မှ Code ရယူပါ။');
         location.href = 'index.html';
@@ -199,7 +179,6 @@
       updateButtons();
     }
 
-    // ===== SELECT =====
     function setupSelect() {
       const sel = document.getElementById('chapterSelect');
       sel.innerHTML = '';
@@ -212,7 +191,6 @@
       sel.value = currentIndex;
     }
 
-    // ===== LOAD CHAPTER =====
     function loadChapter() {
       const ch = chapters[currentIndex];
       document.getElementById('chapterTitle').textContent = ch.title;
@@ -224,54 +202,13 @@
         const num = String(i).padStart(3, '0');
         img.src = `${ch.folder}/${num}.jpg`;
         img.loading = 'lazy';
-        img.dataset.page = i;
         reader.appendChild(img);
       }
 
-      // Save reading progress (chapter)
-      setProgress(manhwaId, ch.number);
-
-      // Scroll to last read page
-      const lastPage = getPagePosition(manhwaId, ch.number);
-      if (lastPage > 0 && lastPage <= ch.pages) {
-        const imgs = reader.querySelectorAll('img');
-        if (imgs[lastPage - 1]) {
-          setTimeout(() => {
-            imgs[lastPage - 1].scrollIntoView({ behavior: 'smooth' });
-          }, 300);
-        }
-      }
-
       updateButtons();
+      window.scrollTo(0, 0);
     }
 
-    // ===== SAVE PAGE POSITION ON SCROLL =====
-    function saveCurrentPage() {
-      const reader = document.getElementById('reader');
-      const imgs = reader.querySelectorAll('img');
-      const scrollTop = window.scrollY + window.innerHeight / 2;
-      let currentPage = 1;
-      imgs.forEach((img, i) => {
-        const rect = img.getBoundingClientRect();
-        if (rect.top < window.innerHeight / 2) {
-          currentPage = i + 1;
-        }
-      });
-      const ch = chapters[currentIndex];
-      if (ch) {
-        savePagePosition(manhwaId, ch.number, currentPage);
-      }
-    }
-
-    window.addEventListener('scroll', () => {
-      saveCurrentPage();
-      const st = window.scrollY;
-      const dh = document.documentElement.scrollHeight - window.innerHeight;
-      document.getElementById('progress').style.width = dh > 0 ? (st / dh) * 100 + '%' : '0%';
-      document.getElementById('topBtn').style.display = st > 500 ? 'block' : 'none';
-    });
-
-    // ===== CHANGE =====
     function changeChapter() {
       const idx = parseInt(document.getElementById('chapterSelect').value);
       const ch = chapters[idx];
@@ -283,7 +220,6 @@
       location.href = `reader.html?manhwa=${manhwaId}&chapter=${ch.number}`;
     }
 
-    // ===== PREV/NEXT =====
     function prevChapter() {
       if (currentIndex > 0) {
         const ch = chapters[currentIndex - 1];
@@ -305,6 +241,13 @@
       document.getElementById('prevBtn').disabled = currentIndex === 0;
       document.getElementById('nextBtn').disabled = currentIndex === chapters.length - 1;
     }
+
+    window.addEventListener('scroll', () => {
+      const st = window.scrollY;
+      const dh = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('progress').style.width = dh > 0 ? (st / dh) * 100 + '%' : '0%';
+      document.getElementById('topBtn').style.display = st > 500 ? 'block' : 'none';
+    });
 
     load();
   </script>
