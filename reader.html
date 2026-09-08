@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MY MANHWA Reader</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Reader</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -14,54 +21,77 @@
 }
 
 body{
-  background:#111;
-  color:white;
+  background:#000;
+  color:#fff;
   font-family:Arial,sans-serif;
 }
 
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  height:55px;
-  background:#181818;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 12px;
-  box-shadow:0 2px 10px rgba(0,0,0,.5);
-}
-
-.logo{
-  font-weight:bold;
-  font-size:18px;
-}
-
-button,select{
-  background:#292929;
-  color:white;
-  border:0;
-  border-radius:6px;
-  padding:9px 12px;
-  font-size:14px;
-}
+/* PROGRESS */
 
 .progress{
   position:fixed;
   top:0;
   left:0;
-  height:3px;
-  background:#ff4d6d;
+
   width:0%;
-  z-index:2000;
+  height:3px;
+
+  background:#ff4d6d;
+
+  z-index:9999;
 }
+
+/* TOP BAR */
+
+.topbar{
+  position:sticky;
+  top:0;
+
+  height:55px;
+
+  background:#151515;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 10px;
+
+  z-index:1000;
+}
+
+.logo{
+  font-weight:bold;
+  font-size:15px;
+}
+
+button,
+select{
+  background:#292929;
+  color:#fff;
+
+  border:none;
+  border-radius:5px;
+
+  padding:8px 10px;
+}
+
+select{
+  max-width:130px;
+}
+
+/* TITLE */
 
 .chapter-title{
   text-align:center;
-  padding:15px 10px;
-  font-size:18px;
+
+  padding:14px 10px;
+
+  font-size:17px;
   font-weight:bold;
 }
+
+/* READER */
 
 .reader{
   width:100%;
@@ -71,114 +101,235 @@ button,select{
 
 .reader img{
   display:block;
+
   width:100%;
   height:auto;
+
   margin:0 auto;
-  background:#222;
+
+  background:#111;
 }
 
-.loading{
-  text-align:center;
-  padding:30px;
-  color:#aaa;
-}
+/* NAV */
 
 .bottom-nav{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:20px 12px 35px;
   max-width:900px;
   margin:auto;
+
+  display:flex;
+  gap:10px;
+
+  padding:20px 10px 40px;
 }
 
 .bottom-nav button{
   flex:1;
 }
 
+/* TOP BUTTON */
+
 .top-btn{
   position:fixed;
+
   right:15px;
-  bottom:75px;
+  bottom:70px;
+
   width:45px;
   height:45px;
+
   border-radius:50%;
+
   background:#ff4d6d;
+
   font-size:20px;
+
   display:none;
 }
 
+/* MOBILE */
+
 @media(max-width:600px){
+
   .logo{
-    font-size:15px;
+    font-size:13px;
   }
 
   select{
-    max-width:130px;
+    max-width:115px;
+    font-size:12px;
   }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<div class="progress" id="progress"></div>
+<div
+  class="progress"
+  id="progress"
+></div>
+
+
+<!-- TOP BAR -->
 
 <div class="topbar">
 
-  <button onclick="goHome()">⌂</button>
+  <button onclick="goHome()">
+    ⌂
+  </button>
 
-  <div class="logo">MY MANHWA</div>
+  <div
+    class="logo"
+    id="logo"
+  >
+    Manhwa Myanmar
+  </div>
 
-  <select id="chapterSelect" onchange="changeChapter()">
+  <select
+    id="chapterSelect"
+    onchange="changeChapter()"
+  >
   </select>
 
 </div>
 
-<div class="chapter-title" id="chapterTitle">
+
+<!-- CHAPTER TITLE -->
+
+<div
+  class="chapter-title"
+  id="chapterTitle"
+>
   Loading...
 </div>
 
-<div class="reader" id="reader">
-  <div class="loading">Loading chapter...</div>
+
+<!-- IMAGES -->
+
+<div
+  class="reader"
+  id="reader"
+>
 </div>
+
+
+<!-- BOTTOM NAV -->
 
 <div class="bottom-nav">
 
-  <button onclick="previousChapter()">
+  <button
+    id="previous"
+    onclick="previousChapter()"
+  >
     ← Previous
   </button>
 
-  <button onclick="nextChapter()">
+  <button
+    id="next"
+    onclick="nextChapter()"
+  >
     Next →
   </button>
 
 </div>
 
-<button class="top-btn" id="topBtn" onclick="scrollToTop()">
+
+<!-- TOP -->
+
+<button
+  class="top-btn"
+  id="topBtn"
+  onclick="scrollToTop()"
+>
   ↑
 </button>
 
+
 <script>
 
-let chapters = [];
-let currentChapter = 0;
+let manhwaList = [];
 
-async function loadChapters(){
+let manhwa;
 
-  const response = await fetch("chapters.json");
+let currentChapterIndex = 0;
 
-  chapters = await response.json();
 
-  const params = new URLSearchParams(window.location.search);
+/* ================= LOAD ================= */
 
-  const requested = parseInt(params.get("chapter")) || 1;
+async function loadData(){
 
-  const index = chapters.findIndex(
-    chapter => chapter.number === requested
-  );
+  const response =
+    await fetch("manhwa.json");
 
-  currentChapter = index >= 0 ? index : 0;
+  manhwaList =
+    await response.json();
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const manhwaId =
+    parseInt(
+      params.get("manhwa")
+    ) || 1;
+
+
+  const chapterNumber =
+    parseInt(
+      params.get("chapter")
+    ) || 1;
+
+
+  manhwa =
+    manhwaList.find(
+      item =>
+        item.id === manhwaId
+    );
+
+
+  if(!manhwa){
+
+    document.body.innerHTML =
+      "<h2 style='padding:30px'>Manhwa not found.</h2>";
+
+    return;
+
+  }
+
+
+  currentChapterIndex =
+    manhwa.chapters.findIndex(
+      chapter =>
+        chapter.number === chapterNumber
+    );
+
+
+  if(currentChapterIndex < 0){
+
+    currentChapterIndex = 0;
+
+  }
+
+
+  setup();
+
+}
+
+
+/* ================= SETUP ================= */
+
+function setup(){
+
+  document.getElementById("logo")
+    .textContent =
+      manhwa.title;
+
 
   createChapterSelector();
 
@@ -186,160 +337,277 @@ async function loadChapters(){
 
 }
 
+
+/* ================= CHAPTER SELECT ================= */
+
 function createChapterSelector(){
 
-  const select = document.getElementById("chapterSelect");
+  const select =
+    document.getElementById(
+      "chapterSelect"
+    );
+
 
   select.innerHTML = "";
 
-  chapters.forEach((chapter,index)=>{
 
-    const option = document.createElement("option");
+  manhwa.chapters.forEach(
+    (chapter,index)=>{
 
-    option.value = index;
+      const option =
+        document.createElement(
+          "option"
+        );
 
-    option.textContent = chapter.title;
 
-    select.appendChild(option);
+      option.value =
+        index;
 
-  });
 
-  select.value = currentChapter;
+      option.textContent =
+        chapter.title;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  select.value =
+    currentChapterIndex;
 
 }
 
+
+/* ================= LOAD CHAPTER ================= */
+
 function loadChapter(){
 
-  const chapter = chapters[currentChapter];
+  const chapter =
+    manhwa.chapters[
+      currentChapterIndex
+    ];
 
-  document.getElementById("chapterTitle").textContent =
+
+  document.getElementById(
+    "chapterTitle"
+  ).textContent =
     chapter.title;
 
-  const reader = document.getElementById("reader");
+
+  const reader =
+    document.getElementById(
+      "reader"
+    );
+
 
   reader.innerHTML = "";
 
-  for(let i=1; i<=chapter.pages; i++){
 
-    const img = document.createElement("img");
+  for(
+    let i=1;
+    i<=chapter.pages;
+    i++
+  ){
 
-    const number = String(i).padStart(3,"0");
+    const img =
+      document.createElement(
+        "img"
+      );
+
+
+    const number =
+      String(i)
+        .padStart(3,"0");
+
 
     img.src =
       `${chapter.folder}/${number}.jpg`;
 
-    img.loading = "lazy";
+
+    img.loading =
+      "lazy";
+
 
     img.alt =
-      `${chapter.title} Page ${i}`;
+      `${manhwa.title} ${chapter.title} Page ${i}`;
 
-    reader.appendChild(img);
+
+    reader.appendChild(
+      img
+    );
 
   }
 
-  window.scrollTo(0,0);
 
   updateButtons();
 
+
+  window.scrollTo(0,0);
+
 }
+
+
+/* ================= CHANGE ================= */
 
 function changeChapter(){
 
-  currentChapter =
+  const index =
     parseInt(
-      document.getElementById("chapterSelect").value
+      document.getElementById(
+        "chapterSelect"
+      ).value
     );
 
-  const chapter = chapters[currentChapter];
+
+  const chapter =
+    manhwa.chapters[index];
+
 
   window.location.href =
-    `reader.html?chapter=${chapter.number}`;
+    `reader.html?manhwa=${manhwa.id}&chapter=${chapter.number}`;
 
 }
+
+
+/* ================= PREVIOUS ================= */
 
 function previousChapter(){
 
-  if(currentChapter > 0){
+  if(
+    currentChapterIndex > 0
+  ){
 
     const chapter =
-      chapters[currentChapter - 1];
+      manhwa.chapters[
+        currentChapterIndex - 1
+      ];
+
 
     window.location.href =
-      `reader.html?chapter=${chapter.number}`;
+      `reader.html?manhwa=${manhwa.id}&chapter=${chapter.number}`;
 
   }
 
 }
+
+
+/* ================= NEXT ================= */
 
 function nextChapter(){
 
-  if(currentChapter < chapters.length - 1){
+  if(
+    currentChapterIndex <
+    manhwa.chapters.length - 1
+  ){
 
     const chapter =
-      chapters[currentChapter + 1];
+      manhwa.chapters[
+        currentChapterIndex + 1
+      ];
+
 
     window.location.href =
-      `reader.html?chapter=${chapter.number}`;
+      `reader.html?manhwa=${manhwa.id}&chapter=${chapter.number}`;
 
   }
 
 }
 
+
+/* ================= BUTTONS ================= */
+
 function updateButtons(){
 
-  const buttons =
-    document.querySelectorAll(".bottom-nav button");
+  document.getElementById(
+    "previous"
+  ).style.visibility =
+    currentChapterIndex === 0
+      ? "hidden"
+      : "visible";
 
-  buttons[0].style.visibility =
-    currentChapter === 0 ? "hidden" : "visible";
 
-  buttons[1].style.visibility =
-    currentChapter === chapters.length - 1
+  document.getElementById(
+    "next"
+  ).style.visibility =
+    currentChapterIndex ===
+    manhwa.chapters.length - 1
       ? "hidden"
       : "visible";
 
 }
 
+
+/* ================= HOME ================= */
+
 function goHome(){
 
-  window.location.href = "index.html";
+  window.location.href =
+    "index.html";
 
 }
+
+
+/* ================= TOP ================= */
 
 function scrollToTop(){
 
   window.scrollTo({
+
     top:0,
+
     behavior:"smooth"
+
   });
 
 }
 
-window.addEventListener("scroll",()=>{
 
-  const scrollTop =
-    window.scrollY;
+/* ================= SCROLL ================= */
 
-  const docHeight =
-    document.documentElement.scrollHeight
-    - window.innerHeight;
+window.addEventListener(
+  "scroll",
+  ()=>{
 
-  const percent =
-    docHeight > 0
-      ? (scrollTop / docHeight) * 100
-      : 0;
+    const scrollTop =
+      window.scrollY;
 
-  document.getElementById("progress").style.width =
-    percent + "%";
 
-  document.getElementById("topBtn").style.display =
-    scrollTop > 500 ? "block" : "none";
+    const docHeight =
+      document.documentElement
+        .scrollHeight
+      - window.innerHeight;
 
-});
 
-loadChapters();
+    const percent =
+      docHeight > 0
+        ? (scrollTop / docHeight) * 100
+        : 0;
+
+
+    document.getElementById(
+      "progress"
+    ).style.width =
+      percent + "%";
+
+
+    document.getElementById(
+      "topBtn"
+    ).style.display =
+      scrollTop > 500
+        ? "block"
+        : "none";
+
+  }
+);
+
+
+loadData();
 
 </script>
 
 </body>
-  </html>
+</html>
