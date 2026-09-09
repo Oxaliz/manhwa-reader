@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToonNest — Manhwa Reader</title>
   <style>
+    /* ===== RESET & BASE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; transition: 0.3s; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      transition: 0.3s;
+      user-select: none; /* စာသားရွေးလို့မရအောင် */
+    }
     :root {
       --bg: #0b0b0f;
       --bg2: #12121a;
@@ -17,6 +22,8 @@
       --primary: #ff6b8a;
       --primary2: #d98ac8;
       --shadow: rgba(255,107,138,0.15);
+      --radius: 16px;
+      --transition: 0.3s ease;
     }
     .light {
       --bg: #f5f0f7;
@@ -28,30 +35,34 @@
       --shadow: rgba(0,0,0,0.08);
     }
     body { background: var(--bg); color: var(--text); }
+
+    /* ===== SCROLLBAR ===== */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg2); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
+    /* ===== HEADER ===== */
     .header {
       background: linear-gradient(135deg, #1a0b1f, #2d1b33);
-      padding: 30px 20px 20px;
+      padding: 28px 20px 18px;
       text-align: center;
       border-bottom: 2px solid var(--primary);
     }
     .logo {
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 900;
+      letter-spacing: -0.5px;
       background: linear-gradient(90deg, var(--primary), var(--primary2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .tagline { font-size: 13px; color: var(--text2); margin-top: 4px; letter-spacing: 2px; }
 
+    /* ===== NAV ===== */
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
+      padding: 10px 20px;
       background: var(--bg2);
       border-bottom: 1px solid var(--border);
       position: sticky;
@@ -59,14 +70,23 @@
       z-index: 100;
       flex-wrap: wrap;
       gap: 8px;
+      backdrop-filter: blur(8px);
     }
     .nav-left { display: flex; align-items: center; gap: 12px; }
     .menu-btn {
       background: none; border: none; color: var(--text); font-size: 26px;
-      cursor: pointer;
+      cursor: pointer; transition: var(--transition);
     }
-    .nav-title { font-weight: 600; font-size: 15px; color: var(--text); }
-    .nav-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .menu-btn:hover { color: var(--primary); }
+    .nav-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--bg3);
+      padding: 4px 14px;
+      border-radius: 30px;
+    }
+    .nav-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .premium-btn {
       background: linear-gradient(135deg, var(--primary), var(--primary2));
       border: none;
@@ -76,9 +96,10 @@
       font-weight: 700;
       font-size: 13px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255,107,138,0.3);
     }
-    .premium-btn:hover { transform: scale(1.05); opacity: 0.9; }
+    .premium-btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255,107,138,0.5); }
     .theme-btn {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -87,11 +108,14 @@
       border-radius: 30px;
       cursor: pointer;
       font-size: 16px;
+      transition: var(--transition);
     }
+    .theme-btn:hover { border-color: var(--primary); }
 
+    /* ===== SEARCH + FILTER ===== */
     .search-area {
       max-width: 1100px;
-      margin: 20px auto 0;
+      margin: 24px auto 0;
       padding: 0 15px;
       display: flex;
       flex-wrap: wrap;
@@ -100,67 +124,71 @@
     .search {
       flex: 1;
       min-width: 200px;
-      padding: 14px 18px;
-      border-radius: 30px;
+      padding: 14px 20px;
+      border-radius: 40px;
       border: 1px solid var(--border);
       background: var(--bg2);
       color: var(--text);
       font-size: 15px;
       outline: none;
-      transition: 0.3s;
+      transition: var(--transition);
     }
-    .search:focus { border-color: var(--primary); box-shadow: 0 0 20px var(--shadow); }
+    .search:focus { border-color: var(--primary); box-shadow: 0 0 30px var(--shadow); }
     .filter-select {
-      padding: 14px 18px;
-      border-radius: 30px;
+      padding: 14px 20px;
+      border-radius: 40px;
       border: 1px solid var(--border);
       background: var(--bg2);
       color: var(--text);
       font-size: 14px;
       outline: none;
       cursor: pointer;
+      transition: var(--transition);
     }
     .filter-select:focus { border-color: var(--primary); }
 
+    /* ===== CONTAINER ===== */
     .container {
       max-width: 1100px;
       margin: auto;
-      padding: 30px 15px 60px;
+      padding: 30px 15px 40px;
     }
     .section { margin-top: 30px; }
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .section-title {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--text);
     }
     .section-title span { color: var(--primary); }
 
+    /* ===== GRID ===== */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
       gap: 24px 16px;
     }
 
+    /* ===== CARD ===== */
     .card {
       background: var(--bg2);
-      border-radius: 16px;
+      border-radius: var(--radius);
       overflow: hidden;
       text-decoration: none;
       color: var(--text);
-      transition: 0.3s;
+      transition: var(--transition);
       border: 1px solid var(--border);
       position: relative;
     }
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
       border-color: var(--primary);
-      box-shadow: 0 10px 30px var(--shadow);
+      box-shadow: 0 12px 40px var(--shadow);
     }
     .card-cover {
       width: 100%;
@@ -168,6 +196,9 @@
       object-fit: cover;
       display: block;
       background: var(--bg3);
+      pointer-events: none; /* Save မရအောင် */
+      -webkit-user-drag: none; /* Drag မရအောင် */
+      user-drag: none;
     }
     .card-body { padding: 12px 12px 14px; }
     .card-title {
@@ -195,12 +226,14 @@
       letter-spacing: 0.5px;
     }
 
+    /* ===== MENU ===== */
     .overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.7);
       z-index: 200;
       display: none;
+      backdrop-filter: blur(4px);
     }
     .overlay.show { display: block; }
     .menu-panel {
@@ -239,10 +272,22 @@
       color: var(--text);
       text-decoration: none;
       font-size: 15px;
-      transition: 0.2s;
+      transition: var(--transition);
     }
     .menu-link:hover { color: var(--primary); padding-left: 10px; }
 
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding: 24px 15px;
+      border-top: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 13px;
+      background: var(--bg2);
+    }
+    .footer span { color: var(--primary); }
+
+    /* ===== EMPTY ===== */
     .empty {
       grid-column: 1/-1;
       text-align: center;
@@ -250,6 +295,7 @@
       padding: 50px 10px;
     }
 
+    /* ===== MODAL ===== */
     .modal {
       display: none;
       position: fixed;
@@ -259,6 +305,7 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      backdrop-filter: blur(4px);
     }
     .modal.show { display: flex; }
     .modal-box {
@@ -266,21 +313,23 @@
       max-width: 420px;
       width: 100%;
       padding: 35px 30px;
-      border-radius: 20px;
+      border-radius: 24px;
       border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
     .modal-box h2 { color: var(--primary); margin-bottom: 8px; }
     .modal-box p { color: var(--text2); margin-bottom: 18px; font-size: 14px; }
     .modal-box input {
       width: 100%;
-      padding: 14px;
-      border-radius: 30px;
+      padding: 14px 20px;
+      border-radius: 40px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text);
       font-size: 15px;
       outline: none;
       margin-bottom: 14px;
+      transition: var(--transition);
     }
     .modal-box input:focus { border-color: var(--primary); }
     .modal-box .btn-submit {
@@ -288,12 +337,12 @@
       padding: 14px;
       background: linear-gradient(135deg, var(--primary), var(--primary2));
       border: none;
-      border-radius: 30px;
+      border-radius: 40px;
       color: #fff;
       font-weight: 700;
       font-size: 16px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: var(--transition);
     }
     .modal-box .btn-submit:hover { opacity: 0.9; transform: scale(1.02); }
     .modal-close {
@@ -306,12 +355,14 @@
     }
     .modal-msg { margin-top: 14px; font-size: 14px; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
-      .logo { font-size: 28px; }
+      .logo { font-size: 30px; }
       .grid { grid-template-columns: repeat(3, 1fr); gap: 16px 10px; }
       .card-body { padding: 8px 8px 10px; }
       .card-title { font-size: 12px; }
       .section-title { font-size: 18px; }
+      .search-area { margin-top: 16px; }
     }
     @media (max-width: 400px) {
       .grid { grid-template-columns: repeat(2, 1fr); gap: 14px 8px; }
@@ -320,11 +371,12 @@
 </head>
 <body>
 
+  <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="logo">ToonNest</div>
-    <div class="tagline">✦ Read Manhwa in Style ✦</div>
   </header>
 
+  <!-- ===== NAV ===== -->
   <nav class="nav">
     <div class="nav-left">
       <button class="menu-btn" onclick="openMenu()">☰</button>
@@ -336,6 +388,7 @@
     </div>
   </nav>
 
+  <!-- ===== SEARCH + FILTER ===== -->
   <div class="search-area">
     <input class="search" id="searchInput" type="text" placeholder="🔍 Search Manhwa..." oninput="filterAll()">
     <select class="filter-select" id="genreFilter" onchange="filterAll()">
@@ -349,6 +402,7 @@
     </select>
   </div>
 
+  <!-- ===== MAIN ===== -->
   <main class="container">
     <section class="section">
       <div class="section-head">
@@ -365,6 +419,12 @@
     </section>
   </main>
 
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    © 2026 <span>ToonNest</span>. All rights reserved.
+  </footer>
+
+  <!-- ===== MENU ===== -->
   <div class="overlay" id="overlay" onclick="closeMenu()"></div>
   <div class="menu-panel" id="menuPanel">
     <button class="menu-close" onclick="closeMenu()">×</button>
@@ -406,7 +466,7 @@
     }
 
     // ============================================================
-    // ONE-TIME LIFETIME PREMIUM
+    // PREMIUM (One-Time Lifetime)
     // ============================================================
     const AVAILABLE_CODES = {
       "PREMIUM-001": true,
@@ -498,7 +558,7 @@
 
       a.innerHTML = `
         ${badge}
-        <img class="card-cover" src="${manhwa.cover}" alt="${manhwa.title}" loading="lazy">
+        <img class="card-cover" src="${manhwa.cover}" alt="${manhwa.title}" loading="lazy" draggable="false" oncontextmenu="return false">
         <div class="card-body">
           <div class="card-title">${manhwa.title}</div>
           <div class="card-genre">${manhwa.genres ? manhwa.genres.slice(0,2).join(' • ') : ''}</div>
@@ -564,7 +624,15 @@
     // START
     // ============================================================
     loadManhwa();
-  </script>
 
+    // ============================================================
+    // PREVENT SAVE (Right-click & Drag)
+    // ============================================================
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
   </html>
