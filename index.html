@@ -8,7 +8,10 @@
   <meta name="keywords" content="manhwa, read manhwa, manhwa reader, manhwa online, ToonNest, manhwa free, webtoon">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://manhwa-reader.oxaliz69.workers.dev/">
-  
+
+  <!-- ===== PROPELLERSADS VERIFICATION ===== -->
+  <meta name="monetag" content="f99801fb32ce2d0608edee279a8b978f">
+
   <!-- Open Graph -->
   <meta property="og:title" content="ToonNest — Read Manhwa Online Free">
   <meta property="og:description" content="Read your favorite manhwa online for free at ToonNest. Updated daily with new chapters!">
@@ -16,7 +19,7 @@
   <meta property="og:url" content="https://manhwa-reader.oxaliz69.workers.dev/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  
+
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {
@@ -32,14 +35,10 @@
     }
   }
   </script>
-  
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 
-  <!-- ===== ADS (Social Bar - Footer) ===== -->
-  <script src="https://pl31262321.profitableratecpmnetwork.com/2e/27/11/2e27111df34bce0d32a63cc444081c74.js"></script>
-
   <style>
-    /* ===== RESET & BASE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -70,12 +69,10 @@
     }
     body { background: var(--bg); color: var(--text); }
 
-    /* ===== SCROLLBAR ===== */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg2); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-    /* ===== HEADER ===== */
     .header {
       background: linear-gradient(135deg, #1a0b1f, #2d1b33);
       padding: 28px 20px 18px;
@@ -91,7 +88,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ===== NAV ===== */
     .nav {
       display: flex;
       align-items: center;
@@ -146,7 +142,6 @@
     }
     .theme-btn:hover { border-color: var(--primary); }
 
-    /* ===== SEARCH + FILTER ===== */
     .search-area {
       max-width: 1100px;
       margin: 24px auto 0;
@@ -181,7 +176,6 @@
     }
     .filter-select:focus { border-color: var(--primary); }
 
-    /* ===== CONTAINER ===== */
     .container {
       max-width: 1100px;
       margin: auto;
@@ -201,14 +195,12 @@
     }
     .section-title span { color: var(--primary); }
 
-    /* ===== GRID ===== */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
       gap: 24px 16px;
     }
 
-    /* ===== CARD ===== */
     .card {
       background: var(--bg2);
       border-radius: var(--radius);
@@ -260,7 +252,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* ===== MENU ===== */
     .overlay {
       position: fixed;
       inset: 0;
@@ -310,7 +301,6 @@
     }
     .menu-link:hover { color: var(--primary); padding-left: 10px; }
 
-    /* ===== FOOTER ===== */
     .footer {
       text-align: center;
       padding: 24px 15px;
@@ -321,7 +311,6 @@
     }
     .footer span { color: var(--primary); }
 
-    /* ===== EMPTY ===== */
     .empty {
       grid-column: 1/-1;
       text-align: center;
@@ -329,7 +318,6 @@
       padding: 50px 10px;
     }
 
-    /* ===== MODAL ===== */
     .modal {
       display: none;
       position: fixed;
@@ -389,7 +377,6 @@
     }
     .modal-msg { margin-top: 14px; font-size: 14px; }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .logo { font-size: 30px; }
       .grid { grid-template-columns: repeat(3, 1fr); gap: 16px 10px; }
@@ -405,12 +392,10 @@
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="logo">ToonNest</div>
   </header>
 
-  <!-- ===== NAV ===== -->
   <nav class="nav">
     <div class="nav-left">
       <button class="menu-btn" onclick="openMenu()">☰</button>
@@ -422,7 +407,6 @@
     </div>
   </nav>
 
-  <!-- ===== SEARCH + FILTER ===== -->
   <div class="search-area">
     <input class="search" id="searchInput" type="text" placeholder="🔍 Search Manhwa..." oninput="filterAll()">
     <select class="filter-select" id="genreFilter" onchange="filterAll()">
@@ -436,7 +420,6 @@
     </select>
   </div>
 
-  <!-- ===== MAIN ===== -->
   <main class="container">
     <section class="section">
       <div class="section-head">
@@ -453,12 +436,10 @@
     </section>
   </main>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     © 2026 <span>ToonNest</span>. All rights reserved.
   </footer>
 
-  <!-- ===== MENU ===== -->
   <div class="overlay" id="overlay" onclick="closeMenu()"></div>
   <div class="menu-panel" id="menuPanel">
     <button class="menu-close" onclick="closeMenu()">×</button>
@@ -469,7 +450,6 @@
     <a class="menu-link" href="#" onclick="closeMenu(); openModal();">👑 Premium</a>
   </div>
 
-  <!-- ===== PREMIUM MODAL ===== -->
   <div class="modal" id="premiumModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">×</button>
@@ -482,15 +462,9 @@
   </div>
 
   <script>
-    // ============================================================
-    // DATA
-    // ============================================================
     let manhwaList = [];
     let allManhwa = [];
 
-    // ============================================================
-    // THEME
-    // ============================================================
     function toggleTheme() {
       document.body.classList.toggle('light');
       localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
@@ -499,9 +473,6 @@
       document.body.classList.add('light');
     }
 
-    // ============================================================
-    // PREMIUM (One-Time Lifetime)
-    // ============================================================
     const AVAILABLE_CODES = {
       "PREMIUM-001": true,
       "PREMIUM-002": true,
@@ -561,9 +532,6 @@
       document.getElementById('premiumModal').classList.remove('show');
     }
 
-    // ============================================================
-    // LOAD MANHWA
-    // ============================================================
     async function loadManhwa() {
       try {
         const res = await fetch('manhwa.json');
@@ -577,9 +545,6 @@
       updateNav();
     }
 
-    // ============================================================
-    // RENDER CARDS
-    // ============================================================
     function createCard(manhwa, showBadge = false) {
       const a = document.createElement('a');
       a.className = 'card';
@@ -618,9 +583,6 @@
       });
     }
 
-    // ============================================================
-    // SEARCH + FILTER
-    // ============================================================
     function filterAll() {
       const keyword = document.getElementById('searchInput').value.toLowerCase();
       const genre = document.getElementById('genreFilter').value;
@@ -642,9 +604,6 @@
       });
     }
 
-    // ============================================================
-    // MENU
-    // ============================================================
     function openMenu() {
       document.getElementById('menuPanel').classList.add('open');
       document.getElementById('overlay').classList.add('show');
@@ -654,19 +613,14 @@
       document.getElementById('overlay').classList.remove('show');
     }
 
-    // ============================================================
-    // START
-    // ============================================================
     loadManhwa();
 
-    // ============================================================
-    // PREVENT SAVE (Right-click & Drag)
-    // ============================================================
     document.addEventListener('contextmenu', (e) => {
       if (e.target.tagName === 'IMG') {
         e.preventDefault();
       }
     });
   </script>
+
 </body>
-      </html>
+  </html>
