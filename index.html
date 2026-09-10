@@ -76,6 +76,39 @@
     ::-webkit-scrollbar-track { background: var(--bg2); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
+    /* ===== NOTI BAR ===== */
+    .noti-bar {
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
+      color: #fff;
+      text-align: center;
+      padding: 10px 40px 10px 15px;
+      font-size: 13px;
+      font-weight: 600;
+      position: relative;
+      display: block;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .noti-bar:hover { filter: brightness(1.1); }
+    .noti-bar.hide { display: none; }
+    .noti-bar .close-noti {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .noti-bar .telegram-link {
+      text-decoration: underline;
+      color: #fff;
+      font-weight: 700;
+    }
+
     .header {
       background: linear-gradient(135deg, #1a0b1f, #2d1b33);
       padding: 28px 20px 18px;
@@ -335,7 +368,7 @@
     .modal.show { display: flex; }
     .modal-box {
       background: var(--bg2);
-      max-width: 420px;
+      max-width: 460px;
       width: 100%;
       padding: 35px 30px;
       border-radius: 24px;
@@ -343,7 +376,34 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
     .modal-box h2 { color: var(--primary); margin-bottom: 8px; }
-    .modal-box p { color: var(--text2); margin-bottom: 18px; font-size: 14px; }
+    .modal-box p { color: var(--text2); margin-bottom: 14px; font-size: 14px; line-height: 1.6; }
+    .modal-box .price-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: #fff;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+    .modal-box .tg-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: #229ED9;
+      border: none;
+      border-radius: 40px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 14px;
+      transition: var(--transition);
+    }
+    .modal-box .tg-btn:hover { opacity: 0.9; transform: scale(1.02); }
     .modal-box input {
       width: 100%;
       padding: 14px 20px;
@@ -379,6 +439,24 @@
       cursor: pointer;
     }
     .modal-msg { margin-top: 14px; font-size: 14px; }
+    .modal-box .divider {
+      text-align: center;
+      color: var(--text2);
+      font-size: 12px;
+      margin: 14px 0;
+      position: relative;
+    }
+    .modal-box .divider::before,
+    .modal-box .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: var(--border);
+    }
+    .modal-box .divider::before { left: 0; }
+    .modal-box .divider::after { right: 0; }
 
     @media (max-width: 600px) {
       .logo { font-size: 30px; }
@@ -387,6 +465,7 @@
       .card-title { font-size: 12px; }
       .section-title { font-size: 18px; }
       .search-area { margin-top: 16px; }
+      .noti-bar { font-size: 12px; padding: 9px 36px 9px 12px; }
     }
     @media (max-width: 400px) {
       .grid { grid-template-columns: repeat(2, 1fr); gap: 14px 8px; }
@@ -394,6 +473,12 @@
   </style>
 </head>
 <body>
+
+  <!-- ===== NOTI BAR ===== -->
+  <div class="noti-bar" id="notiBar" onclick="openModal()">
+    <span id="notiText">🎉 ToonNest မှ ကြိုဆိုပါတယ်! Premium ဝယ်ပြီး Ads ကင်းစင်စွာ ဖတ်ရှုပါ — ၅၀၀၀ ကျပ်</span>
+    <button class="close-noti" onclick="event.stopPropagation(); closeNoti()">×</button>
+  </div>
 
   <header class="header">
     <div class="logo">ToonNest</div>
@@ -453,11 +538,16 @@
     <a class="menu-link" href="#" onclick="closeMenu(); openModal();">👑 Premium</a>
   </div>
 
+  <!-- ===== PREMIUM MODAL ===== -->
   <div class="modal" id="premiumModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">×</button>
       <h2>👑 Premium</h2>
-      <p>Telegram Group မှ ရရှိသော Code ကို ထည့်ပါ။</p>
+      <p>Telegram Channel မှာ ဝယ်ယူနိုင်ပါတယ်။</p>
+      <div class="price-tag">💰 ၅၀၀၀ ကျပ်</div>
+      <a class="tg-btn" href="https://t.me/YOUR_CHANNEL" target="_blank">📲 Telegram မှာ ဝယ်မယ်</a>
+      <div class="divider">သို့မဟုတ်</div>
+      <p style="margin-bottom: 8px;">Code ရပြီးသားဆိုရင် ဒီမှာထည့်ပါ —</p>
       <input type="text" id="premiumCode" placeholder="Code ထည့်ပါ...">
       <button class="btn-submit" onclick="verifyCode()">အတည်ပြုမယ်</button>
       <div class="modal-msg" id="premiumMsg"></div>
@@ -468,6 +558,9 @@
     let manhwaList = [];
     let allManhwa = [];
 
+    // ============================================================
+    // THEME
+    // ============================================================
     function toggleTheme() {
       document.body.classList.toggle('light');
       localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
@@ -476,6 +569,21 @@
       document.body.classList.add('light');
     }
 
+    // ============================================================
+    // NOTI BAR
+    // ============================================================
+    function closeNoti() {
+      document.getElementById('notiBar').classList.add('hide');
+      sessionStorage.setItem('notiClosed', 'true');
+    }
+    // ပိတ်ထားပြီးသားဆိုရင် ပြန်မပြ
+    if (sessionStorage.getItem('notiClosed') === 'true') {
+      document.getElementById('notiBar').classList.add('hide');
+    }
+
+    // ============================================================
+    // PREMIUM (One-Time Lifetime)
+    // ============================================================
     const AVAILABLE_CODES = {
       "PREMIUM-001": true,
       "PREMIUM-002": true,
@@ -525,6 +633,10 @@
     function updateNav() {
       const title = document.getElementById('navTitle');
       title.innerHTML = isPremium() ? 'Home 👑' : 'Home';
+      // Premium ဖြစ်ရင် Noti Bar ကို ဝှက်
+      if (isPremium()) {
+        document.getElementById('notiBar').classList.add('hide');
+      }
     }
 
     function openModal() {
@@ -535,6 +647,24 @@
       document.getElementById('premiumModal').classList.remove('show');
     }
 
+    // ============================================================
+    // ADS — Premium မဟုတ်မှ ပြ
+    // ============================================================
+    function loadAds() {
+      if (isPremium()) return; // Premium User ကို Ads မပြ
+
+      // Monetag Script ကို Premium မဟုတ်မှ Load လုပ်
+      const script = document.createElement('script');
+      script.src = 'https://quge5.com/88/tag.min.js';
+      script.setAttribute('data-zone', '278362');
+      script.async = true;
+      script.setAttribute('data-cfasync', 'false');
+      document.body.appendChild(script);
+    }
+
+    // ============================================================
+    // LOAD MANHWA
+    // ============================================================
     async function loadManhwa() {
       try {
         const res = await fetch('manhwa.json');
@@ -548,6 +678,9 @@
       updateNav();
     }
 
+    // ============================================================
+    // RENDER CARDS
+    // ============================================================
     function createCard(manhwa, showBadge = false) {
       const a = document.createElement('a');
       a.className = 'card';
@@ -616,7 +749,11 @@
       document.getElementById('overlay').classList.remove('show');
     }
 
+    // ============================================================
+    // START
+    // ============================================================
     loadManhwa();
+    loadAds();
 
     document.addEventListener('contextmenu', (e) => {
       if (e.target.tagName === 'IMG') {
