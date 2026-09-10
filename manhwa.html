@@ -200,6 +200,25 @@
     }
 
     // ============================================================
+    // PREMIUM CHECK
+    // ============================================================
+    function isPremium() {
+      return localStorage.getItem('isPremium') === 'true';
+    }
+
+    // ============================================================
+    // ADS — Premium မဟုတ်မှသာ Load လုပ်
+    // ============================================================
+    if (!isPremium()) {
+      const script = document.createElement('script');
+      script.src = 'https://quge5.com/88/tag.min.js';
+      script.setAttribute('data-zone', '278362');
+      script.async = true;
+      script.setAttribute('data-cfasync', 'false');
+      document.body.appendChild(script);
+    }
+
+    // ============================================================
     // NOTI BAR
     // ============================================================
     function closeNoti() {
@@ -209,27 +228,8 @@
     function goPremium() {
       window.location.href = 'index.html';
     }
-    if (sessionStorage.getItem('notiClosed') === 'true' || localStorage.getItem('isPremium') === 'true') {
+    if (sessionStorage.getItem('notiClosed') === 'true' || isPremium()) {
       document.getElementById('notiBar').classList.add('hide');
-    }
-
-    // ============================================================
-    // PREMIUM
-    // ============================================================
-    function isPremium() {
-      return localStorage.getItem('isPremium') === 'true';
-    }
-
-    // ============================================================
-    // ADS — Premium မဟုတ်မှ ပြ
-    // ============================================================
-    if (!isPremium()) {
-      const script = document.createElement('script');
-      script.src = 'https://quge5.com/88/tag.min.js';
-      script.setAttribute('data-zone', '278362');
-      script.async = true;
-      script.setAttribute('data-cfasync', 'false');
-      document.body.appendChild(script);
     }
 
     // ============================================================
