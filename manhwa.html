@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToonNest — Manhwa</title>
-  
+
+  <!-- ===== PROPELLERSADS VERIFICATION ===== -->
+  <meta name="monetag" content="f99801fb32ce2d0608edee279a8b978f">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', Arial, sans-serif; transition: 0.3s; }
@@ -137,24 +140,6 @@
     .chapter-read { color: var(--primary); font-size: 14px; }
     .lock { color: var(--text2); margin-left: 8px; font-size: 13px; }
 
-    /* ===== AD CONTAINER ===== */
-    .ad-container {
-      max-width: 900px;
-      margin: 30px auto 0;
-      padding: 16px;
-      background: var(--bg2);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      text-align: center;
-      min-height: 100px;
-    }
-    .ad-label {
-      font-size: 11px;
-      color: var(--text2);
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-
     @media (max-width: 600px) {
       .info { flex-direction: column; align-items: center; text-align: center; }
       .cover { width: 140px; height: 190px; }
@@ -170,12 +155,6 @@
   </header>
 
   <main class="container" id="main"></main>
-
-  <!-- ===== AD BANNER (အောက်ဆုံး) ===== -->
-  <div class="ad-container">
-    <div class="ad-label">— Sponsored —</div>
-    <script src="https://pl31262426.profitableratecpmnetwork.com/17/ca/e1/17cae1dc36d80253b34f70e83f8b882f.js"></script>
-  </div>
 
   <script>
     if (localStorage.getItem('theme') === 'light') {
@@ -230,9 +209,6 @@
 
     load();
 
-    // ============================================================
-    // PREVENT SAVE
-    // ============================================================
     document.addEventListener('contextmenu', (e) => {
       if (e.target.tagName === 'IMG') {
         e.preventDefault();
