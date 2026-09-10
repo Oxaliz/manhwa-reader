@@ -158,14 +158,14 @@
     }
 
     // ============================================================
-    // PREMIUM
+    // PREMIUM CHECK
     // ============================================================
     function isPremium() {
       return localStorage.getItem('isPremium') === 'true';
     }
 
     // ============================================================
-    // ADS — Premium မဟုတ်မှ ပြ
+    // ADS — Premium မဟုတ်မှသာ Load လုပ်
     // ============================================================
     if (!isPremium()) {
       const script = document.createElement('script');
@@ -290,4 +290,4 @@
   </script>
 
 </body>
-</html>
+  </html>
