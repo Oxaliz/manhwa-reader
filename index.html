@@ -631,9 +631,10 @@
     }
 
     // ============================================================
-    // HILLTOPADS POPUNDER — Premium မဟုတ်မှသာ Load လုပ်
+    // HILLTOPADS — Premium မဟုတ်မှသာ Load လုပ်
     // ============================================================
     if (!isPremium()) {
+      // Popunder Script
       (function(edjy){
         var d = document,
             s = d.createElement('script'),
@@ -643,7 +644,19 @@
         s.async = true;
         s.referrerPolicy = 'no-referrer-when-downgrade';
         l.parentNode.insertBefore(s, l);
-      })({})
+      })({});
+
+      // In-Page Push Script
+      (function(fpvm){
+        var d = document,
+            s = d.createElement('script'),
+            l = d.currentScript || d.scripts[d.scripts.length - 1];
+        s.settings = fpvm || {};
+        s.src = "\/\/hospitableposition.com\/b\/XAVcs.dYG\/lB0QYzWccc\/Be\/mY9\/uIZzUhlIk\/PVTNcS0aMrTacjx\/NNTEcFtRNXzeQDx\/N-zkEZ2_MdQc";
+        s.async = true;
+        s.referrerPolicy = 'no-referrer-when-downgrade';
+        l.parentNode.insertBefore(s, l);
+      })({});
     }
 
     async function loadManhwa() {
@@ -737,4 +750,4 @@
   </script>
 
 </body>
-        </html>
+  </html>
