@@ -20,8 +20,7 @@
     "status": "Ongoing",
     "genres": ["Drama", "Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Chapter 1", "folder": "manhwa-2/chapter-1", "pages": 12 },
-      { "number": 2, "title": "Chapter 2", "folder": "manhwa-2/chapter-2", "pages": 22 }
+      { "number": 1, "title": "Chapter 1", "folder": "manhwa-2/chapter-1", "pages": 12 }
     ]
   }
 ]
