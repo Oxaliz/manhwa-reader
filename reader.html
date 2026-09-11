@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToonNest — Reader</title>
 
-  <!-- ===== GOOGLE SEARCH CONSOLE VERIFICATION ===== -->
   <meta name="google-site-verification" content="YIVcFmhhCDeFFjVW1cz064eiEtNrl0iJ5vnDQ012Iq8" />
-
-  <!-- ===== HILLTOPADS VERIFICATION ===== -->
   <meta name="d9bdb04dc39f3c78e37bf558f15df61458f35181" content="d9bdb04dc39f3c78e37bf558f15df61458f35181" />
 
   <style>
@@ -94,10 +91,11 @@
       border-radius: 12px;
       border: 1px solid var(--border);
       text-align: center;
-      min-height: 90px;
+      min-height: 250px;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .bottom-nav {
@@ -156,6 +154,22 @@
 
   <div class="chapter-title" id="chapterTitle">Loading...</div>
 
+  <!-- ===== TOP BANNER AD (HTML ထဲမှာ တိုက်ရိုက်) ===== -->
+  <div id="topBannerAd" class="ad-container" style="display:none;">
+    <script>
+      (function(onx){
+        var d = document,
+            s = d.createElement('script'),
+            l = d.currentScript || d.scripts[d.scripts.length - 1];
+        s.settings = onx || {};
+        s.src = "\/\/hospitableposition.com\/bpXmVSsMd.Gbl\/0IYiWxcx\/pemm\/9FuMZ\/UjleklPHTYcK0FMFT_cUxWOxD\/UYtzNqzJQ\/xQNZztEz4BO\/Qr";
+        s.async = true;
+        s.referrerPolicy = 'no-referrer-when-downgrade';
+        l.parentNode.insertBefore(s, l);
+      })({});
+    </script>
+  </div>
+
   <div class="reader" id="reader"></div>
 
   <div class="bottom-nav">
@@ -203,18 +217,6 @@
         s.referrerPolicy = 'no-referrer-when-downgrade';
         l.parentNode.insertBefore(s, l);
       })({});
-
-      // Banner 300x250 Script (Reader Page အတွက်)
-      (function(onx){
-        var d = document,
-            s = d.createElement('script'),
-            l = d.currentScript || d.scripts[d.scripts.length - 1];
-        s.settings = onx || {};
-        s.src = "\/\/hospitableposition.com\/bpXmVSsMd.Gbl\/0IYiWxcx\/pemm\/9FuMZ\/UjleklPHTYcK0FMFT_cUxWOxD\/UYtzNqzJQ\/xQNZztEz4BO\/Qr";
-        s.async = true;
-        s.referrerPolicy = 'no-referrer-when-downgrade';
-        l.parentNode.insertBefore(s, l);
-      })({});
     }
 
     async function load() {
@@ -258,6 +260,14 @@
       const ch = chapters[currentIndex];
       document.getElementById('chapterTitle').textContent = ch.title;
 
+      // ===== Banner Ad ပြ / ဝှက် =====
+      const adBox = document.getElementById('topBannerAd');
+      if (!isPremium()) {
+        adBox.style.display = 'flex';
+      } else {
+        adBox.style.display = 'none';
+      }
+
       const reader = document.getElementById('reader');
       reader.innerHTML = '';
 
@@ -269,26 +279,6 @@
         img.draggable = false;
         img.oncontextmenu = () => false;
         reader.appendChild(img);
-
-        // ===== AD BANNER — ပုံ ၅ ပုံတိုင်း =====
-        if (!isPremium() && i % 5 === 0 && i < ch.pages) {
-          const adDiv = document.createElement('div');
-          adDiv.className = 'ad-container';
-          adDiv.innerHTML = '<div id="banner-ad-' + i + '"></div>';
-          reader.appendChild(adDiv);
-
-          // Banner Script ကို Load လုပ်
-          (function(onx){
-            var d = document,
-                s = d.createElement('script'),
-                l = d.currentScript || d.scripts[d.scripts.length - 1];
-            s.settings = onx || {};
-            s.src = "\/\/hospitableposition.com\/bpXmVSsMd.Gbl\/0IYiWxcx\/pemm\/9FuMZ\/UjleklPHTYcK0FMFT_cUxWOxD\/UYtzNqzJQ\/xQNZztEz4BO\/Qr";
-            s.async = true;
-            s.referrerPolicy = 'no-referrer-when-downgrade';
-            l.parentNode.insertBefore(s, l);
-          })({});
-        }
       }
 
       updateButtons();
