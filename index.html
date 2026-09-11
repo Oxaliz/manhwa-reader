@@ -9,8 +9,8 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://manhwa-reader.oxaliz69.workers.dev/">
 
-  <!-- ===== PROPELLERSADS VERIFICATION ===== -->
-  <meta name="monetag" content="f99801fb32ce2d0608edee279a8b978f">
+  <!-- ===== HILLTOPADS VERIFICATION ===== -->
+  <meta name="d9bdb04dc39f3c78e37bf558f15df61458f35181" content="d9bdb04dc39f3c78e37bf558f15df61458f35181" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="ToonNest — Read Manhwa Online Free">
@@ -533,7 +533,6 @@
     <a class="menu-link" href="https://t.me/toon_nest" target="_blank">📲 Telegram Channel</a>
   </div>
 
-  <!-- ===== PREMIUM MODAL ===== -->
   <div class="modal" id="premiumModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">×</button>
@@ -553,9 +552,6 @@
     let manhwaList = [];
     let allManhwa = [];
 
-    // ============================================================
-    // THEME
-    // ============================================================
     function toggleTheme() {
       document.body.classList.toggle('light');
       localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
@@ -564,9 +560,6 @@
       document.body.classList.add('light');
     }
 
-    // ============================================================
-    // NOTI BAR
-    // ============================================================
     function closeNoti() {
       document.getElementById('notiBar').classList.add('hide');
       sessionStorage.setItem('notiClosed', 'true');
@@ -575,9 +568,6 @@
       document.getElementById('notiBar').classList.add('hide');
     }
 
-    // ============================================================
-    // PREMIUM (One-Time Lifetime)
-    // ============================================================
     const AVAILABLE_CODES = {
       "PREMIUM-001": true,
       "PREMIUM-002": true,
@@ -640,23 +630,6 @@
       document.getElementById('premiumModal').classList.remove('show');
     }
 
-    // ============================================================
-    // ADS — Premium မဟုတ်မှ ပြ
-    // ============================================================
-    function loadAds() {
-      if (isPremium()) return;
-
-      const script = document.createElement('script');
-      script.src = 'https://quge5.com/88/tag.min.js';
-      script.setAttribute('data-zone', '278362');
-      script.async = true;
-      script.setAttribute('data-cfasync', 'false');
-      document.body.appendChild(script);
-    }
-
-    // ============================================================
-    // LOAD MANHWA
-    // ============================================================
     async function loadManhwa() {
       try {
         const res = await fetch('manhwa.json');
@@ -738,11 +711,7 @@
       document.getElementById('overlay').classList.remove('show');
     }
 
-    // ============================================================
-    // START
-    // ============================================================
     loadManhwa();
-    loadAds();
 
     document.addEventListener('contextmenu', (e) => {
       if (e.target.tagName === 'IMG') {
