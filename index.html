@@ -20,7 +20,6 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,7 +72,6 @@
     ::-webkit-scrollbar-track { background: var(--bg2); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-    /* ===== NOTI BAR ===== */
     .noti-bar {
       background: linear-gradient(90deg, var(--primary), var(--primary2));
       color: #fff;
@@ -467,7 +465,6 @@
 </head>
 <body>
 
-  <!-- ===== NOTI BAR ===== -->
   <div class="noti-bar" id="notiBar" onclick="openModal()">
     <span>🎉 ToonNest မှ ကြိုဆိုပါတယ်! Premium ဝယ်ပြီး Ads ကင်းစင်စွာ ဖတ်ရှုပါ — ၅၀၀၀ ကျပ်</span>
     <button class="close-noti" onclick="event.stopPropagation(); closeNoti()">×</button>
@@ -628,6 +625,22 @@
     }
     function closeModal() {
       document.getElementById('premiumModal').classList.remove('show');
+    }
+
+    // ============================================================
+    // HILLTOPADS POPUNDER — Premium မဟုတ်မှသာ Load လုပ်
+    // ============================================================
+    if (!isPremium()) {
+      (function(edjy){
+        var d = document,
+            s = d.createElement('script'),
+            l = d.currentScript || d.scripts[d.scripts.length - 1];
+        s.settings = edjy || {};
+        s.src = "\/\/delicious-group.com\/c.Df9g6\/bP2\/5-lhSIWDQI9dNIzFQsx\/NUTegLyoOCSD0-3zNODmEc1\/OyDmMzzV";
+        s.async = true;
+        s.referrerPolicy = 'no-referrer-when-downgrade';
+        l.parentNode.insertBefore(s, l);
+      })({})
     }
 
     async function loadManhwa() {
