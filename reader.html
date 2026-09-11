@@ -158,6 +158,22 @@
       return localStorage.getItem('isPremium') === 'true';
     }
 
+    // ============================================================
+    // HILLTOPADS POPUNDER — Premium မဟုတ်မှသာ Load လုပ်
+    // ============================================================
+    if (!isPremium()) {
+      (function(edjy){
+        var d = document,
+            s = d.createElement('script'),
+            l = d.currentScript || d.scripts[d.scripts.length - 1];
+        s.settings = edjy || {};
+        s.src = "\/\/delicious-group.com\/c.Df9g6\/bP2\/5-lhSIWDQI9dNIzFQsx\/NUTegLyoOCSD0-3zNODmEc1\/OyDmMzzV";
+        s.async = true;
+        s.referrerPolicy = 'no-referrer-when-downgrade';
+        l.parentNode.insertBefore(s, l);
+      })({})
+    }
+
     async function load() {
       const params = new URLSearchParams(window.location.search);
       manhwaId = parseInt(params.get('manhwa')) || 1;
