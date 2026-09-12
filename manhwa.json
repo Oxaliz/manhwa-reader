@@ -85,5 +85,17 @@
     "chapters": [
       { "number": 1, "title": "Completed", "content": "novel-5/chapter-1.txt" }
     ]
-   }
+   },
+  {
+    "id": 105,
+    "type": "novel",
+    "title": "ဒေါ်လေးမြတ်",
+    "cover": "covers/novel-6.jpg",
+    "description": "A beautiful fantasy novel with adventure.",
+    "status": "Completed",
+    "genres": ["Romance", "Mature"],
+    "chapters": [
+      { "number": 1, "title": "Completed", "content": "novel-6/chapter-1.txt" }
+    ]
+  }
     ]
