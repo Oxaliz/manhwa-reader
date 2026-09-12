@@ -3,225 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToonNest — Read Manhwa Online Free</title>
-  <meta name="description" content="ToonNest is the best place to read manhwa online for free. Read your favorite manhwa chapters in high quality. Updated daily!">
-  <meta name="keywords" content="manhwa, read manhwa, manhwa reader, manhwa online, ToonNest, manhwa free, webtoon">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://manhwa-reader.oxaliz69.workers.dev/">
-
-  <!-- ===== GOOGLE SEARCH CONSOLE VERIFICATION ===== -->
+  <title>ToonNest — Read Manhwa & Novel Free</title>
+  <meta name="description" content="Read manhwa and novels online for free at ToonNest.">
   <meta name="google-site-verification" content="YIVcFmhhCDeFFjVW1cz064eiEtNrl0iJ5vnDQ012Iq8" />
-
-  <!-- ===== HILLTOPADS VERIFICATION ===== -->
   <meta name="d9bdb04dc39f3c78e37bf558f15df61458f35181" content="d9bdb04dc39f3c78e37bf558f15df61458f35181" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="ToonNest — Read Manhwa Online Free">
-  <meta property="og:description" content="Read your favorite manhwa online for free at ToonNest. Updated daily with new chapters!">
-  <meta property="og:image" content="https://manhwa-reader.oxaliz69.workers.dev/covers/og-image.jpg">
-  <meta property="og:url" content="https://manhwa-reader.oxaliz69.workers.dev/">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "ToonNest",
-    "url": "https://manhwa-reader.oxaliz69.workers.dev/",
-    "description": "Read manhwa online for free. ToonNest offers a wide collection of manhwa with daily updates.",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://manhwa-reader.oxaliz69.workers.dev/?search={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      transition: 0.3s;
-      user-select: none;
-    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; transition: 0.3s; user-select: none; }
     :root {
-      --bg: #0b0b0f;
-      --bg2: #12121a;
-      --bg3: #1a1a28;
-      --border: #2a2a3a;
-      --text: #eee;
-      --text2: #aaa;
-      --primary: #ff6b8a;
-      --primary2: #d98ac8;
-      --shadow: rgba(255,107,138,0.15);
-      --radius: 16px;
-      --transition: 0.3s ease;
+      --bg: #0b0b0f; --bg2: #12121a; --bg3: #1a1a28;
+      --border: #2a2a3a; --text: #eee; --text2: #aaa;
+      --primary: #ff6b8a; --primary2: #d98ac8;
+      --shadow: rgba(255,107,138,0.15); --radius: 16px;
     }
     .light {
-      --bg: #f5f0f7;
-      --bg2: #ffffff;
-      --bg3: #f0ebf2;
-      --border: #ddd;
-      --text: #222;
-      --text2: #555;
+      --bg: #f5f0f7; --bg2: #ffffff; --bg3: #f0ebf2;
+      --border: #ddd; --text: #222; --text2: #555;
       --shadow: rgba(0,0,0,0.08);
     }
     body { background: var(--bg); color: var(--text); }
-
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg2); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
     .noti-bar {
       background: linear-gradient(90deg, var(--primary), var(--primary2));
-      color: #fff;
-      text-align: center;
-      padding: 10px 40px 10px 15px;
-      font-size: 13px;
-      font-weight: 600;
-      position: relative;
-      display: block;
+      color: #fff; text-align: center; padding: 10px 40px 10px 15px;
+      font-size: 13px; font-weight: 600; position: relative;
       cursor: pointer;
-      transition: 0.3s;
     }
-    .noti-bar:hover { filter: brightness(1.1); }
     .noti-bar.hide { display: none; }
     .noti-bar .close-noti {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      line-height: 1;
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: #fff; font-size: 18px; cursor: pointer;
     }
 
     .header {
       background: linear-gradient(135deg, #1a0b1f, #2d1b33);
-      padding: 28px 20px 18px;
-      text-align: center;
+      padding: 28px 20px 18px; text-align: center;
       border-bottom: 2px solid var(--primary);
     }
     .logo {
-      font-size: 38px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
+      font-size: 38px; font-weight: 900;
       background: linear-gradient(90deg, var(--primary), var(--primary2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
     .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background: var(--bg2);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px; background: var(--bg2);
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      flex-wrap: wrap;
-      gap: 8px;
-      backdrop-filter: blur(8px);
+      position: sticky; top: 0; z-index: 100;
+      flex-wrap: wrap; gap: 8px;
     }
     .nav-left { display: flex; align-items: center; gap: 12px; }
-    .menu-btn {
-      background: none; border: none; color: var(--text); font-size: 26px;
-      cursor: pointer; transition: var(--transition);
-    }
-    .menu-btn:hover { color: var(--primary); }
-    .nav-title {
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--text);
-      background: var(--bg3);
-      padding: 4px 14px;
-      border-radius: 30px;
-    }
-    .nav-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .menu-btn { background: none; border: none; color: var(--text); font-size: 26px; cursor: pointer; }
+    .nav-title { font-weight: 600; font-size: 15px; background: var(--bg3); padding: 4px 14px; border-radius: 30px; }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
     .premium-btn {
       background: linear-gradient(135deg, var(--primary), var(--primary2));
-      border: none;
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 4px 15px rgba(255,107,138,0.3);
+      border: none; color: #fff; padding: 8px 18px; border-radius: 30px;
+      font-weight: 700; font-size: 13px; cursor: pointer;
     }
-    .premium-btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255,107,138,0.5); }
     .theme-btn {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 12px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: var(--transition);
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text); padding: 8px 12px; border-radius: 30px;
+      cursor: pointer; font-size: 16px;
     }
-    .theme-btn:hover { border-color: var(--primary); }
+
+    /* ===== TABS ===== */
+    .tabs {
+      max-width: 1100px; margin: 20px auto 0; padding: 0 15px;
+      display: flex; gap: 8px;
+    }
+    .tab-btn {
+      flex: 1; padding: 12px 20px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 30px; color: var(--text);
+      font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--primary); }
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: #fff; border-color: transparent;
+    }
 
     .search-area {
-      max-width: 1100px;
-      margin: 24px auto 0;
-      padding: 0 15px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      max-width: 1100px; margin: 16px auto 0; padding: 0 15px;
+      display: flex; flex-wrap: wrap; gap: 10px;
     }
     .search {
-      flex: 1;
-      min-width: 200px;
-      padding: 14px 20px;
-      border-radius: 40px;
-      border: 1px solid var(--border);
-      background: var(--bg2);
-      color: var(--text);
-      font-size: 15px;
-      outline: none;
-      transition: var(--transition);
+      flex: 1; min-width: 200px; padding: 14px 20px;
+      border-radius: 40px; border: 1px solid var(--border);
+      background: var(--bg2); color: var(--text); font-size: 15px; outline: none;
     }
-    .search:focus { border-color: var(--primary); box-shadow: 0 0 30px var(--shadow); }
+    .search:focus { border-color: var(--primary); }
     .filter-select {
-      padding: 14px 20px;
-      border-radius: 40px;
-      border: 1px solid var(--border);
-      background: var(--bg2);
-      color: var(--text);
-      font-size: 14px;
-      outline: none;
-      cursor: pointer;
-      transition: var(--transition);
+      padding: 14px 20px; border-radius: 40px;
+      border: 1px solid var(--border); background: var(--bg2);
+      color: var(--text); font-size: 14px; outline: none; cursor: pointer;
     }
-    .filter-select:focus { border-color: var(--primary); }
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 30px 15px 40px;
-    }
+    .container { max-width: 1100px; margin: auto; padding: 30px 15px 40px; }
     .section { margin-top: 30px; }
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .section-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text);
-    }
+    .section-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
     .section-title span { color: var(--primary); }
 
     .grid {
@@ -231,14 +118,9 @@
     }
 
     .card {
-      background: var(--bg2);
-      border-radius: var(--radius);
-      overflow: hidden;
-      text-decoration: none;
-      color: var(--text);
-      transition: var(--transition);
-      border: 1px solid var(--border);
-      position: relative;
+      background: var(--bg2); border-radius: var(--radius);
+      overflow: hidden; text-decoration: none; color: var(--text);
+      transition: 0.3s; border: 1px solid var(--border); position: relative;
     }
     .card:hover {
       transform: translateY(-8px);
@@ -246,223 +128,122 @@
       box-shadow: 0 12px 40px var(--shadow);
     }
     .card-cover {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      display: block;
-      background: var(--bg3);
-      pointer-events: none;
-      -webkit-user-drag: none;
-      user-drag: none;
+      width: 100%; aspect-ratio: 2/3; object-fit: cover;
+      display: block; background: var(--bg3);
+      pointer-events: none; -webkit-user-drag: none;
     }
-    .card-body { padding: 12px 12px 14px; }
+    .card-body { padding: 12px; }
     .card-title {
-      font-size: 14px;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 14px; font-weight: 600;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .card-genre {
-      font-size: 11px;
-      color: var(--text2);
-      margin-top: 4px;
-    }
+    .card-genre { font-size: 11px; color: var(--text2); margin-top: 4px; }
     .badge-latest {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: var(--primary);
-      color: #fff;
-      font-size: 9px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.5px;
+      position: absolute; top: 10px; left: 10px;
+      background: var(--primary); color: #fff;
+      font-size: 9px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .badge-type {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(0,0,0,0.6); color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 4px 10px; border-radius: 20px;
+      backdrop-filter: blur(4px);
     }
 
     .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      z-index: 200;
-      display: none;
-      backdrop-filter: blur(4px);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      z-index: 200; display: none;
     }
     .overlay.show { display: block; }
     .menu-panel {
-      position: fixed;
-      top: 0;
-      left: -300px;
-      width: 280px;
-      height: 100vh;
-      background: var(--bg2);
-      z-index: 300;
-      padding: 30px 20px;
-      transition: 0.3s;
-      border-right: 1px solid var(--border);
+      position: fixed; top: 0; left: -300px; width: 280px; height: 100vh;
+      background: var(--bg2); z-index: 300; padding: 30px 20px;
+      transition: 0.3s; border-right: 1px solid var(--border);
     }
     .menu-panel.open { left: 0; }
     .menu-close {
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 28px;
-      float: right;
-      cursor: pointer;
+      background: none; border: none; color: var(--text);
+      font-size: 28px; float: right; cursor: pointer;
     }
     .menu-logo {
-      font-size: 28px;
-      font-weight: 900;
+      font-size: 28px; font-weight: 900;
       background: linear-gradient(90deg, var(--primary), var(--primary2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 30px 0 30px;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 30px 0;
     }
     .menu-link {
-      display: block;
-      padding: 14px 6px;
+      display: block; padding: 14px 6px;
       border-bottom: 1px solid var(--border);
-      color: var(--text);
-      text-decoration: none;
-      font-size: 15px;
-      transition: var(--transition);
+      color: var(--text); text-decoration: none; font-size: 15px;
     }
-    .menu-link:hover { color: var(--primary); padding-left: 10px; }
+    .menu-link:hover { color: var(--primary); }
 
     .footer {
-      text-align: center;
-      padding: 24px 15px;
+      text-align: center; padding: 24px 15px;
       border-top: 1px solid var(--border);
-      color: var(--text2);
-      font-size: 13px;
-      background: var(--bg2);
+      color: var(--text2); font-size: 13px; background: var(--bg2);
     }
     .footer span { color: var(--primary); }
     .footer a { color: var(--primary); text-decoration: none; }
 
-    .empty {
-      grid-column: 1/-1;
-      text-align: center;
-      color: var(--text2);
-      padding: 50px 10px;
-    }
+    .empty { grid-column: 1/-1; text-align: center; color: var(--text2); padding: 50px; }
 
     .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 500;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      backdrop-filter: blur(4px);
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); z-index: 500;
+      align-items: center; justify-content: center; padding: 20px;
     }
     .modal.show { display: flex; }
     .modal-box {
-      background: var(--bg2);
-      max-width: 460px;
-      width: 100%;
-      padding: 35px 30px;
-      border-radius: 24px;
+      background: var(--bg2); max-width: 460px; width: 100%;
+      padding: 35px 30px; border-radius: 24px;
       border: 1px solid var(--border);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
     .modal-box h2 { color: var(--primary); margin-bottom: 8px; }
-    .modal-box p { color: var(--text2); margin-bottom: 14px; font-size: 14px; line-height: 1.6; }
-    .modal-box .price-tag {
+    .modal-box p { color: var(--text2); margin-bottom: 14px; font-size: 14px; }
+    .price-tag {
       display: inline-block;
       background: linear-gradient(135deg, var(--primary), var(--primary2));
-      color: #fff;
-      padding: 6px 18px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 16px;
+      color: #fff; padding: 6px 18px; border-radius: 30px;
+      font-weight: 700; font-size: 16px; margin-bottom: 14px;
+    }
+    .tg-btn {
+      display: block; width: 100%; padding: 14px;
+      background: #229ED9; border: none; border-radius: 40px;
+      color: #fff; font-weight: 700; font-size: 15px;
+      cursor: pointer; text-decoration: none; text-align: center;
       margin-bottom: 14px;
     }
-    .modal-box .tg-btn {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      background: #229ED9;
-      border: none;
-      border-radius: 40px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      margin-bottom: 14px;
-      transition: var(--transition);
-    }
-    .modal-box .tg-btn:hover { opacity: 0.9; transform: scale(1.02); }
     .modal-box input {
-      width: 100%;
-      padding: 14px 20px;
-      border-radius: 40px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 15px;
-      outline: none;
+      width: 100%; padding: 14px 20px; border-radius: 40px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text); font-size: 15px; outline: none;
       margin-bottom: 14px;
-      transition: var(--transition);
     }
-    .modal-box input:focus { border-color: var(--primary); }
-    .modal-box .btn-submit {
-      width: 100%;
-      padding: 14px;
+    .btn-submit {
+      width: 100%; padding: 14px;
       background: linear-gradient(135deg, var(--primary), var(--primary2));
-      border: none;
-      border-radius: 40px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      transition: var(--transition);
+      border: none; border-radius: 40px; color: #fff;
+      font-weight: 700; font-size: 16px; cursor: pointer;
     }
-    .modal-box .btn-submit:hover { opacity: 0.9; transform: scale(1.02); }
     .modal-close {
-      float: right;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 28px;
-      cursor: pointer;
+      float: right; background: none; border: none;
+      color: var(--text); font-size: 28px; cursor: pointer;
     }
     .modal-msg { margin-top: 14px; font-size: 14px; }
-    .modal-box .divider {
-      text-align: center;
-      color: var(--text2);
-      font-size: 12px;
-      margin: 14px 0;
-      position: relative;
+    .divider {
+      text-align: center; color: var(--text2);
+      font-size: 12px; margin: 14px 0;
     }
-    .modal-box .divider::before,
-    .modal-box .divider::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 40%;
-      height: 1px;
-      background: var(--border);
-    }
-    .modal-box .divider::before { left: 0; }
-    .modal-box .divider::after { right: 0; }
 
     @media (max-width: 600px) {
       .logo { font-size: 30px; }
       .grid { grid-template-columns: repeat(3, 1fr); gap: 16px 10px; }
-      .card-body { padding: 8px 8px 10px; }
+      .card-body { padding: 8px; }
       .card-title { font-size: 12px; }
       .section-title { font-size: 18px; }
-      .search-area { margin-top: 16px; }
-      .noti-bar { font-size: 12px; padding: 9px 36px 9px 12px; }
-    }
-    @media (max-width: 400px) {
-      .grid { grid-template-columns: repeat(2, 1fr); gap: 14px 8px; }
     }
   </style>
 </head>
@@ -483,13 +264,20 @@
       <span class="nav-title" id="navTitle">Home</span>
     </div>
     <div class="nav-right">
-      <button class="theme-btn" onclick="toggleTheme()" title="Dark/Light Mode">🌓</button>
+      <button class="theme-btn" onclick="toggleTheme()">🌓</button>
       <button class="premium-btn" onclick="openModal()">👑 Premium</button>
     </div>
   </nav>
 
+  <!-- ===== TABS ===== -->
+  <div class="tabs">
+    <button class="tab-btn active" id="tabAll" onclick="switchTab('all')">📚 All</button>
+    <button class="tab-btn" id="tabManhwa" onclick="switchTab('manhwa')">🎨 Manhwa</button>
+    <button class="tab-btn" id="tabNovel" onclick="switchTab('novel')">📖 Novel</button>
+  </div>
+
   <div class="search-area">
-    <input class="search" id="searchInput" type="text" placeholder="🔍 Search Manhwa..." oninput="filterAll()">
+    <input class="search" id="searchInput" type="text" placeholder="🔍 Search..." oninput="filterAll()">
     <select class="filter-select" id="genreFilter" onchange="filterAll()">
       <option value="all">All Genres</option>
       <option value="Action">Action</option>
@@ -498,21 +286,18 @@
       <option value="Horror">Horror</option>
       <option value="Comedy">Comedy</option>
       <option value="Drama">Drama</option>
+      <option value="Adventure">Adventure</option>
     </select>
   </div>
 
   <main class="container">
     <section class="section">
-      <div class="section-head">
-        <div class="section-title">🆕 <span>Latest</span> Updates</div>
-      </div>
+      <div class="section-title">🆕 <span>Latest</span> Updates</div>
       <div class="grid" id="latestGrid"></div>
     </section>
 
     <section class="section">
-      <div class="section-head">
-        <div class="section-title">📚 <span>All</span> Manhwa</div>
-      </div>
+      <div class="section-title">📚 <span>All</span> Titles</div>
       <div class="grid" id="allGrid"></div>
     </section>
   </main>
@@ -527,8 +312,8 @@
     <button class="menu-close" onclick="closeMenu()">×</button>
     <div class="menu-logo">ToonNest</div>
     <a class="menu-link" href="index.html">🏠 Home</a>
-    <a class="menu-link" href="#" onclick="closeMenu(); document.getElementById('latestGrid').scrollIntoView({behavior:'smooth'});">🆕 Latest</a>
-    <a class="menu-link" href="#" onclick="closeMenu(); document.getElementById('allGrid').scrollIntoView({behavior:'smooth'});">📚 All Manhwa</a>
+    <a class="menu-link" href="#" onclick="closeMenu(); switchTab('manhwa');">🎨 Manhwa</a>
+    <a class="menu-link" href="#" onclick="closeMenu(); switchTab('novel');">📖 Novel</a>
     <a class="menu-link" href="#" onclick="closeMenu(); openModal();">👑 Premium</a>
     <a class="menu-link" href="https://t.me/toon_nest" target="_blank">📲 Telegram Channel</a>
   </div>
@@ -540,8 +325,7 @@
       <p>Telegram Channel မှာ ဝယ်ယူနိုင်ပါတယ်။</p>
       <div class="price-tag">💰 ၅၀၀၀ ကျပ် (Lifetime)</div>
       <a class="tg-btn" href="https://t.me/toon_nest" target="_blank">📲 Telegram မှာ ဝယ်မယ်</a>
-      <div class="divider">သို့မဟုတ်</div>
-      <p style="margin-bottom: 8px;">Code ရပြီးသားဆိုရင် ဒီမှာထည့်ပါ —</p>
+      <div class="divider">— သို့မဟုတ် —</div>
       <input type="text" id="premiumCode" placeholder="Code ထည့်ပါ...">
       <button class="btn-submit" onclick="verifyCode()">အတည်ပြုမယ်</button>
       <div class="modal-msg" id="premiumMsg"></div>
@@ -551,15 +335,16 @@
   <script>
     let manhwaList = [];
     let allManhwa = [];
+    let currentTab = 'all';
 
+    // THEME
     function toggleTheme() {
       document.body.classList.toggle('light');
       localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     }
-    if (localStorage.getItem('theme') === 'light') {
-      document.body.classList.add('light');
-    }
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
 
+    // NOTI
     function closeNoti() {
       document.getElementById('notiBar').classList.add('hide');
       sessionStorage.setItem('notiClosed', 'true');
@@ -568,60 +353,34 @@
       document.getElementById('notiBar').classList.add('hide');
     }
 
+    // PREMIUM
     const AVAILABLE_CODES = {
-      "PREMIUM-001": true,
-      "PREMIUM-002": true,
-      "PREMIUM-003": true,
-      "TEAM-2026": true
+      "PREMIUM-001": true, "PREMIUM-002": true,
+      "PREMIUM-003": true, "TEAM-2026": true
     };
-
     function isCodeUsed(code) {
-      const usedCodes = JSON.parse(localStorage.getItem('usedCodes') || '[]');
-      return usedCodes.includes(code);
+      const used = JSON.parse(localStorage.getItem('usedCodes') || '[]');
+      return used.includes(code);
     }
-
     function markCodeAsUsed(code) {
-      const usedCodes = JSON.parse(localStorage.getItem('usedCodes') || '[]');
-      usedCodes.push(code);
-      localStorage.setItem('usedCodes', JSON.stringify(usedCodes));
+      const used = JSON.parse(localStorage.getItem('usedCodes') || '[]');
+      used.push(code);
+      localStorage.setItem('usedCodes', JSON.stringify(used));
     }
-
     function isPremium() {
       return localStorage.getItem('isPremium') === 'true';
     }
-
     function verifyCode() {
       const input = document.getElementById('premiumCode').value.trim();
       const msg = document.getElementById('premiumMsg');
-
-      if (!AVAILABLE_CODES[input]) {
-        msg.style.color = '#ff6b8a';
-        msg.textContent = '❌ Code မှားနေပါသည်။';
-        return;
-      }
-
-      if (isCodeUsed(input)) {
-        msg.style.color = '#ff6b8a';
-        msg.textContent = '❌ ဒီ Code ကို သုံးပြီးပါပြီ။';
-        return;
-      }
-
+      if (!AVAILABLE_CODES[input]) { msg.style.color = '#ff6b8a'; msg.textContent = '❌ Code မှားနေပါသည်။'; return; }
+      if (isCodeUsed(input)) { msg.style.color = '#ff6b8a'; msg.textContent = '❌ ဒီ Code ကို သုံးပြီးပါပြီ။'; return; }
       localStorage.setItem('isPremium', 'true');
       markCodeAsUsed(input);
-
       msg.style.color = '#4caf50';
-      msg.textContent = '✅ အောင်မြင်ပါပြီ! (Lifetime Premium)';
+      msg.textContent = '✅ အောင်မြင်ပါပြီ!';
       setTimeout(() => { closeModal(); location.reload(); }, 1200);
     }
-
-    function updateNav() {
-      const title = document.getElementById('navTitle');
-      title.innerHTML = isPremium() ? 'Home 👑' : 'Home';
-      if (isPremium()) {
-        document.getElementById('notiBar').classList.add('hide');
-      }
-    }
-
     function openModal() {
       document.getElementById('premiumModal').classList.add('show');
       document.getElementById('premiumMsg').textContent = '';
@@ -630,64 +389,69 @@
       document.getElementById('premiumModal').classList.remove('show');
     }
 
-    // ============================================================
-    // HILLTOPADS — Premium မဟုတ်မှသာ Load လုပ်
-    // ============================================================
+    // ADS — Premium မဟုတ်မှ
     if (!isPremium()) {
-      // Popunder Script
       (function(edjy){
-        var d = document,
-            s = d.createElement('script'),
+        var d = document, s = d.createElement('script'),
             l = d.currentScript || d.scripts[d.scripts.length - 1];
         s.settings = edjy || {};
         s.src = "\/\/delicious-group.com\/c.Df9g6\/bP2\/5-lhSIWDQI9dNIzFQsx\/NUTegLyoOCSD0-3zNODmEc1\/OyDmMzzV";
         s.async = true;
-        s.referrerPolicy = 'no-referrer-when-downgrade';
         l.parentNode.insertBefore(s, l);
       })({});
-
-      // In-Page Push Script
       (function(fpvm){
-        var d = document,
-            s = d.createElement('script'),
+        var d = document, s = d.createElement('script'),
             l = d.currentScript || d.scripts[d.scripts.length - 1];
         s.settings = fpvm || {};
         s.src = "\/\/hospitableposition.com\/b\/XAVcs.dYG\/lB0QYzWccc\/Be\/mY9\/uIZzUhlIk\/PVTNcS0aMrTacjx\/NNTEcFtRNXzeQDx\/N-zkEZ2_MdQc";
         s.async = true;
-        s.referrerPolicy = 'no-referrer-when-downgrade';
         l.parentNode.insertBefore(s, l);
       })({});
     }
 
+    // TABS
+    function switchTab(type) {
+      currentTab = type;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab' + type.charAt(0).toUpperCase() + type.slice(1)).classList.add('active');
+      filterAll();
+    }
+
+    // LOAD
     async function loadManhwa() {
       try {
         const res = await fetch('manhwa.json');
         manhwaList = await res.json();
         allManhwa = [...manhwaList];
         renderLatest();
-        renderAll();
+        filterAll();
       } catch {
         document.getElementById('latestGrid').innerHTML = `<div class="empty">⚠️ ဒေတာမရှိပါ</div>`;
       }
-      updateNav();
+      document.getElementById('navTitle').innerHTML = isPremium() ? 'Home 👑' : 'Home';
     }
 
-    function createCard(manhwa, showBadge = false) {
+    // CARD
+    function createCard(item, showBadge = false) {
       const a = document.createElement('a');
       a.className = 'card';
-      a.href = `manhwa.html?id=${manhwa.id}`;
+      a.href = item.type === 'novel' 
+        ? `novel.html?id=${item.id}` 
+        : `manhwa.html?id=${item.id}`;
 
       let badge = '';
-      if (showBadge) {
-        badge = `<span class="badge-latest">LATEST</span>`;
-      }
+      if (showBadge) badge = `<span class="badge-latest">LATEST</span>`;
+      const typeBadge = item.type === 'novel' 
+        ? `<span class="badge-type">📖 Novel</span>` 
+        : `<span class="badge-type">🎨 Manhwa</span>`;
 
       a.innerHTML = `
         ${badge}
-        <img class="card-cover" src="${manhwa.cover}" alt="${manhwa.title}" loading="lazy" draggable="false" oncontextmenu="return false">
+        ${typeBadge}
+        <img class="card-cover" src="${item.cover}" alt="${item.title}" loading="lazy" draggable="false" oncontextmenu="return false">
         <div class="card-body">
-          <div class="card-title">${manhwa.title}</div>
-          <div class="card-genre">${manhwa.genres ? manhwa.genres.slice(0,2).join(' • ') : ''}</div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-genre">${item.genres ? item.genres.slice(0,2).join(' • ') : ''}</div>
         </div>
       `;
       return a;
@@ -697,17 +461,7 @@
       const grid = document.getElementById('latestGrid');
       grid.innerHTML = '';
       const latest = manhwaList.slice().reverse().slice(0, 6);
-      latest.forEach((m, i) => {
-        grid.appendChild(createCard(m, i === 0));
-      });
-    }
-
-    function renderAll() {
-      const grid = document.getElementById('allGrid');
-      grid.innerHTML = '';
-      manhwaList.forEach(m => {
-        grid.appendChild(createCard(m, false));
-      });
+      latest.forEach((m, i) => grid.appendChild(createCard(m, i === 0)));
     }
 
     function filterAll() {
@@ -717,7 +471,8 @@
       let filtered = allManhwa.filter(m => {
         const matchTitle = m.title.toLowerCase().includes(keyword);
         const matchGenre = genre === 'all' || (m.genres && m.genres.includes(genre));
-        return matchTitle && matchGenre;
+        const matchType = currentTab === 'all' || m.type === currentTab;
+        return matchTitle && matchGenre && matchType;
       });
 
       const grid = document.getElementById('allGrid');
@@ -726,9 +481,7 @@
         grid.innerHTML = `<div class="empty">🔍 ရှာမတွေ့ပါ</div>`;
         return;
       }
-      filtered.forEach(m => {
-        grid.appendChild(createCard(m, false));
-      });
+      filtered.forEach(m => grid.appendChild(createCard(m, false)));
     }
 
     function openMenu() {
@@ -743,9 +496,7 @@
     loadManhwa();
 
     document.addEventListener('contextmenu', (e) => {
-      if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-      }
+      if (e.target.tagName === 'IMG') e.preventDefault();
     });
   </script>
 
