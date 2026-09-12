@@ -37,5 +37,17 @@
     "chapters": [
       { "number": 1, "title": "Completed", "content": "novel-1/chapter-1.txt" }
     ]
-  }
+  },
+   {
+    "id": 101,
+    "type": "novel",
+    "title": "သူဌေးကတော်မမလေး",
+    "cover": "covers/novel-2.jpg",
+    "description": "A beautiful fantasy novel with adventure.",
+    "status": "Completed",
+    "genres": ["Romance", "Mature"],
+    "chapters": [
+      { "number": 1, "title": "Completed", "content": "novel-1/chapter-1.txt" }
+    ]
+   }
     ]
