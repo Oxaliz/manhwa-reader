@@ -33,9 +33,9 @@
     "cover": "covers/novel-1.jpg",
     "description": "A beautiful fantasy novel with adventure.",
     "status": "Ongoing",
-    "genres": ["Fantasy", "Adventure"],
+    "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Chapter 1 — အခန်း ၁", "content": "novel-1/chapter-1.txt" }
+      { "number": 1, "title": "Completed", "content": "novel-1/chapter-1.txt" }
     ]
   }
     ]
