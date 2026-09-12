@@ -61,5 +61,17 @@
     "chapters": [
       { "number": 1, "title": "Completed", "content": "novel-3/chapter-1.txt" }
     ]
+  },
+  {
+    "id": 103,
+    "type": "novel",
+    "title": "အိုင်ဆေးချမ်းကိုနှင့် သူ၏သူငယ်ချင်းမလေးတစ်ယောက် အကြောင်း",
+    "cover": "covers/novel-4.jpg",
+    "description": "A beautiful fantasy novel with adventure.",
+    "status": "Completed",
+    "genres": ["Romance", "Mature"],
+    "chapters": [
+      { "number": 1, "title": "Completed", "content": "novel-4/chapter-1.txt" }
+    ]
   }
     ]
