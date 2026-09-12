@@ -35,8 +35,7 @@
     "status": "Ongoing",
     "genres": ["Fantasy", "Adventure"],
     "chapters": [
-      { "number": 1, "title": "Chapter 1 — အခန်း ၁", "content": "novel-1/chapter-1.txt" },
-      { "number": 2, "title": "Chapter 2 — အခန်း ၂", "content": "novel-1/chapter-2.txt" }
+      { "number": 1, "title": "Chapter 1 — အခန်း ၁", "content": "novel-1/chapter-1.txt" }
     ]
   }
     ]
