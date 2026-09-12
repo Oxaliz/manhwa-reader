@@ -47,7 +47,7 @@
     "status": "Completed",
     "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Completed", "content": "novel-1/chapter-1.txt" }
+      { "number": 1, "title": "Completed", "content": "novel-2/chapter-1.txt" }
     ]
    }
     ]
