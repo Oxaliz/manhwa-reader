@@ -49,5 +49,17 @@
     "chapters": [
       { "number": 1, "title": "Completed", "content": "novel-2/chapter-1.txt" }
     ]
-   }
+   },
+  {
+    "id": 102,
+    "type": "novel",
+    "title": "ကိုလေးချစ်တဲ့ ညီမလေး",
+    "cover": "covers/novel-3.jpg",
+    "description": "အင်းစက်စာပေ ဖြစ်ပါသည်။ အင်းစက်ကို မကြိုက်မနှစ်သက်ပါက မဖဝ်ရှုပဲ ကျော်သွားပါ။",
+    "status": "Completed",
+    "genres": ["Romance", "Mature"],
+    "chapters": [
+      { "number": 1, "title": "Completed", "content": "novel-3/chapter-1.txt" }
+    ]
+  }
     ]
