@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToonNest — Novel Reader</title>
+
   <meta name="google-site-verification" content="YIVcFmhhCDeFFjVW1cz064eiEtNrl0iJ5vnDQ012Iq8" />
   <meta name="d9bdb04dc39f3c78e37bf558f15df61458f35181" content="d9bdb04dc39f3c78e37bf558f15df61458f35181" />
 
@@ -19,7 +20,6 @@
     .light { --bg: #f5f0f7; --bg2: #fff; --bg3: #f0ebf2; --border: #ddd; --text: #222; --text2: #555; }
     body { background: var(--bg); color: var(--text); }
 
-    /* Novel Themes */
     body.theme-dark { --novel-bg: #0b0b0f; --novel-text: #ddd; }
     body.theme-sepia { --novel-bg: #f4ecd8; --novel-text: #5b4636; }
     body.theme-light { --novel-bg: #ffffff; --novel-text: #222; }
@@ -32,8 +32,7 @@
 
     .topbar {
       position: sticky; top: 0;
-      background: var(--bg2);
-      padding: 12px 16px;
+      background: var(--bg2); padding: 12px 16px;
       display: flex; align-items: center; justify-content: space-between;
       border-bottom: 1px solid var(--border); z-index: 100;
       flex-wrap: wrap; gap: 8px;
@@ -49,12 +48,11 @@
     }
     .topbar select { border: 1px solid var(--border); }
 
-    /* Reader Settings Bar */
     .settings-bar {
       max-width: 900px; margin: 12px auto 0; padding: 0 15px;
       display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
     }
-    .settings-bar button, .settings-bar select {
+    .settings-bar button {
       background: var(--bg2); border: 1px solid var(--border);
       color: var(--text); padding: 8px 14px; border-radius: 30px;
       cursor: pointer; font-size: 13px;
@@ -83,6 +81,15 @@
     .novel-content.large { font-size: 20px; }
     .novel-content.xlarge { font-size: 24px; }
 
+    .ad-container {
+      max-width: 720px; margin: 20px auto;
+      padding: 12px; background: var(--bg2);
+      border-radius: 12px; border: 1px solid var(--border);
+      text-align: center; min-height: 250px;
+      display: none; align-items: center; justify-content: center;
+    }
+    .ad-container.show { display: flex; }
+
     .bottom-nav {
       max-width: 900px; margin: auto;
       display: flex; gap: 12px;
@@ -103,15 +110,6 @@
       font-size: 20px; cursor: pointer; display: none; z-index: 50;
     }
 
-    .ad-container {
-      max-width: 720px; margin: 20px auto;
-      padding: 12px; background: var(--bg2);
-      border-radius: 12px; border: 1px solid var(--border);
-      text-align: center; min-height: 250px;
-      display: none; align-items: center; justify-content: center;
-    }
-    .ad-container.show { display: flex; }
-
     @media (max-width: 600px) {
       .chapter-title { font-size: 20px; }
       .novel-content { padding: 20px 15px; font-size: 16px; }
@@ -128,7 +126,6 @@
     <select id="chapterSelect" onchange="changeChapter()"></select>
   </div>
 
-  <!-- ===== SETTINGS BAR ===== -->
   <div class="settings-bar">
     <button onclick="changeFontSize('small')">A-</button>
     <button onclick="changeFontSize('medium')">A</button>
@@ -141,7 +138,6 @@
 
   <div class="chapter-title" id="chapterTitle">Loading...</div>
 
-  <!-- ===== AD (Premium မဟုတ်မှ) ===== -->
   <div class="ad-container" id="adBox">
     <script>
       (function(onx){
@@ -169,11 +165,8 @@
 
     if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
 
-    function isPremium() {
-      return localStorage.getItem('isPremium') === 'true';
-    }
+    function isPremium() { return localStorage.getItem('isPremium') === 'true'; }
 
-    // ADS — Premium မဟုတ်မှ
     if (!isPremium()) {
       (function(edjy){
         var d = document, s = d.createElement('script'),
@@ -208,8 +201,9 @@
       currentIndex = chapters.findIndex(c => c.number === chapterNum);
       if (currentIndex < 0) currentIndex = 0;
 
-      if (chapters[currentIndex]?.number >= 10 && !isPremium()) {
-        alert('🔒 Premium ပါ။ Telegram Channel မှ ဝယ်ပါ။');
+      // 🔒 Chapter တစ်ခုချင်း Lock စစ်ဆေး
+      if (chapters[currentIndex]?.premium === true && !isPremium()) {
+        alert('🔒 ဒီ Chapter က Premium ပါ။ Telegram Channel မှ ၅၀၀၀ ကျပ်နဲ့ ဝယ်ပါ။');
         location.href = 'index.html';
         return;
       }
@@ -225,7 +219,8 @@
       chapters.forEach((ch, i) => {
         const opt = document.createElement('option');
         opt.value = i;
-        opt.textContent = ch.title;
+        const lockIcon = (ch.premium === true && !isPremium()) ? ' 🔒' : '';
+        opt.textContent = ch.title + lockIcon;
         sel.appendChild(opt);
       });
       sel.value = currentIndex;
@@ -242,7 +237,6 @@
       const text = await textRes.text();
       content.textContent = text;
 
-      // Last read save
       localStorage.setItem('novel_last_' + novelId, ch.number);
 
       updateButtons();
@@ -252,7 +246,7 @@
     function changeChapter() {
       const idx = parseInt(document.getElementById('chapterSelect').value);
       const ch = chapters[idx];
-      if (ch.number >= 10 && !isPremium()) {
+      if (ch.premium === true && !isPremium()) {
         alert('🔒 Premium ပါ။');
         document.getElementById('chapterSelect').value = currentIndex;
         return;
@@ -269,7 +263,7 @@
     function nextChapter() {
       if (currentIndex < chapters.length - 1) {
         const ch = chapters[currentIndex + 1];
-        if (ch.number >= 10 && !isPremium()) {
+        if (ch.premium === true && !isPremium()) {
           alert('🔒 နောက် Chapter က Premium ပါ။');
           return;
         }
@@ -340,4 +334,4 @@
   </script>
 
 </body>
-  </html>
+</html>
