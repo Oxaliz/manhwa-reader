@@ -129,7 +129,12 @@
       { "number": 3, "title": "Chapter-3", "content": "novel-8/chapter-3.txt" },
       { "number": 4, "title": "Chapter-4", "content": "novel-8/chapter-4.txt","premium": true },
       { "number": 5, "title": "Chapter-5", "content": "novel-8/chapter-5.txt","premium": true },
-      { "number": 6, "title": "End", "content": "novel-8/chapter-6.txt","premium": true }
+      { "number": 6, "title": "Chapter-6", "content": "novel-8/chapter-6.txt","premium": true },
+      { "number": 7, "title": "Chapter-7", "content": "novel-8/chapter-7.txt","premium": true },
+      { "number": 8, "title": "Chapter-8", "content": "novel-8/chapter-8.txt","premium": true },
+      { "number": 9, "title": "Chapter-9", "content": "novel-8/chapter-9.txt","premium": true },
+      { "number": 10, "title": "Chapter-10", "content": "novel-8/chapter-10.txt","premium": true },
+      { "number": 11, "title": "End", "content": "novel-8/chapter-11.txt","premium": true }
     ]
   }
     ]
