@@ -35,7 +35,7 @@
     "status": "Completed",
     "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Completed", "content": "novel-1/chapter-1.txt" }
+      { "number": 1, "title": "End", "content": "novel-1/chapter-1.txt" }
     ]
   },
    {
@@ -47,7 +47,7 @@
     "status": "Completed",
     "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Completed", "content": "novel-2/chapter-1.txt" }
+      { "number": 1, "title": "End", "content": "novel-2/chapter-1.txt" }
     ]
    },
   {
@@ -59,7 +59,7 @@
     "status": "Completed",
     "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Completed", "content": "novel-3/chapter-1.txt" }
+      { "number": 1, "title": "End", "content": "novel-3/chapter-1.txt" }
     ]
   },
   {
@@ -71,7 +71,7 @@
     "status": "Completed",
     "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Completed", "content": "novel-4/chapter-1.txt" }
+      { "number": 1, "title": "End", "content": "novel-4/chapter-1.txt" }
     ]
   },
    {
@@ -83,7 +83,7 @@
     "status": "Completed",
     "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Completed", "content": "novel-5/chapter-1.txt" }
+      { "number": 1, "title": "End", "content": "novel-5/chapter-1.txt" }
     ]
    },
   {
@@ -95,7 +95,7 @@
     "status": "Completed",
     "genres": ["Romance", "Mature"],
     "chapters": [
-      { "number": 1, "title": "Completed", "content": "novel-6/chapter-1.txt" }
+      { "number": 1, "title": "End", "content": "novel-6/chapter-1.txt" }
     ]
   },
   {
@@ -112,7 +112,24 @@
       { "number": 3, "title": "Chapter-3", "content": "novel-7/chapter-3.txt" },
       { "number": 4, "title": "Chapter-4", "content": "novel-7/chapter-4.txt","premium": true },
       { "number": 5, "title": "Chapter-5", "content": "novel-7/chapter-5.txt","premium": true },
-      { "number": 6, "title": "Completed", "content": "novel-7/chapter-6.txt","premium": true }
+      { "number": 6, "title": "End", "content": "novel-7/chapter-6.txt","premium": true }
+    ]
+  },
+  {
+    "id": 107,
+    "type": "novel",
+    "title": "ဟလိုဒါလင်",
+    "cover": "covers/novel-8.jpg",
+    "description": "မှတ်ချက် – အင်းစက်စာပေ ဖြစ်ပါသည်။ အင်းစက်စာပေဆိုသည်မှာ မိသားစု မောင်နှမ သွေးသားရင်း အချင်းချင်း လိင်းဆက်ဆံသော အကြောင်းအရာကို စိတ်ကူးပုံဖော် ရေးသားထားခြင်း ဖြစ်ပါသည်။ ထို့ကြောင့် မကြိုက် မနှစ်သက်ပါက မဖတ်ရှုပဲ ကျော်သွားပေးပါ။ ယခုဝတ္ထုမှာ စာပေသဘော ရေးသားခြင်း ဖြစ်သဖြင့် လိုက်လံအတုယူ ပြုလုပ်ခြင်းများ မပြုလုပ်ပါရန် မေတ္တာရပ်ခံပါသည်။",
+    "status": "Completed",
+    "genres": ["Romance", "Mature"],
+    "chapters": [
+      { "number": 1, "title": "Chapter-1", "content": "novel-8/chapter-1.txt" },
+      { "number": 2, "title": "Chapter-2", "content": "novel-8/chapter-2.txt" },
+      { "number": 3, "title": "Chapter-3", "content": "novel-8/chapter-3.txt" },
+      { "number": 4, "title": "Chapter-4", "content": "novel-8/chapter-4.txt","premium": true },
+      { "number": 5, "title": "Chapter-5", "content": "novel-8/chapter-5.txt","premium": true },
+      { "number": 6, "title": "End", "content": "novel-8/chapter-6.txt","premium": true }
     ]
   }
     ]
