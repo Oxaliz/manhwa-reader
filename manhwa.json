@@ -97,5 +97,17 @@
     "chapters": [
       { "number": 1, "title": "Completed", "content": "novel-6/chapter-1.txt" }
     ]
+  },
+  {
+    "id": 106,
+    "type": "novel",
+    "title": "တူလေးရဲ့ ၁၈ နှစ်ပြည့် မွေးနေ့",
+    "cover": "covers/novel-7.jpg",
+    "description": "A beautiful fantasy novel with adventure.",
+    "status": "Ongoing",
+    "genres": ["Romance", "Mature"],
+    "chapters": [
+      { "number": 1, "title": "Chapter-1", "content": "novel-7/chapter-1.txt" }
+    ]
   }
     ]
